@@ -1,0 +1,8 @@
+DROP YOUR HEADSHOT / PROFILE PHOTO HERE
+----------------------------------------
+- Accepted formats: .jpg, .jpeg, .png, .webp
+- Recommended: portrait orientation (taller than wide)
+- Name the file:  profile.jpg  (or profile.png)
+
+Once you drop it in, let Claude Code know and it will
+plug it into the About Me section of the website.

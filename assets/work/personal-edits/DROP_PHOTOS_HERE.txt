@@ -1,0 +1,10 @@
+DROP PHOTOS / THUMBNAILS FOR "PERSONAL EDITS" HERE
+----------------------------------------------------
+- Accepted formats: .jpg, .jpeg, .png, .webp
+- The FIRST image will be used as the project card thumbnail.
+  Name it:  thumbnail.jpg  (or thumbnail.png)
+- Any additional images will be used inside the project gallery.
+  Name them:  01.jpg, 02.jpg, 03.jpg ... etc.
+
+Once you drop them in, let Claude Code know and it will
+plug them into the Work section.
