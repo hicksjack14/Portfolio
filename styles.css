@@ -1198,13 +1198,123 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .claude-block {
-    padding: 1.5rem;
-  }
-
   .site-footer {
     flex-direction: column;
     gap: 0.5rem;
     text-align: center;
   }
+
+  .robot-grid {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .robot-right {
+    height: 380px;
+  }
+}
+
+/* ── ROBOT + CLAUDE SECTION ── */
+.robot-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.robot-spotlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(600px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(201, 162, 39, 0.06), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.robot-section:hover .robot-spotlight {
+  opacity: 1;
+}
+
+.robot-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  min-height: 480px;
+  position: relative;
+  z-index: 1;
+}
+
+.robot-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.robot-claude-logo {
+  width: 42px;
+  height: 42px;
+  opacity: 0.9;
+  margin-bottom: 0.4rem;
+}
+
+.robot-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.robot-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  line-height: 1.05;
+}
+
+.robot-body {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: rgba(240, 237, 232, 0.52);
+  line-height: 1.85;
+}
+
+.robot-sig {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: rgba(201, 162, 39, 0.55);
+  letter-spacing: 0.08em;
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+.robot-right {
+  position: relative;
+  height: 480px;
+  overflow: hidden;
+}
+
+spline-viewer {
+  width: 100%;
+  height: 100%;
+  display: block;
+  --background-color: transparent;
+}
+
+spline-viewer::part(logo) {
+  display: none !important;
+}
+
+/* ── SECTION CLAUDE LOGO — bottom right of robot section ── */
+.section-claude-logo {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  width: 26px;
+  height: 26px;
+  opacity: 0.3;
+  z-index: 2;
+  pointer-events: none;
 }
