@@ -767,7 +767,108 @@
     });
   }
 
-  // ── 16. SCROLL BUTTON ─────────────────────────────────────
+  // ── 16. DOWNLOAD WIDGET ───────────────────────────────────
+  function initDownloadWidget() {
+    var btn        = document.getElementById('dwDownloadBtn');
+    var widget     = document.getElementById('downloadWidget');
+    var statusEl   = document.getElementById('dwStatusText');
+    var progressEl = document.getElementById('dwProgressFill');
+    var timeEl     = document.getElementById('dwTime');
+    var filesEl    = document.getElementById('dwFiles');
+    if (!btn || !widget) return;
+
+    var isDownloading = false;
+    var animInterval   = null;
+    var scrambleTimer  = null;
+    var ALPHABETS      = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+    function randChar() {
+      return ALPHABETS[Math.floor(Math.random() * 26)];
+    }
+
+    function scrambleTo(target, onDone) {
+      if (scrambleTimer) clearInterval(scrambleTimer);
+      var iterations = 0;
+      var maxIter    = target.length * 10;
+      var stepMs     = Math.round(800 / maxIter);
+
+      scrambleTimer = setInterval(function () {
+        var result = '';
+        for (var i = 0; i < target.length; i++) {
+          if (target[i] === ' ') { result += ' '; continue; }
+          result += (i <= iterations / 10) ? target[i] : randChar();
+        }
+        statusEl.textContent = result;
+        iterations++;
+        if (iterations > maxIter) {
+          clearInterval(scrambleTimer);
+          statusEl.textContent = target;
+          if (onDone) onDone();
+        }
+      }, stepMs);
+    }
+
+    function formatTime(seconds) {
+      var m = Math.floor(seconds / 60);
+      var s = seconds % 60;
+      return m + 'min ' + (s < 10 ? '0' + s : s) + 'sec';
+    }
+
+    function resetWidget() {
+      isDownloading = false;
+      widget.classList.remove('is-downloading');
+      btn.disabled = false;
+      progressEl.style.width = '0%';
+      timeEl.textContent  = '2min 34sec';
+      filesEl.textContent = '0';
+      scrambleTo('READY');
+    }
+
+    function startDownload() {
+      if (isDownloading) return;
+      isDownloading = true;
+
+      // Start animation state
+      widget.classList.add('is-downloading');
+      btn.disabled = true;
+      scrambleTo('DOWNLOADING');
+
+      var progress     = 0;
+      var totalSeconds = 154;
+
+      if (animInterval) clearInterval(animInterval);
+      animInterval = setInterval(function () {
+        progress++;
+        var secondsLeft = Math.max(0, Math.round(totalSeconds * (1 - progress / 100)));
+        var filesCount  = Math.floor((progress / 100) * 1000);
+
+        progressEl.style.width  = progress + '%';
+        timeEl.textContent      = formatTime(secondsLeft);
+        filesEl.textContent     = filesCount.toLocaleString();
+
+        if (progress >= 100) {
+          clearInterval(animInterval);
+          // Trigger PDF download at 100%
+          var a = document.createElement('a');
+          a.href     = 'JACK%20HICKS%20RESUME.pdf';
+          a.download = 'Jack Hicks Resume.pdf';
+          a.target   = '_blank';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          setTimeout(resetWidget, 800);
+        }
+      }, 25); // 2.5s total
+    }
+
+    // Initialize
+    statusEl.textContent  = 'READY';
+    timeEl.textContent    = '2min 34sec';
+    filesEl.textContent   = '0';
+    btn.addEventListener('click', startDownload);
+  }
+
+  // ── 17. SCROLL BUTTON ─────────────────────────────────────
   function initScrollBtn() {
     var btn = document.getElementById('scrollBtn');
     if (!btn) return;
@@ -790,6 +891,7 @@
     initScrollBtn();
     initRobotSpotlight();
     removeSplineLogo();
+    initDownloadWidget();
 
     updateTime();
     setInterval(updateTime, 1000);

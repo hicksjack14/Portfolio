@@ -161,9 +161,6 @@
           </div>
         </div>
       </div>
-      <div class="resume-download">
-        <a href="JACK%20HICKS%20RESUME.pdf" class="download-btn" target="_blank">&#8595; DOWNLOAD RESUME</a>
-      </div>
     </div>
   </section>
 
@@ -258,10 +255,67 @@
   <section id="contact" class="content-section">
     <div class="content-inner contact-inner">
       <div class="section-label">004 — CONTACT</div>
-      <p class="contact-tagline">Open to production roles, collaborations,<br/>and new opportunities.</p>
-      <a href="mailto:jhhicks@syr.edu" class="big-email" data-email>jhhicks@syr.edu</a>
-      <div class="social-row" id="socialRow">
-        <!-- rendered by script.js based on config -->
+      <div class="contact-grid">
+
+        <!-- Left: email + tagline + social -->
+        <div class="contact-left">
+          <p class="contact-tagline">Open to production roles, collaborations,<br/>and new opportunities.</p>
+          <a href="mailto:jhhicks@syr.edu" class="big-email" data-email>jhhicks@syr.edu</a>
+          <div class="social-row contact-social" id="socialRow">
+            <!-- rendered by script.js based on config -->
+          </div>
+        </div>
+
+        <!-- Right: animated download widget -->
+        <div class="contact-right">
+          <div class="download-widget" id="downloadWidget">
+
+            <!-- Header: chevrons + status badge -->
+            <div class="dw-header">
+              <div class="dw-chevrons" aria-hidden="true">
+                <svg class="dw-chev dw-chev-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                <svg class="dw-chev dw-chev-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <div class="dw-badge">
+                <span class="dw-status-text" id="dwStatusText">READY</span>
+                <span class="dw-dots" id="dwDots" aria-hidden="true">
+                  <span class="dw-dot">.</span>
+                  <span class="dw-dot">.</span>
+                  <span class="dw-dot">.</span>
+                </span>
+              </div>
+            </div>
+
+            <!-- Thick separator -->
+            <div class="dw-separator"></div>
+
+            <!-- Labels row -->
+            <div class="dw-meta-row">
+              <span class="dw-meta-label dw-col-progress">PROGRESS</span>
+              <span class="dw-meta-label dw-col-time">EST. TIME</span>
+              <span class="dw-meta-label dw-col-files">FILES COPIED:</span>
+            </div>
+
+            <!-- Values row -->
+            <div class="dw-values-row">
+              <div class="dw-col-progress">
+                <div class="dw-progress-track">
+                  <div class="dw-progress-fill" id="dwProgressFill"></div>
+                </div>
+              </div>
+              <div class="dw-value dw-col-time" id="dwTime">2min 34sec</div>
+              <div class="dw-value dw-col-files" id="dwFiles">0</div>
+            </div>
+
+            <!-- Bottom accent bar -->
+            <div class="dw-bottom-bar"></div>
+
+            <!-- Download button -->
+            <button class="dw-download-btn" id="dwDownloadBtn">&#8595; DOWNLOAD RESUME</button>
+
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
