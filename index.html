@@ -7,9 +7,37 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 </head>
 <body>
+
+  <!-- SECTION 0: Landing -->
+  <section id="landing" class="landing-section">
+
+    <nav class="landing-nav">
+      <a href="#about">About</a>
+      <span class="landing-nav-sep">|</span>
+      <a href="#resume">Resume</a>
+      <span class="landing-nav-sep">|</span>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="landing-center">
+      <div class="landing-name-wrap">
+        <span id="landingName" class="landing-name">JACK HICKS</span>
+      </div>
+      <p class="landing-tagline">
+        Storyteller at the intersection of film, music, and sport.<br/>
+        Driven by curiosity. Grounded in empathy.
+      </p>
+    </div>
+
+    <button class="scroll-btn" id="scrollBtn">
+      <span class="scroll-label">WORK</span>
+      <span class="scroll-arrow">↓</span>
+    </button>
+
+  </section>
 
   <!-- SECTION 1: Work / Hero (100vh) -->
   <section id="work" class="work-section">
@@ -29,6 +57,7 @@
     </main>
 
     <div class="background-image" id="backgroundImage" role="img" aria-hidden="true"></div>
+    <div class="project-logo" id="projectLogo" aria-hidden="true"></div>
 
     <aside class="corner-elements">
       <div class="corner-item top-left">
