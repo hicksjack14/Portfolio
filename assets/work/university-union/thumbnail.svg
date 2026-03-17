@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <!-- Background -->
+  <rect width="1200" height="675" fill="#0D0D0F"/>
+
+  <!-- Subtle grid -->
+  <pattern id="grid" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+    <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#059669" stroke-width="0.25" opacity="0.15"/>
+  </pattern>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+
+  <!-- Left accent bar -->
+  <rect x="120" y="160" width="4" height="355" fill="#059669" opacity="0.9"/>
+
+  <!-- Top rule -->
+  <line x1="144" y1="120" x2="1080" y2="120" stroke="#059669" stroke-width="0.75" opacity="0.4"/>
+
+  <!-- UNIVERSITY -->
+  <text x="164" y="295"
+    font-family="'Barlow Condensed', 'Arial Narrow', Arial, sans-serif"
+    font-weight="900"
+    font-size="148"
+    fill="#F0EDE8"
+    letter-spacing="8">UNIVERSITY</text>
+
+  <!-- UNION -->
+  <text x="164" y="430"
+    font-family="'Barlow Condensed', 'Arial Narrow', Arial, sans-serif"
+    font-weight="900"
+    font-size="148"
+    fill="#059669"
+    letter-spacing="8">UNION</text>
+
+  <!-- Subtitle -->
+  <text x="164" y="485"
+    font-family="'IBM Plex Mono', 'Courier New', monospace"
+    font-size="16"
+    fill="#888880"
+    letter-spacing="6">COMMUNICATIONS COORDINATOR · SYRACUSE UNIVERSITY</text>
+
+  <!-- Bottom rule -->
+  <line x1="144" y1="555" x2="1080" y2="555" stroke="#059669" stroke-width="0.75" opacity="0.4"/>
+
+  <!-- Bottom label -->
+  <text x="164" y="578"
+    font-family="'IBM Plex Mono', 'Courier New', monospace"
+    font-size="11"
+    fill="#888880"
+    letter-spacing="4">JACK HICKS</text>
+  <text x="1080" y="578"
+    font-family="'IBM Plex Mono', 'Courier New', monospace"
+    font-size="11"
+    fill="#888880"
+    text-anchor="end"
+    letter-spacing="4">2026</text>
+</svg>
