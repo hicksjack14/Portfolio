@@ -6,6 +6,9 @@ const SITE_CONFIG = {
   imdb:      "https://www.imdb.com/user/ur212405079/?ref_=up_nv_profile",
   youtube:   "",
 
+  // ── Music Player ──────────────────────────────────────────
+  spotifyPlaylist: "https://open.spotify.com/playlist/3yiy1sG74w6meId6oABqFT?si=mKiMjJqRQ4CLhxADaGelUg",
+
   // ── Contact ───────────────────────────────────────────────
   email: "jhhicks@syr.edu",
 

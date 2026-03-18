@@ -868,13 +868,127 @@
     btn.addEventListener('click', startDownload);
   }
 
-  // ── 17. SCROLL BUTTON ─────────────────────────────────────
+  // ── 19. SCROLL BUTTON ─────────────────────────────────────
   function initScrollBtn() {
     var btn = document.getElementById('scrollBtn');
     if (!btn) return;
     btn.addEventListener('click', function () {
       var workSection = document.getElementById('work');
       if (workSection) workSection.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
+  // ── 16b. MUSIC PLAYER ────────────────────────────────────
+  function initMusicPlayer() {
+    var titleEl  = document.getElementById('musicTitle');
+    var spBtn    = document.getElementById('spotifyPlaylistBtn');
+    var npDotEl  = document.getElementById('npDot');
+    var npTextEl = document.getElementById('npText');
+    var ppBtnEl  = document.getElementById('npPlayPause');
+    var ppIconEl = document.getElementById('ppIcon');
+    var songBtns = document.querySelectorAll('.song-btn');
+
+    if (!titleEl || !npDotEl) return;
+
+    // Wire Spotify playlist URL from config if set
+    if (spBtn && SITE_CONFIG.spotifyPlaylist) {
+      spBtn.href = SITE_CONFIG.spotifyPlaylist;
+    }
+
+    // Auto-fit header text to container width
+    (function fitTitle() {
+      var container = document.querySelector('.music-inner');
+      if (!container) return;
+      var size = 0.8;
+      titleEl.style.fontSize = size + 'rem';
+      var targetW = container.offsetWidth - 48;
+      while (titleEl.scrollWidth < targetW && size < 6) {
+        size += 0.05;
+        titleEl.style.fontSize = size + 'rem';
+      }
+      titleEl.style.fontSize = (size - 0.05) + 'rem';
+    })();
+
+    var MUSIC_TRACKS = [
+      { src: 'mp3s for portfolio/Jay Z - Marcy Me [UI0_MHp10cM].mp3',             artist: 'JAY-Z',       title: 'MARCY ME',               color: '#D0A88D' },
+      { src: 'mp3s for portfolio/Here, My Dear.mp3',                               artist: 'MARVIN GAYE', title: 'HERE MY DEAR',           color: '#C9B896' },
+      { src: 'mp3s for portfolio/Mk.gee  - Candy (Official Audio).mp3',            artist: 'MK.GEE',      title: 'CANDY',                  color: '#3A6090' },
+      { src: 'mp3s for portfolio/Billy Joel - New York State of Mind (Audio).mp3', artist: 'BILLY JOEL',  title: 'NEW YORK STATE OF MIND', color: '#9BA3AC' }
+    ];
+
+    var npBarEl = document.querySelector('.now-playing');
+
+    var PLAY_ICON  = '<polygon points="5,3 19,12 5,21"/>';
+    var PAUSE_ICON = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+
+    var mAudio = null, mIdx = -1, mPlaying = false;
+
+    function mSetIcon(p) { ppIconEl.innerHTML = p ? PAUSE_ICON : PLAY_ICON; }
+
+    function mSetColor(color) {
+      if (!npBarEl) return;
+      npBarEl.style.borderColor   = color;
+      npDotEl.style.background    = color;
+      ppBtnEl.style.color         = color;
+      ppBtnEl.style.borderColor   = color;
+    }
+
+    function mClearColor() {
+      if (!npBarEl) return;
+      npBarEl.style.borderColor   = '';
+      npDotEl.style.background    = '';
+      ppBtnEl.style.color         = '';
+      ppBtnEl.style.borderColor   = '';
+    }
+
+    function mResetUI() {
+      npDotEl.classList.remove('live');
+      npTextEl.classList.remove('live');
+      npTextEl.textContent = 'NOW PLAYING';
+      ppBtnEl.classList.remove('live');
+      mSetIcon(false);
+      mClearColor();
+      if (mIdx >= 0) songBtns[mIdx].classList.remove('is-playing');
+    }
+
+    function mStop() {
+      if (mAudio) { mAudio.pause(); mAudio.currentTime = 0; mAudio = null; }
+      mPlaying = false; mIdx = -1; mResetUI();
+    }
+
+    function mPlay(idx) {
+      var t = MUSIC_TRACKS[idx];
+      mAudio = new Audio(t.src);
+      mAudio.volume = 0.85;
+      mIdx = idx; mPlaying = true;
+      songBtns[idx].classList.add('is-playing');
+      npDotEl.classList.add('live');
+      npTextEl.classList.add('live');
+      npTextEl.textContent = 'NOW PLAYING - ' + t.artist + ' - ' + t.title;
+      ppBtnEl.classList.add('live');
+      mSetIcon(true);
+      mSetColor(t.color);
+      mAudio.play().catch(function () { mStop(); });
+      mAudio.addEventListener('ended', mStop);
+    }
+
+    songBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var idx = parseInt(btn.getAttribute('data-idx'));
+        if (mIdx === idx) { mStop(); } else { mStop(); mPlay(idx); }
+      });
+    });
+
+    ppBtnEl.addEventListener('click', function () {
+      if (mIdx === -1 && !mAudio) return;
+      if (mPlaying && mAudio) {
+        mAudio.pause(); mPlaying = false;
+        songBtns[mIdx].classList.remove('is-playing');
+        ppBtnEl.classList.remove('live'); mSetIcon(false);
+      } else if (!mPlaying && mIdx >= 0) {
+        if (!mAudio) { mPlay(mIdx); }
+        else { mAudio.play(); mPlaying = true; songBtns[mIdx].classList.add('is-playing'); ppBtnEl.classList.add('live'); mSetIcon(true); }
+      }
     });
   }
 
@@ -892,6 +1006,7 @@
     initRobotSpotlight();
     removeSplineLogo();
     initDownloadWidget();
+    initMusicPlayer();
 
     updateTime();
     setInterval(updateTime, 1000);
