@@ -884,6 +884,7 @@
     var spBtn    = document.getElementById('spotifyPlaylistBtn');
     var npDotEl  = document.getElementById('npDot');
     var npTextEl = document.getElementById('npText');
+    var npScrollEl = document.getElementById('npScroll');
     var ppBtnEl  = document.getElementById('npPlayPause');
     var ppIconEl = document.getElementById('ppIcon');
     var songBtns = document.querySelectorAll('.song-btn');
@@ -944,7 +945,7 @@
     function mResetUI() {
       npDotEl.classList.remove('live');
       npTextEl.classList.remove('live');
-      npTextEl.textContent = 'NOW PLAYING';
+      npScrollEl.textContent = 'NOW PLAYING';
       ppBtnEl.classList.remove('live');
       mSetIcon(false);
       mClearColor();
@@ -953,7 +954,9 @@
 
     function mStop() {
       if (mAudio) { mAudio.pause(); mAudio.currentTime = 0; mAudio = null; }
-      mPlaying = false; mIdx = -1; mResetUI();
+      mPlaying = false;
+      mResetUI();  // must run before mIdx is cleared — uses mIdx to remove .is-playing
+      mIdx = -1;
     }
 
     function mPlay(idx) {
@@ -963,8 +966,11 @@
       mIdx = idx; mPlaying = true;
       songBtns[idx].classList.add('is-playing');
       npDotEl.classList.add('live');
+      npScrollEl.textContent = 'NOW PLAYING - ' + t.artist + ' - ' + t.title;
+      npScrollEl.style.animation = 'none';
+      void npScrollEl.offsetWidth;  // reflow — resets ticker to frame 0 on every new song
+      npScrollEl.style.animation = '';
       npTextEl.classList.add('live');
-      npTextEl.textContent = 'NOW PLAYING - ' + t.artist + ' - ' + t.title;
       ppBtnEl.classList.add('live');
       mSetIcon(true);
       mSetColor(t.color);
@@ -1019,5 +1025,15 @@
   } else {
     init();
   }
+
+  var aboutNav = document.getElementById('aboutNavBtn');
+  if (aboutNav) aboutNav.addEventListener('click', function () {
+    document.getElementById('resume').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  var resumeNav = document.getElementById('resumeNavBtn');
+  if (resumeNav) resumeNav.addEventListener('click', function () {
+    document.getElementById('personal').scrollIntoView({ behavior: 'smooth' });
+  });
 
 })();

@@ -1,0 +1,123 @@
+/* ── BASE #soundboard-box ── */
+#soundboard-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  padding: 1.5rem;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* ── LANDING PAGE PLACEMENT ── */
+section#landing #soundboard-box {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  z-index: 5;
+  width: clamp(160px, 15vw, 210px);
+  gap: 0.45rem;
+  padding: 0.7rem;
+  background: transparent;
+  border: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+}
+
+/* Header: centered now that dot is removed */
+section#landing .music-header {
+  margin-bottom: 0;
+  justify-content: center;
+}
+
+/* Title: scale down to match the smaller box */
+section#landing .music-title { font-size: 0.72rem; }
+
+section#landing .song-buttons { margin-bottom: 0; gap: 0.5rem; justify-content: center; }
+
+/* ── LANDING — SONG BUTTONS ── */
+section#landing .song-btn {
+  width: 38px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+}
+
+/* Border opacity dropped to 20% at rest */
+section#landing .btn-jayz   { border-color: rgba(208, 168, 141, 0.20); }
+section#landing .btn-marvin { border-color: rgba(201, 184, 150, 0.20); }
+section#landing .btn-mkgee  { border-color: rgba( 58,  96, 144, 0.20); }
+section#landing .btn-billy  { border-color: rgba(155, 163, 172, 0.20); }
+
+/* is-playing — lighter color wash */
+section#landing .btn-jayz.is-playing   { background: rgba(208, 168, 141, 0.12); }
+section#landing .btn-marvin.is-playing { background: rgba(201, 184, 150, 0.12); }
+section#landing .btn-mkgee.is-playing  { background: rgba( 58,  96, 144, 0.12); }
+section#landing .btn-billy.is-playing  { background: rgba(155, 163, 172, 0.12); }
+
+/* ── LANDING — ICON ── */
+section#landing .song-btn-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* ── LANDING — SPOTIFY BUTTON ── */
+section#landing .spotify-btn {
+  height: 38px;
+  min-height: 38px;
+  background: transparent;
+  border-color: rgba(29, 185, 84, 0.4);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  font-size: 0.58rem;
+}
+
+/* ── LANDING — NOW PLAYING BAR ── */
+section#landing .now-playing {
+  height: 38px;
+  min-height: 38px;
+  background: transparent;
+  border: 1px solid rgba(201, 162, 39, 0.15);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+section#landing .np-text { font-size: 0.72rem; }
+
+section#landing .np-playpause {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  min-height: 22px;
+}
+
+/* Brightness-only breathe pulse for active pad */
+@keyframes btn-breathe {
+  0%, 100% { filter: brightness(0.85); }
+  50%       { filter: brightness(1.15); }
+}
+
+/* ── LANDING — ICON SIZE OVERRIDE ── */
+/* Base icon styles and glow animations live in styles.css; only size override needed here */
+
+/* ── Now-playing scroll inner span ── */
+.np-scroll {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.np-text.live .np-scroll {
+  animation: ticker-scroll 14s linear infinite;
+  animation-delay: 1.8s;
+}
+
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* .soundboard-caption lives in styles.css */
