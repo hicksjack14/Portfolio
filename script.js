@@ -910,10 +910,10 @@
     })();
 
     var MUSIC_TRACKS = [
-      { src: 'mp3s for portfolio/Jay Z - Marcy Me [UI0_MHp10cM].mp3',             artist: 'JAY-Z',       title: 'MARCY ME',               color: '#D0A88D' },
-      { src: 'mp3s for portfolio/Here, My Dear.mp3',                               artist: 'MARVIN GAYE', title: 'HERE MY DEAR',           color: '#C9B896' },
-      { src: 'mp3s for portfolio/Mk.gee  - Candy (Official Audio).mp3',            artist: 'MK.GEE',      title: 'CANDY',                  color: '#3A6090' },
-      { src: 'mp3s for portfolio/Billy Joel - New York State of Mind (Audio).mp3', artist: 'BILLY JOEL',  title: 'NEW YORK STATE OF MIND', color: '#9BA3AC' }
+      { src: 'mp3s%20for%20portfolio/Jay%20Z%20-%20Marcy%20Me%20%5BUI0_MHp10cM%5D.mp3',                   artist: 'JAY-Z',       title: 'MARCY ME',               color: '#D0A88D' },
+      { src: 'mp3s%20for%20portfolio/Here%2C%20My%20Dear.mp3',                                             artist: 'MARVIN GAYE', title: 'HERE MY DEAR',           color: '#C9B896' },
+      { src: 'mp3s%20for%20portfolio/Mk.gee%20%20-%20Candy%20%28Official%20Audio%29.mp3',                  artist: 'MK.GEE',      title: 'CANDY',                  color: '#3A6090' },
+      { src: 'mp3s%20for%20portfolio/Billy%20Joel%20-%20New%20York%20State%20of%20Mind%20%28Audio%29.mp3', artist: 'BILLY JOEL',  title: 'NEW YORK STATE OF MIND', color: '#9BA3AC' }
     ];
 
     var npBarEl = document.querySelector('.now-playing');
