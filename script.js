@@ -97,11 +97,7 @@
       if (part.type === 'dayPeriod') dayPeriod = part.value;
     });
 
-    var timeStr = hour + ':' + minute + ' ' + dayPeriod;
-    if (timeEl) timeEl.textContent = timeStr;
-    document.querySelectorAll('.stamp-time').forEach(function(el) {
-      el.textContent = timeStr;
-    });
+    if (timeEl) timeEl.textContent = hour + ':' + minute + ' ' + dayPeriod;
   }
 
   // ── 3. LOCATION ───────────────────────────────────────────
@@ -109,9 +105,6 @@
     var loc = SITE_CONFIG.location || '';
     if (locationEl)  locationEl.textContent  = loc;
     if (footerLocEl) footerLocEl.textContent = loc;
-    document.querySelectorAll('.stamp-loc').forEach(function(el) {
-      el.textContent = loc;
-    });
   }
 
   // ── 4. SOCIAL ICONS ───────────────────────────────────────
