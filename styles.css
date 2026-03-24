@@ -1690,12 +1690,12 @@ body {
 
   .about-grid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 2rem;
   }
 
   .about-photo {
     order: -1;
-    max-width: 280px;
+    max-width: 100%;
   }
 
   .resume-grid {
@@ -1703,7 +1703,9 @@ body {
     gap: 2rem;
   }
 
-  .corner-item.top-right { display: none; }
+  .corner-item.top-right,
+  .corner-item.bottom-left,
+  .corner-item.bottom-right { display: none; }
 
   .personal-projects-grid {
     grid-template-columns: 1fr;
@@ -1718,10 +1720,64 @@ body {
   .robot-grid {
     grid-template-columns: 1fr;
     min-height: auto;
+    gap: 2rem;
   }
 
   .robot-right {
-    height: 380px;
+    height: 280px;
+  }
+
+  /* Content section padding */
+  .content-section {
+    padding: 3.5rem 1.25rem;
+  }
+
+  /* Section nav buttons — center them */
+  .section-nav-btn {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Grid gaps */
+  .about-grid,
+  .contact-grid {
+    gap: 2rem;
+  }
+
+  /* Landing nav */
+  .landing-nav {
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.52rem;
+    gap: 0.3rem;
+  }
+
+  /* Panel visual + content */
+  .panel-visual { height: 26vh; }
+  .panel-content { padding: 1.5rem 1.25rem; }
+
+  /* Download widget — stack columns vertically */
+  .dw-meta-row,
+  .dw-values-row {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .dw-col-progress { flex: 0 0 100%; }
+  .dw-col-time     { flex: 0 0 auto; margin-left: 0; }
+  .dw-col-files    { flex: 0 0 auto; }
+
+  /* Soundboard */
+  #soundboard-box { max-width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .content-section { padding: 2.5rem 1rem; }
+
+  .landing-nav { display: none; }
+
+  .landing-tagline {
+    font-size: 0.6rem;
+    padding: 0 1rem;
   }
 }
 
