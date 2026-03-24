@@ -1210,7 +1210,7 @@ body {
   position: relative;
   z-index: 1;
   border-top: 1px solid var(--border);
-  padding: 2rem 2rem 1.5rem;
+  padding: 1.5rem 2rem;
   display: flex;
   justify-content: center;
   font-family: var(--font-mono);
@@ -1221,30 +1221,6 @@ body {
   background: transparent;
 }
 
-.footer-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-.footer-logo {
-  width: 96px;
-  opacity: 0.65;
-  transition: opacity 0.2s;
-}
-
-.footer-logo:hover { opacity: 1; }
-
-.footer-meta {
-  display: flex;
-  gap: 2rem;
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
-  color: var(--muted);
-  text-transform: uppercase;
-}
 
 /* ── PROJECT PANEL ── */
 .project-panel {
