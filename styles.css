@@ -9,7 +9,7 @@
   --bg: #0D0D0F;
   --surface: #111116;
   --text: #F0EDE8;
-  --muted: #888880;
+  --muted: #f0ede8;
   --accent: #C9A227;
   --red: #E8192C;
   --border: #222228;
@@ -452,10 +452,27 @@ body {
 .corner-item.bottom-left  { bottom: 1.5rem; left: 2rem; }
 .corner-item.bottom-right { bottom: 1.5rem; right: 2rem; }
 
-.corner-square {
-  width: 16px;
-  height: 16px;
-  border: 1.5px solid rgba(240, 237, 232, 0.6);
+.corner-jh-logo {
+  width: 38px;
+  opacity: 0.55;
+  transition: opacity 0.2s;
+}
+
+.corner-jh-logo:hover { opacity: 0.9; }
+
+/* ── SECTION STAMP (coords + time at each section break) ── */
+.section-stamp {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  text-transform: uppercase;
+  border-top: 1px solid var(--border);
+  opacity: 0.7;
 }
 
 .corner-item.top-right a,
@@ -1207,15 +1224,41 @@ body {
   position: relative;
   z-index: 1;
   border-top: 1px solid var(--border);
-  padding: 1.5rem 2rem;
+  padding: 2rem 2rem 1.5rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   font-family: var(--font-mono);
   font-size: 0.6rem;
   letter-spacing: 0.1em;
   color: var(--muted);
   text-transform: uppercase;
   background: transparent;
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-logo {
+  width: 96px;
+  opacity: 0.65;
+  filter: brightness(0) invert(1);
+  transition: opacity 0.2s;
+}
+
+.footer-logo:hover { opacity: 1; }
+
+.footer-meta {
+  display: flex;
+  gap: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-transform: uppercase;
 }
 
 /* ── PROJECT PANEL ── */

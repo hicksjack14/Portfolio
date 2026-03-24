@@ -14,12 +14,12 @@
 /* ── LANDING PAGE PLACEMENT ── */
 section#landing #soundboard-box {
   position: absolute;
-  top: 1.5rem;
-  left: 1.5rem;
+  top: 1.2rem;
+  left: 0.8rem;
   z-index: 5;
-  width: clamp(160px, 15vw, 210px);
-  gap: 0.45rem;
-  padding: 0.7rem;
+  width: clamp(148px, 14vw, 195px);
+  gap: 0.32rem;
+  padding: 0.5rem;
   background: transparent;
   border: none;
   backdrop-filter: none;
@@ -33,31 +33,31 @@ section#landing .music-header {
   justify-content: center;
 }
 
-/* Title: scale down to match the smaller box */
-section#landing .music-title { font-size: 0.72rem; }
+/* Title: slightly bigger so it reads clearly */
+section#landing .music-title { font-size: 0.84rem; }
 
-section#landing .song-buttons { margin-bottom: 0; gap: 0.5rem; justify-content: center; }
+section#landing .song-buttons { margin-bottom: 0; gap: 0.4rem; justify-content: center; }
 
 /* ── LANDING — SONG BUTTONS ── */
 section#landing .song-btn {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(1px);
   -webkit-backdrop-filter: blur(1px);
 }
 
-/* Border opacity dropped to 20% at rest */
-section#landing .btn-jayz   { border-color: rgba(208, 168, 141, 0.20); }
-section#landing .btn-marvin { border-color: rgba(201, 184, 150, 0.20); }
-section#landing .btn-mkgee  { border-color: rgba( 58,  96, 144, 0.20); }
-section#landing .btn-billy  { border-color: rgba(155, 163, 172, 0.20); }
+/* Button glow borders — each button glows its own color */
+section#landing .btn-jayz   { border-color: rgba(208, 168, 141, 0.55); box-shadow: 0 0 8px rgba(208,168,141,0.35), 0 0 18px rgba(208,168,141,0.15); }
+section#landing .btn-marvin { border-color: rgba(201, 184, 150, 0.55); box-shadow: 0 0 8px rgba(201,184,150,0.35), 0 0 18px rgba(201,184,150,0.15); }
+section#landing .btn-mkgee  { border-color: rgba( 58,  96, 144, 0.65); box-shadow: 0 0 8px rgba( 58, 96,144,0.40), 0 0 18px rgba( 58, 96,144,0.20); }
+section#landing .btn-billy  { border-color: rgba(155, 163, 172, 0.55); box-shadow: 0 0 8px rgba(155,163,172,0.35), 0 0 18px rgba(155,163,172,0.15); }
 
-/* is-playing — lighter color wash */
-section#landing .btn-jayz.is-playing   { background: rgba(208, 168, 141, 0.12); }
-section#landing .btn-marvin.is-playing { background: rgba(201, 184, 150, 0.12); }
-section#landing .btn-mkgee.is-playing  { background: rgba( 58,  96, 144, 0.12); }
-section#landing .btn-billy.is-playing  { background: rgba(155, 163, 172, 0.12); }
+/* is-playing — stronger glow + color wash */
+section#landing .btn-jayz.is-playing   { background: rgba(208, 168, 141, 0.14); box-shadow: 0 0 12px rgba(208,168,141,0.55), 0 0 28px rgba(208,168,141,0.25); }
+section#landing .btn-marvin.is-playing { background: rgba(201, 184, 150, 0.14); box-shadow: 0 0 12px rgba(201,184,150,0.55), 0 0 28px rgba(201,184,150,0.25); }
+section#landing .btn-mkgee.is-playing  { background: rgba( 58,  96, 144, 0.14); box-shadow: 0 0 12px rgba( 58, 96,144,0.60), 0 0 28px rgba( 58, 96,144,0.30); }
+section#landing .btn-billy.is-playing  { background: rgba(155, 163, 172, 0.14); box-shadow: 0 0 12px rgba(155,163,172,0.55), 0 0 28px rgba(155,163,172,0.25); }
 
 /* ── LANDING — ICON ── */
 section#landing .song-btn-icon {
