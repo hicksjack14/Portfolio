@@ -455,7 +455,6 @@ body {
 .corner-jh-logo {
   width: 38px;
   opacity: 0.55;
-  filter: brightness(0) invert(1);
   transition: opacity 0.2s;
 }
 
@@ -1232,7 +1231,6 @@ body {
 .footer-logo {
   width: 96px;
   opacity: 0.65;
-  filter: brightness(0) invert(1);
   transition: opacity 0.2s;
 }
 
