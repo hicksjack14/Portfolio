@@ -43,10 +43,9 @@
         '<span class="project-data title">'  + project.title  + '</span>' +
         '<span class="project-data role">'   + project.role   + '</span>' +
         '<span class="project-data type">'   + project.type   + '</span>' +
-        '<button class="project-open-btn" tabindex="-1">' +
-          '<span class="project-open-label">OPEN</span>' +
-          '<span class="project-open-arrow">→</span>' +
-        '</button>' +
+        (project.comingSoon
+          ? '<button class="project-open-btn project-open-btn--soon" tabindex="-1"><span class="project-open-label">COMING SOON</span></button>'
+          : '<button class="project-open-btn" tabindex="-1"><span class="project-open-label">OPEN</span><span class="project-open-arrow">→</span></button>') +
         '<span class="project-data year">'   + project.year   + '</span>';
 
       li.addEventListener('mouseenter', function () {
@@ -401,10 +400,13 @@
 
           '<div class="panel-section" id="panelSec2">' +
             '<div class="panel-label">What I Did</div>' +
-            '<ul class="panel-bullets">' + bulletsHTML + '</ul>' +
+            (project.comingSoon
+              ? '<p class="panel-text panel-coming-soon-text">COMING SOON</p>'
+              : '<ul class="panel-bullets">' + bulletsHTML + '</ul>') +
           '</div>' +
 
           '<div class="panel-tags" id="panelTags">' + tagsHTML + '</div>' +
+          (project.link && project.link !== '#' ? '<div class="panel-link-row"><a class="panel-link-btn" href="' + project.link + '" target="_blank" rel="noopener">&#9654; ' + (project.linkLabel || 'Visit') + '</a></div>' : '') +
         '</div>' +
 
       '</div>'; // .panel-scroll

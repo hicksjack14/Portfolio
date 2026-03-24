@@ -119,7 +119,7 @@ body {
 .landing-tagline {
   font-family: var(--font-mono);
   font-size: clamp(0.62rem, 1vw, 0.8rem);
-  color: var(--muted);
+  color: var(--text);
   letter-spacing: 0.12em;
   line-height: 1.9;
   text-transform: uppercase;
@@ -357,6 +357,20 @@ body {
   border-color: rgba(201, 162, 39, 0.55);
 }
 
+.project-open-btn--soon {
+  color: rgba(240, 237, 232, 0.35);
+  border-color: rgba(240, 237, 232, 0.12);
+  cursor: default;
+  font-size: 0.5rem;
+  letter-spacing: 0.18em;
+}
+
+.project-item:hover .project-open-btn--soon,
+.project-item.active .project-open-btn--soon {
+  color: rgba(192, 57, 43, 0.8);
+  border-color: rgba(192, 57, 43, 0.4);
+}
+
 .project-item:hover .project-open-arrow,
 .project-item.active .project-open-arrow {
   transform: translateX(3px);
@@ -515,7 +529,7 @@ body {
 .about-text p {
   font-family: var(--font-mono);
   font-size: 0.82rem;
-  color: rgba(240, 237, 232, 0.6);
+  color: var(--text);
   line-height: 1.85;
   margin-bottom: 1.2rem;
 }
@@ -598,7 +612,7 @@ body {
 .resume-detail {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: rgba(240, 237, 232, 0.55);
+  color: var(--text);
   line-height: 1.75;
 }
 
@@ -614,7 +628,7 @@ body {
   letter-spacing: 0.08em;
   padding: 0.3rem 0.7rem;
   border: 1px solid var(--border);
-  color: rgba(240, 237, 232, 0.5);
+  color: var(--text);
   text-transform: uppercase;
 }
 
@@ -645,7 +659,7 @@ body {
 .contact-tagline {
   font-family: var(--font-mono);
   font-size: 0.78rem;
-  color: var(--muted);
+  color: var(--text);
   line-height: 1.8;
   margin-bottom: 2.5rem;
 }
@@ -1443,11 +1457,12 @@ body {
 }
 
 .panel-bullets li::before {
-  content: '—';
+  content: '\25B8';
   position: absolute;
   left: 0;
   color: var(--panel-accent);
-  font-size: 0.7rem;
+  font-size: 0.65rem;
+  top: 0.1rem;
 }
 
 .panel-tags {
@@ -1457,6 +1472,27 @@ body {
   margin-top: 2.5rem;
   padding-top: 2rem;
   border-top: 1px solid var(--border);
+}
+
+.panel-link-row {
+  margin-top: 1.5rem;
+}
+
+.panel-link-btn {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--panel-accent);
+  text-decoration: none;
+  border: 1px solid var(--panel-accent);
+  padding: 0.45rem 1rem;
+  display: inline-block;
+  transition: background 0.2s, color 0.2s;
+}
+
+.panel-link-btn:hover {
+  background: var(--panel-accent);
+  color: #080808;
 }
 
 .panel-tag {
@@ -1479,7 +1515,7 @@ body {
 .personal-intro p {
   font-family: var(--font-mono);
   font-size: 0.82rem;
-  color: rgba(240, 237, 232, 0.5);
+  color: var(--text);
   line-height: 1.85;
   max-width: 680px;
 }
@@ -1602,7 +1638,7 @@ body {
 .pp-desc {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: rgba(240, 237, 232, 0.5);
+  color: var(--text);
   line-height: 1.8;
   margin-top: 0.4rem;
   flex: 1;
@@ -1752,7 +1788,7 @@ body {
 .robot-body {
   font-family: var(--font-mono);
   font-size: 0.76rem;
-  color: rgba(240, 237, 232, 0.52);
+  color: var(--text);
   line-height: 1.85;
 }
 
