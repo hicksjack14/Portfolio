@@ -376,7 +376,7 @@
 
       '<div class="panel-scroll">' +
 
-        '<div class="panel-visual">' +
+        '<div class="panel-visual' + (project.screenBlend ? ' panel-visual--blend' : '') + '">' +
           '<div class="panel-image" style="' + imageStyle + '"></div>' +
           '<div class="panel-visual-overlay"></div>' +
           '<div class="panel-visual-content">' +

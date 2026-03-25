@@ -1347,6 +1347,10 @@ body {
   z-index: 1;
 }
 
+.panel-visual--blend .panel-visual-overlay {
+  display: none;
+}
+
 .panel-visual-content {
   position: absolute;
   bottom: 0;
