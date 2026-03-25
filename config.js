@@ -26,6 +26,8 @@ const SITE_CONFIG = {
       medium: "ARTIST SERVICES",
       year: "2026",
       image: "assets/work/mh-inc/download.jpg",
+      imageFit: "contain",
+      screenBlend: true,
       logo: "",
       link: "https://open.spotify.com/artist/2iERIi50FwSNzNeT6j20K8?si=1Jc4MeznQ8CFODRMxWec4A",
       linkLabel: "Isabella Allon on Spotify",

@@ -359,8 +359,9 @@
 
     // Image or gradient fallback
     var fit = project.imageFit || 'cover';
+    var blendMode = project.screenBlend ? 'background-blend-mode: screen;' : '';
     var imageStyle = project.image
-      ? "background-image: url('" + project.image + "'); background-size: " + fit + "; background-position: center; background-color: #0D0D0F;"
+      ? "background-image: url('" + project.image + "'); background-size: " + fit + "; background-position: center; background-color: #111116;" + blendMode
       : 'background: linear-gradient(160deg, rgba(' + accentRgb + ', 0.18) 0%, #0D0D0F 100%);';
 
     panel.innerHTML =
