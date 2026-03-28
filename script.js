@@ -725,6 +725,21 @@
     });
 
     animate();
+
+    window._setDotColor = function (hex) {
+      var colAttr = geometry.attributes.color;
+      var r, g, b;
+      if (hex) {
+        var parsed = parseInt(hex.replace('#', ''), 16);
+        r = ((parsed >> 16) & 255) / 255;
+        g = ((parsed >>  8) & 255) / 255;
+        b = ( parsed        & 255) / 255;
+      } else {
+        r = 240/255; g = 237/255; b = 232/255;
+      }
+      for (var i = 0; i < colAttr.count; i++) colAttr.setXYZ(i, r, g, b);
+      colAttr.needsUpdate = true;
+    };
   }
 
   // ── 15. ROBOT SECTION SPOTLIGHT ──────────────────────────
@@ -914,9 +929,9 @@
 
     var MUSIC_TRACKS = [
       { src: 'Jay%20Z%20-%20Marcy%20Me%20%5BUI0_MHp10cM%5D.mp3',             artist: 'JAY-Z',       title: 'MARCY ME',               color: '#D0A88D' },
-      { src: 'Here%2C%20My%20Dear.mp3',                                       artist: 'MARVIN GAYE', title: 'HERE MY DEAR',           color: '#C9B896' },
-      { src: 'Mk.gee%20%20-%20Candy%20%28Official%20Audio%29.mp3',            artist: 'MK.GEE',      title: 'CANDY',                  color: '#3A6090' },
-      { src: 'Billy%20Joel%20-%20New%20York%20State%20of%20Mind%20%28Audio%29.mp3', artist: 'BILLY JOEL',  title: 'NEW YORK STATE OF MIND', color: '#9BA3AC' }
+      { src: 'marvin-gaye-whats-going-on.mp3',                               artist: 'MARVIN GAYE', title: 'WHAT\'S GOING ON',       color: '#2A5C3F' },
+      { src: 'Frank%20Ocean%20-%20Voodoo.mp3',                                artist: 'FRANK OCEAN', title: 'VOODOO',                 color: '#F4821F' },
+      { src: 'Billy%20Joel%20-%20New%20York%20State%20of%20Mind%20%28Audio%29.mp3', artist: 'BILLY JOEL',  title: 'NEW YORK STATE OF MIND', color: '#5B88B0' }
     ];
 
     var npBarEl = document.querySelector('.now-playing');
@@ -929,19 +944,25 @@
     function mSetIcon(p) { ppIconEl.innerHTML = p ? PAUSE_ICON : PLAY_ICON; }
 
     function mSetColor(color) {
+      document.documentElement.style.setProperty('--text', color);
+      document.documentElement.style.setProperty('--muted', color);
+      if (window._setDotColor) window._setDotColor(color);
       if (!npBarEl) return;
-      npBarEl.style.borderColor   = color;
-      npDotEl.style.background    = color;
-      ppBtnEl.style.color         = color;
-      ppBtnEl.style.borderColor   = color;
+      npBarEl.style.borderColor = color;
+      npDotEl.style.background  = color;
+      ppBtnEl.style.color       = color;
+      ppBtnEl.style.borderColor = color;
     }
 
     function mClearColor() {
+      document.documentElement.style.removeProperty('--text');
+      document.documentElement.style.removeProperty('--muted');
+      if (window._setDotColor) window._setDotColor(null);
       if (!npBarEl) return;
-      npBarEl.style.borderColor   = '';
-      npDotEl.style.background    = '';
-      ppBtnEl.style.color         = '';
-      ppBtnEl.style.borderColor   = '';
+      npBarEl.style.borderColor = '';
+      npDotEl.style.background  = '';
+      ppBtnEl.style.color       = '';
+      ppBtnEl.style.borderColor = '';
     }
 
     function mResetUI() {

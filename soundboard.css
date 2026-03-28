@@ -49,15 +49,15 @@ section#landing .song-btn {
 
 /* Button glow borders — each button glows its own color */
 section#landing .btn-jayz   { border-color: rgba(208, 168, 141, 0.55); box-shadow: 0 0 8px rgba(208,168,141,0.35), 0 0 18px rgba(208,168,141,0.15); }
-section#landing .btn-marvin { border-color: rgba(201, 184, 150, 0.55); box-shadow: 0 0 8px rgba(201,184,150,0.35), 0 0 18px rgba(201,184,150,0.15); }
-section#landing .btn-mkgee  { border-color: rgba( 58,  96, 144, 0.65); box-shadow: 0 0 8px rgba( 58, 96,144,0.40), 0 0 18px rgba( 58, 96,144,0.20); }
-section#landing .btn-billy  { border-color: rgba(155, 163, 172, 0.55); box-shadow: 0 0 8px rgba(155,163,172,0.35), 0 0 18px rgba(155,163,172,0.15); }
+section#landing .btn-marvin { border-color: rgba( 42,  92,  63, 0.55); box-shadow: 0 0 8px rgba( 42, 92, 63,0.35), 0 0 18px rgba( 42, 92, 63,0.15); }
+section#landing .btn-franko { border-color: rgba(244, 130,  31, 0.65); box-shadow: 0 0 8px rgba(244,130, 31,0.40), 0 0 18px rgba(244,130, 31,0.20); }
+section#landing .btn-billy  { border-color: rgba( 91, 136, 176, 0.55); box-shadow: 0 0 8px rgba( 91,136,176,0.35), 0 0 18px rgba( 91,136,176,0.15); }
 
 /* is-playing — stronger glow + color wash */
 section#landing .btn-jayz.is-playing   { background: rgba(208, 168, 141, 0.14); box-shadow: 0 0 12px rgba(208,168,141,0.55), 0 0 28px rgba(208,168,141,0.25); }
-section#landing .btn-marvin.is-playing { background: rgba(201, 184, 150, 0.14); box-shadow: 0 0 12px rgba(201,184,150,0.55), 0 0 28px rgba(201,184,150,0.25); }
-section#landing .btn-mkgee.is-playing  { background: rgba( 58,  96, 144, 0.14); box-shadow: 0 0 12px rgba( 58, 96,144,0.60), 0 0 28px rgba( 58, 96,144,0.30); }
-section#landing .btn-billy.is-playing  { background: rgba(155, 163, 172, 0.14); box-shadow: 0 0 12px rgba(155,163,172,0.55), 0 0 28px rgba(155,163,172,0.25); }
+section#landing .btn-marvin.is-playing { background: rgba( 42,  92,  63, 0.14); box-shadow: 0 0 12px rgba( 42, 92, 63,0.55), 0 0 28px rgba( 42, 92, 63,0.25); }
+section#landing .btn-franko.is-playing { background: rgba(244, 130,  31, 0.14); box-shadow: 0 0 12px rgba(244,130, 31,0.60), 0 0 28px rgba(244,130, 31,0.30); }
+section#landing .btn-billy.is-playing  { background: rgba( 91, 136, 176, 0.14); box-shadow: 0 0 12px rgba( 91,136,176,0.55), 0 0 28px rgba( 91,136,176,0.25); }
 
 /* ── LANDING — ICON ── */
 section#landing .song-btn-icon {
