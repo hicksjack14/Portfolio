@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Jack Hicks — Talent Representative, Producer, and Content Strategist. Portfolio of work in entertainment, live production, and media." />
+  <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none'">
   <meta property="og:title" content="Jack Hicks" />
   <meta property="og:description" content="Talent representative and content strategist. Portfolio of work in entertainment, live production, and media." />
   <meta property="og:type" content="website" />
@@ -13,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dseg@0.46.0/css/dseg.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dseg@0.46.0/css/dseg.css" integrity="sha384-hQhDV95Csi4psdLa/hWm+HM8l1ycIQlSJs4aea4dvJg+z6nCsAV0qItQNID/WdYB" crossorigin="anonymous" />
 </head>
 <body>
 
@@ -225,8 +226,7 @@
 
       <!-- Personal Projects -->
       <div class="personal-projects-grid">
-        <div class="personal-project-card pp-coming-soon-card">
-          <div class="pp-coming-soon-stamp">COMING SOON</div>
+        <div class="personal-project-card" id="dubstamperCard" style="cursor:pointer;">
           <div class="pp-label">SOCIAL MEDIA</div>
           <div class="pp-title">DUBSTAMPER</div>
           <div class="pp-meta">@dubstamper · Instagram · TikTok · YouTube Shorts</div>
@@ -404,9 +404,9 @@
       opacity: 0.85;
     }
   </style>
-  <script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/build/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js" integrity="sha384-DfOTGXeJ6WnjboPpd3JQRHUbEWVH1sCUHV0XgLS66AlfVdRb9r4XZkeZszZaSWOC" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/build/three.min.js" integrity="sha384-9EQoUIJYrv09/oYhSxnw1VpLcfPw3BM9dE7+D/3wGUPeLLa7F9Z6OAoD+i/M6FK9" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
   <script src="config.js"></script>
   <script src="script.js"></script>
   <link rel="stylesheet" href="soundboard.css">

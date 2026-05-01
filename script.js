@@ -6,6 +6,16 @@
 (function () {
   'use strict';
 
+  // ── HELPERS ──────────────────────────────────────────────
+  function escapeHTML(str) {
+    return String(str == null ? '' : str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
   // ── DOM REFS ─────────────────────────────────────────────
   const projectListEl = document.getElementById('projectList');
   const portfolioEl   = document.getElementById('portfolioContainer');
@@ -398,15 +408,28 @@
             '<p class="panel-text">' + (detail.description || '') + '</p>' +
           '</div>' +
 
-          '<div class="panel-section" id="panelSec2">' +
-            '<div class="panel-label">What I Did</div>' +
-            (project.comingSoon
-              ? '<p class="panel-text panel-coming-soon-text">COMING SOON</p>'
-              : '<ul class="panel-bullets">' + bulletsHTML + '</ul>') +
+          '<div class="panel-whatidid-row">' +
+            '<div class="panel-section" id="panelSec2">' +
+              '<div class="panel-label">What I Did</div>' +
+              (project.comingSoon
+                ? '<p class="panel-text panel-coming-soon-text">COMING SOON</p>'
+                : '<ul class="panel-bullets">' + bulletsHTML + '</ul>') +
+            '</div>' +
+            (project.photo
+              ? '<div class="panel-photo-col">' +
+                  '<img class="panel-photo" src="' + project.photo + '" alt="On the job" />' +
+                  (project.photoCaption ? '<p class="panel-photo-caption">' + project.photoCaption + '</p>' : '') +
+                '</div>'
+              : '') +
           '</div>' +
 
           '<div class="panel-tags" id="panelTags">' + tagsHTML + '</div>' +
-          (project.link && project.link !== '#' ? '<div class="panel-link-row"><a class="panel-link-btn" href="' + project.link + '" target="_blank" rel="noopener">&#9654; ' + (project.linkLabel || 'Visit') + '</a></div>' : '') +
+          (project.link && project.link !== '#'
+            ? '<div class="panel-link-row">' +
+                '<a class="panel-link-btn" href="' + project.link + '" target="_blank" rel="noopener">&#9654; ' + (project.linkLabel || 'Visit') + '</a>' +
+                (project.link2 ? ' <a class="panel-link-btn panel-link-btn--secondary" href="' + project.link2 + '" target="_blank" rel="noopener">&#9654; ' + (project.link2Label || 'View') + '</a>' : '') +
+              '</div>'
+            : '') +
         '</div>' +
 
       '</div>'; // .panel-scroll
@@ -566,6 +589,120 @@
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && panelOpen) closePanel();
   });
+
+  // ── DUBSTAMPER PANEL ──────────────────────────────────────
+  function buildDubstamperPanel() {
+    var panel = document.createElement('div');
+    panel.className = 'project-panel dubstamper-panel';
+    panel.id = 'panel-dubstamper';
+
+    var posts = (SITE_CONFIG.dubstamper && SITE_CONFIG.dubstamper.posts) || [];
+
+    var stampsHTML = posts.map(function (p, i) {
+      return '<div class="ds-stamp" data-stamp-idx="' + i + '">' +
+        '<img class="ds-stamp-art" src="" alt="' + p.artist + '" data-artist="' + p.artist + '" data-title="' + p.title + '" />' +
+        '<div class="ds-stamp-info">' +
+          '<div class="ds-stamp-artist">' + p.artist + '</div>' +
+          '<div class="ds-stamp-title">' + p.title + '</div>' +
+          '<div class="ds-stamp-date">' + p.date + '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    var topbarHTML =
+      '<div class="panel-topbar">' +
+        '<button class="panel-back-btn" id="dubPanelBackBtn">' +
+          '<span class="panel-back-arrow">←</span> Back' +
+        '</button>' +
+        '<span class="panel-topbar-title">Jack Hicks — Dubstamper</span>' +
+        '<span style="width:60px"></span>' +
+      '</div>';
+
+    var missionHTML =
+      '<div class="ds-mission">' +
+        '<div class="ds-mission-left">' +
+          '<div class="ds-eyebrow">@DUBSTAMPER</div>' +
+          '<h2 class="ds-headline">The stamp.</h2>' +
+          '<p class="ds-body">Most people scroll past great music without ever knowing the story behind it. Dubstamper exists to change that. One song, one story, every day. Real history, real context, no filler.</p>' +
+          '<p class="ds-body">The bigger goal: prove that AI does not have to mean low-effort content. Every video is built using Remotion and Claude. I create the creative vision, Claude goes out and achieves it. Each video is a marker for how good AI video creation is getting. Every single one is better than the last.</p>' +
+          '<p class="ds-body">Replacing brainrot with something worth your time. That is the mission.</p>' +
+          '<div class="ds-tech-row">' +
+            '<span class="ds-tech-tag">REMOTION</span>' +
+            '<span class="ds-tech-x">×</span>' +
+            '<span class="ds-tech-tag">CLAUDE</span>' +
+          '</div>' +
+          '<a class="ds-ig-btn" href="https://www.instagram.com/dubstamper/" target="_blank" rel="noopener">↗ @dubstamper on Instagram</a>' +
+        '</div>' +
+        '<div class="ds-mission-right">' +
+          '<video class="ds-logo" autoplay loop muted playsinline>' +
+            '<source src="assets/dubstamper-logo.webm" type="video/webm">' +
+          '</video>' +
+        '</div>' +
+      '</div>';
+
+    var archiveHTML =
+      '<div class="ds-archive">' +
+        '<div class="panel-label">The Archive</div>' +
+        '<div class="ds-stamps-grid">' + stampsHTML + '</div>' +
+      '</div>';
+
+    var suggestHTML =
+      '<div class="ds-suggest">' +
+        '<div class="panel-label">Suggest a Song</div>' +
+        '<p class="ds-suggest-sub">Got a song with a story worth telling? Drop it here.</p>' +
+        '<form class="ds-form" action="https://formsubmit.co/hicksjack14@gmail.com" method="POST" target="_blank">' +
+          '<input type="hidden" name="_subject" value="Dubstamper Song Suggestion" />' +
+          '<input type="hidden" name="_captcha" value="false" />' +
+          '<input class="ds-input" type="text" name="suggestion" placeholder="Artist — Song Title" required />' +
+          '<button class="ds-submit" type="submit">SEND IT</button>' +
+        '</form>' +
+      '</div>';
+
+    panel.innerHTML = '<div class="panel-canvas"></div>' + topbarHTML +
+      '<div class="panel-scroll">' +
+        missionHTML +
+        archiveHTML +
+        suggestHTML +
+      '</div>';
+
+    return panel;
+  }
+
+  function openDubstamperPanel() {
+    stopIdleAnimation();
+    clearTimeout(idleTimeout);
+    if (currentPanel) { currentPanel.remove(); currentPanel = null; }
+
+    var panel = buildDubstamperPanel();
+    document.body.appendChild(panel);
+    currentPanel = panel;
+    panelOpen = true;
+    document.body.style.overflow = 'hidden';
+    panel.classList.add('is-open');
+
+    initPanelDotWave(panel);
+
+    if (typeof gsap !== 'undefined') {
+      gsap.fromTo(panel, { x: '100%' }, { x: '0%', duration: 0.5, ease: 'power3.out' });
+    }
+
+    panel.querySelector('#dubPanelBackBtn').addEventListener('click', closePanel);
+
+    // Fetch album art from iTunes API (external URLs, no repo storage)
+    panel.querySelectorAll('.ds-stamp-art').forEach(function (img) {
+      var artist = img.getAttribute('data-artist');
+      var title  = img.getAttribute('data-title');
+      var query  = encodeURIComponent(artist + ' ' + title);
+      fetch('https://itunes.apple.com/search?term=' + query + '&entity=song&limit=1')
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (data.results && data.results[0]) {
+            img.src = data.results[0].artworkUrl100.replace('100x100', '400x400');
+          }
+        })
+        .catch(function () {});
+    });
+  }
 
   // ── 13. LANDING NAME SCRAMBLE ─────────────────────────────
   var LANDING_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$&%!?1234567890';
@@ -1036,6 +1173,9 @@
     removeSplineLogo();
     initDownloadWidget();
     initMusicPlayer();
+
+    var dubCard = document.getElementById('dubstamperCard');
+    if (dubCard) dubCard.addEventListener('click', openDubstamperPanel);
 
     updateTime();
     setInterval(updateTime, 1000);

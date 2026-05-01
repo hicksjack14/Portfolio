@@ -16,6 +16,17 @@ const SITE_CONFIG = {
   location: "36.0334° N, 86.7825° W",
   timeZone: "America/New_York",
 
+  // ── Dubstamper ────────────────────────────────────────────
+  dubstamper: {
+    posts: [
+      { artist: "DMX",           title: "Ruff Ryders' Anthem", date: "APR 27, 2026" },
+      { artist: "DAVID BOWIE",   title: "Starman",             date: "APR 27, 2026" },
+      { artist: "DRAKE",         title: "Views",               date: "APR 29, 2026" },
+      { artist: "MICHAEL JACKSON", title: "Beat It",           date: "APR 30, 2026" },
+      { artist: "JOHNNY CASH",   title: "I Walk the Line",     date: "MAY 1, 2026"  }
+    ]
+  },
+
   // ── Projects ──────────────────────────────────────────────
   projects: [
     {
@@ -25,23 +36,27 @@ const SITE_CONFIG = {
       type: "A&R / MANAGEMENT",
       medium: "ARTIST SERVICES",
       year: "2026",
-      image: "assets/work/mh-inc/download.jpg",
+      image: "assets/work/mh-inc/thumbnail.svg",
       imageFit: "contain",
       screenBlend: true,
       logo: "",
+      photo: "assets/work/mh-inc/photo2.jpg",
+      photoCaption: "Myself with Nehru Madan at the UTA NYC offices pitching honestav",
       link: "https://open.spotify.com/artist/2iERIi50FwSNzNeT6j20K8?si=1Jc4MeznQ8CFODRMxWec4A",
       linkLabel: "Isabella Allon on Spotify",
+      link2: "assets/work/mh-inc/uta-pitch-deck.pdf",
+      link2Label: "View TRF 430 Pitch Deck",
       detail: {
         accent: "#3B82F6",
         accentRgb: "59, 130, 246",
         dates: "Jan 2026 to Present",
         location: "Syracuse, NY",
-        description: "Co-founded with Nehru Madan through TRF 430, M&H Inc. is a student-run talent agency built around one idea: give artists what they need to move, and then get out of the way. Our client, Isabella Allon, just won Song of the Year at the Otto Awards, shot a music video for her upcoming release, and is opening for West 22nd when they come to Syracuse. We help develop her creative vision, connect her to real opportunities, and make sure she stays in full control of who she is. We are also approaching UTA with A&R research on honestav, with a full pitch coming soon.",
+        description: "Co-founded with Nehru Madan through TRF 430, M&H Inc. is a student-run talent agency built around one idea: give artists what they need to move, and then get out of the way. Our client, Isabella Allon, won Song of the Year at the Otto Awards, shot a music video for her upcoming release, and on April 25th opened for West 22nd, a band with nearly one million monthly listeners on Spotify. Since we started working with her, she has grown by over 1,500 monthly listeners. We help develop her creative vision, connect her to real opportunities, and make sure she stays in full control of who she is. We also completed a full A&R pitch for potential client honestav to UTA representatives. The pitch was named the top in the class.",
         bullets: [
           "Co-founded agency with Nehru Madan through TRF 430: Artist Representation",
           "Signed and managed Isabella Allon, Otto Awards Song of the Year winner",
           "Facilitated music video shoot, two upcoming single releases, and live booking as opener for West 22nd (Apr 25, 2026)",
-          "Conducting A&R research on artist honestav ahead of an upcoming UTA pitch, deck coming soon"
+          "Completed A&R pitch for potential client honestav to UTA representatives. Named top pitch in the class"
         ],
         tags: ["Talent Management", "A&R Research", "Artist Development", "Live Booking", "Client Pitching"]
       }
@@ -55,6 +70,8 @@ const SITE_CONFIG = {
       year: "2025",
       image: "assets/work/orange-tv-network/thumbnail.png",
       logo: "assets/work/orange-tv-network/otn%20logo.jpg",
+      photo: "assets/work/orange-tv-network/photo2.jpeg",
+      photoCaption: "Myself with the Loud and Clear crew after a successful Spring '26 sem",
       link: "https://www.youtube.com/channel/UCrqsGFd3t6BhNosyUm_HU2Q",
       detail: {
         accent: "#7C3AED",
@@ -82,6 +99,8 @@ const SITE_CONFIG = {
       image: "assets/work/university-union/thuumbnail.jpeg",
       imageFit: "contain",
       logo: "assets/work/university-union/thuumbnail.jpeg",
+      photo: "assets/work/university-union/photo2.jpeg",
+      photoCaption: "Myself with the socials board after a successful night at Block Party",
       link: "https://www.instagram.com/universityunion/",
       linkLabel: "View on Instagram",
       detail: {
@@ -89,7 +108,7 @@ const SITE_CONFIG = {
         accentRgb: "5, 150, 105",
         dates: "Jan 2026 to Present",
         location: "Syracuse, NY",
-        description: "University Union is one of the biggest student-run entertainment organizations in the country, booking artists for Syracuse's student events. I sit on the socials board as Communications Coordinator, working directly with our director and the content creation team. The real day to day is content: generating ideas, going out on campus, asking students questions on camera, and building videos with the team. I also serve as the link between the socials board and every other board in UU, making sure communication across the organization stays tight. The audience for this work is 20,000 students.",
+        description: "University Union is one of the biggest student-run entertainment organizations in the country, booking artists for Syracuse's student events. This past semester I served as Communications Coordinator and content creator, spending most of my time making content for our events. That meant going out on campus, getting students on camera, and building videos for events like Block Party. Next semester I step into the role of Socials Director alongside Elenore Fresnel. Our goal is to bring something new to the board: creative content strategies that actually grow a following, and a data-driven approach to posting so that everything we put out is backed by what we know works.",
         bullets: [
           "Serve as primary liaison between the social media board and all other UU boards",
           "Coordinate with external organizations to amplify event marketing reach",
