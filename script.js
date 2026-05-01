@@ -1071,6 +1071,13 @@
       { src: 'Billy%20Joel%20-%20New%20York%20State%20of%20Mind%20%28Audio%29.mp3', artist: 'BILLY JOEL',  title: 'NEW YORK STATE OF MIND', color: '#5B88B0' }
     ];
 
+    var mPreloaded = MUSIC_TRACKS.map(function (t) {
+      var a = new Audio(t.src);
+      a.preload = 'auto';
+      a.volume = 0.85;
+      return a;
+    });
+
     var npBarEl = document.querySelector('.now-playing');
 
     var PLAY_ICON  = '<polygon points="5,3 19,12 5,21"/>';
@@ -1121,8 +1128,8 @@
 
     function mPlay(idx) {
       var t = MUSIC_TRACKS[idx];
-      mAudio = new Audio(t.src);
-      mAudio.volume = 0.85;
+      mAudio = mPreloaded[idx];
+      mAudio.currentTime = 0;
       mIdx = idx; mPlaying = true;
       songBtns[idx].classList.add('is-playing');
       npDotEl.classList.add('live');
