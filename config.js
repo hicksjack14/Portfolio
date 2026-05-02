@@ -23,7 +23,8 @@ const SITE_CONFIG = {
       { artist: "DAVID BOWIE",   title: "Starman",             date: "APR 27, 2026" },
       { artist: "DRAKE",         title: "Views",               date: "APR 29, 2026" },
       { artist: "MICHAEL JACKSON", title: "Beat It",           date: "APR 30, 2026" },
-      { artist: "JOHNNY CASH",   title: "I Walk the Line",     date: "MAY 1, 2026"  }
+      { artist: "JOHNNY CASH",   title: "I Walk the Line",     date: "MAY 1, 2026"  },
+      { artist: "MOBB DEEP",     title: "Blood Money",         date: "MAY 2, 2026"  }
     ]
   },
 
