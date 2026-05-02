@@ -1096,11 +1096,15 @@
       document.documentElement.style.setProperty('--border', 'rgba('+r+','+g+','+b+',0.25)');
       if (t.bgColor) document.documentElement.style.setProperty('--bg', t.bgColor);
       if (window._setDotColor) window._setDotColor(textColor);
+      songBtns.forEach(function(btn) {
+        btn.style.color       = textColor;
+        btn.style.borderColor = textColor;
+      });
       if (!npBarEl) return;
-      npBarEl.style.borderColor = t.color;
-      npDotEl.style.background  = t.color;
-      ppBtnEl.style.color       = t.color;
-      ppBtnEl.style.borderColor = t.color;
+      npBarEl.style.borderColor = textColor;
+      npDotEl.style.background  = textColor;
+      ppBtnEl.style.color       = textColor;
+      ppBtnEl.style.borderColor = textColor;
     }
 
     function mClearColor() {
@@ -1109,6 +1113,10 @@
       document.documentElement.style.removeProperty('--bg');
       document.documentElement.style.removeProperty('--border');
       if (window._setDotColor) window._setDotColor(null);
+      songBtns.forEach(function(btn) {
+        btn.style.color       = '';
+        btn.style.borderColor = '';
+      });
       if (!npBarEl) return;
       npBarEl.style.borderColor = '';
       npDotEl.style.background  = '';
