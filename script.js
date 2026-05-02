@@ -1065,10 +1065,10 @@
     })();
 
     var MUSIC_TRACKS = [
-      { src: 'Jay%20Z%20-%20Marcy%20Me%20%5BUI0_MHp10cM%5D.mp3',             artist: 'JAY-Z',       title: 'MARCY ME',               color: '#D0A88D' },
-      { src: 'marvin-gaye-whats-going-on.mp3',                               artist: 'MARVIN GAYE', title: 'WHAT\'S GOING ON',       color: '#2A5C3F' },
-      { src: 'Frank%20Ocean%20-%20Voodoo.mp3',                                artist: 'FRANK OCEAN', title: 'VOODOO',                 color: '#F4821F' },
-      { src: 'Billy%20Joel%20-%20New%20York%20State%20of%20Mind%20%28Audio%29.mp3', artist: 'BILLY JOEL',  title: 'NEW YORK STATE OF MIND', color: '#5B88B0' }
+      { src: 'bakar-alive.mp3',                                                artist: 'BAKAR',         title: 'ALIVE!',                 color: '#FFE030', bgColor: '#2E7BB5', textColor: '#FFE030' },
+      { src: 'glen-campbell-wichita-lineman.mp3',                             artist: 'GLEN CAMPBELL', title: 'WICHITA LINEMAN',        color: '#F0EDE8', bgColor: '#5C1A28', textColor: '#F0EDE8' },
+      { src: 'daft-punk-lose-yourself-to-dance.mp3',                          artist: 'DAFT PUNK',     title: 'LOSE YOURSELF TO DANCE', color: '#C8AA52', bgColor: '#0D0D0F', textColor: '#C8AA52' },
+      { src: 'soul-for-real-candy-rain.mp3',                                  artist: 'SOUL FOR REAL', title: 'CANDY RAIN',             color: '#F0EDE8', bgColor: '#F0EDE8', textColor: '#0D0D0F' }
     ];
 
     var mPreloaded = MUSIC_TRACKS.map(function (t) {
@@ -1087,20 +1087,27 @@
 
     function mSetIcon(p) { ppIconEl.innerHTML = p ? PAUSE_ICON : PLAY_ICON; }
 
-    function mSetColor(color) {
-      document.documentElement.style.setProperty('--text', color);
-      document.documentElement.style.setProperty('--muted', color);
-      if (window._setDotColor) window._setDotColor(color);
+    function mSetColor(t) {
+      var textColor = t.textColor || t.color;
+      var hex = textColor.replace('#', '');
+      var r = parseInt(hex.slice(0,2),16), g = parseInt(hex.slice(2,4),16), b = parseInt(hex.slice(4,6),16);
+      document.documentElement.style.setProperty('--text', textColor);
+      document.documentElement.style.setProperty('--muted', textColor);
+      document.documentElement.style.setProperty('--border', 'rgba('+r+','+g+','+b+',0.25)');
+      if (t.bgColor) document.documentElement.style.setProperty('--bg', t.bgColor);
+      if (window._setDotColor) window._setDotColor(textColor);
       if (!npBarEl) return;
-      npBarEl.style.borderColor = color;
-      npDotEl.style.background  = color;
-      ppBtnEl.style.color       = color;
-      ppBtnEl.style.borderColor = color;
+      npBarEl.style.borderColor = t.color;
+      npDotEl.style.background  = t.color;
+      ppBtnEl.style.color       = t.color;
+      ppBtnEl.style.borderColor = t.color;
     }
 
     function mClearColor() {
       document.documentElement.style.removeProperty('--text');
       document.documentElement.style.removeProperty('--muted');
+      document.documentElement.style.removeProperty('--bg');
+      document.documentElement.style.removeProperty('--border');
       if (window._setDotColor) window._setDotColor(null);
       if (!npBarEl) return;
       npBarEl.style.borderColor = '';
@@ -1140,7 +1147,7 @@
       npTextEl.classList.add('live');
       ppBtnEl.classList.add('live');
       mSetIcon(true);
-      mSetColor(t.color);
+      mSetColor(t);
       mAudio.play().catch(function () { mStop(); });
       mAudio.addEventListener('ended', mStop);
     }
