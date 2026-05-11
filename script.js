@@ -881,30 +881,7 @@
 
   // ── 15. ROBOT SECTION SPOTLIGHT ──────────────────────────
   // ── SPLINE WATERMARK REMOVAL ──────────────────────────────
-  function removeSplineLogo() {
-    var viewer = document.querySelector('spline-viewer');
-    if (!viewer) return;
-    var attempts = 0;
-    var interval = setInterval(function () {
-      attempts++;
-      if (viewer.shadowRoot) {
-        // Inject a stylesheet directly into the shadow root — bypasses shadow DOM isolation
-        var existing = viewer.shadowRoot.querySelector('style[data-hide-logo]');
-        if (!existing) {
-          var style = document.createElement('style');
-          style.setAttribute('data-hide-logo', '1');
-          style.textContent = '#logo, a[href*="spline"], [id*="logo"], [class*="logo"] { display: none !important; opacity: 0 !important; pointer-events: none !important; visibility: hidden !important; }';
-          viewer.shadowRoot.appendChild(style);
-        }
-        // Also remove elements directly
-        viewer.shadowRoot.querySelectorAll('#logo, a[href*="spline"]').forEach(function (el) {
-          el.remove();
-        });
-        clearInterval(interval);
-      }
-      if (attempts > 60) clearInterval(interval);
-    }, 200);
-  }
+
 
   function initRobotSpotlight() {
     var section = document.getElementById('claude-robot');
@@ -1192,7 +1169,7 @@
     initDottedSurface();
     initScrollBtn();
     initRobotSpotlight();
-    removeSplineLogo();
+
     initDownloadWidget();
     initMusicPlayer();
 

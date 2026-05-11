@@ -1841,7 +1841,7 @@ body {
 
 .robot-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.6fr 0.6fr;
   gap: 4rem;
   align-items: center;
   min-height: 480px;
@@ -1901,15 +1901,13 @@ body {
   overflow: hidden;
 }
 
-spline-viewer {
+.pixel-robot-frame {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  display: block;
-  --background-color: transparent;
-}
-
-spline-viewer::part(logo) {
-  display: none !important;
+  border: none;
+  background: transparent;
 }
 
 /* ── SECTION CLAUDE LOGO — bottom right of robot section ── */
