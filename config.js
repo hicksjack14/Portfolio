@@ -24,7 +24,11 @@ const SITE_CONFIG = {
       { artist: "DRAKE",         title: "Views",               date: "APR 29, 2026" },
       { artist: "MICHAEL JACKSON", title: "Beat It",           date: "APR 30, 2026" },
       { artist: "JOHNNY CASH",   title: "I Walk the Line",     date: "MAY 1, 2026"  },
-      { artist: "MOBB DEEP",     title: "Blood Money",         date: "MAY 2, 2026"  }
+      { artist: "MOBB DEEP",     title: "Blood Money",         date: "MAY 2, 2026"  },
+      { artist: "KENDRICK LAMAR", title: "6:16 in LA",          date: "MAY 3, 2026"  },
+      { artist: "CSNY",           title: "Ohio",                date: "MAY 4, 2026"  },
+      { artist: "RED HOT CHILI PEPPERS", title: "Arcadium Stadium", date: "MAY 9, 2026"  },
+      { artist: "JIMI HENDRIX",   title: "Are You Experienced?", date: "MAY 12, 2026" }
     ]
   },
 
