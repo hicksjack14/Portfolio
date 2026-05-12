@@ -1069,6 +1069,7 @@
       var hex = textColor.replace('#', '');
       var r = parseInt(hex.slice(0,2),16), g = parseInt(hex.slice(2,4),16), b = parseInt(hex.slice(4,6),16);
       document.documentElement.style.setProperty('--text', textColor);
+      document.documentElement.style.setProperty('--text-rgb', r + ',' + g + ',' + b);
       document.documentElement.style.setProperty('--muted', textColor);
       document.documentElement.style.setProperty('--border', 'rgba('+r+','+g+','+b+',0.25)');
       if (t.bgColor) document.documentElement.style.setProperty('--bg', t.bgColor);
@@ -1086,6 +1087,7 @@
 
     function mClearColor() {
       document.documentElement.style.removeProperty('--text');
+      document.documentElement.style.removeProperty('--text-rgb');
       document.documentElement.style.removeProperty('--muted');
       document.documentElement.style.removeProperty('--bg');
       document.documentElement.style.removeProperty('--border');
