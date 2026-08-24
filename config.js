@@ -169,9 +169,9 @@ const SITE_CONFIG = {
         description: "This summer I worked in New York with Uncrowned, Ariel Helwani's combat sports media company, as a Production Intern on the Ariel Helwani Show. Day to day I helped the show with developing assets, handling courtesies, and small production stuff like camera work and whatever else came up. I also shadowed our Exec Producer, Graphics Producer, Technical Director, and Audio Engineer, and picked up something from every department. On Thursdays I got handed a mic for Boys in the Back and went on air anywhere from a few minutes to a full hour.",
         bullets: [
           "Helped develop assets, courtesies, and day-to-day production needs for the Ariel Helwani Show",
-          "Operated camera and supported other production tasks as needed",
+          "Supported other production tasks as needed",
           "Shadowed the Exec Producer, Graphics Producer, Technical Director, and Audio Engineer across departments",
-          "Went on-air weekly for Boys in the Back, hosting segments up to an hour long"
+          "Got air time weekly for Boys in the Back, up to an hour long"
         ],
         tags: ["SPORTS MEDIA", "PRODUCTION", "LIVE TV", "ON-AIR", "NYC"]
       }
