@@ -97,7 +97,7 @@ const SITE_CONFIG = {
     {
       id: 3,
       title: "UNIVERSITY UNION",
-      role: "COMMS COORDINATOR",
+      role: "DIRECTOR OF SOCIAL MEDIA",
       type: "COMMS / CONTENT CREATION",
       medium: "SOCIAL MEDIA",
       year: "2026",
@@ -113,8 +113,9 @@ const SITE_CONFIG = {
         accentRgb: "5, 150, 105",
         dates: "Jan 2026 to Present",
         location: "Syracuse, NY",
-        description: "University Union is one of the biggest student-run entertainment organizations in the country, booking artists for Syracuse's student events. This past semester I served as Communications Coordinator and content creator, spending most of my time making content for our events. That meant going out on campus, getting students on camera, and building videos for events like Block Party. Next semester I step into the role of Socials Director alongside Elenore Fresnel. Our goal is to bring something new to the board: creative content strategies that actually grow a following, and a data-driven approach to posting so that everything we put out is backed by what we know works.",
+        description: "University Union is one of the biggest student-run entertainment organizations in the country, booking artists for Syracuse's student events. I started on the board as Communications Coordinator and content creator, spending most of my time making content for our events. That meant going out on campus, getting students on camera, and building videos for events like Block Party. In May 2026 I stepped into the role of Director of Social Media alongside Elenore Fresnel. Our goal is to bring something new to the board: creative content strategies that actually grow a following, and a data-driven approach to posting so that everything we put out is backed by what we know works.",
         bullets: [
+          "Promoted to Director of Social Media for the 2026–27 board, co-leading alongside Elenore Fresnel",
           "Serve as primary liaison between the social media board and all other UU boards",
           "Coordinate with external organizations to amplify event marketing reach",
           "Develop reels, stories, and captions aligned with a content planning calendar"
@@ -150,7 +151,7 @@ const SITE_CONFIG = {
     {
       id: 5,
       title: "UNCROWNED",
-      role: "CONTENT & PRODUCTION",
+      role: "PRODUCTION INTERN",
       type: "SPORTS MEDIA",
       medium: "INTERNSHIP",
       year: "2026",
@@ -158,19 +159,21 @@ const SITE_CONFIG = {
       logo: "",
       link: "https://www.uncrowned.com",
       linkLabel: "Visit Uncrowned",
-      comingSoon: true,
+      link2: "https://www.youtube.com/@ArielHelwani",
+      link2Label: "Ariel Helwani on YouTube",
       detail: {
         accent: "#E8B400",
         accentRgb: "232, 180, 0",
         dates: "Summer 2026",
         location: "New York, NY",
-        description: "This summer, I am heading to New York City to work on the Ariel Helwani show as part of Uncrowned, his combat sports media company in partnership with Yahoo Sports. I will be embedded in content and production, working on a show that covers boxing, MMA, and the stories that live around the sport. More details soon.",
+        description: "This summer I worked in New York with Uncrowned, Ariel Helwani's combat sports media company, as a Production Intern on the Ariel Helwani Show. Day to day I helped the show with developing assets, handling courtesies, and small production stuff like camera work and whatever else came up. I also shadowed our Exec Producer, Graphics Producer, Technical Director, and Audio Engineer, and picked up something from every department. On Thursdays I got handed a mic for Boys in the Back and went on air anywhere from a few minutes to a full hour.",
         bullets: [
-          "Joining Uncrowned as a summer 2026 intern in NYC",
-          "Working on the Ariel Helwani show, part of Uncrowned x Yahoo Sports",
-          "Content and production role in combat sports media"
+          "Helped develop assets, courtesies, and day-to-day production needs for the Ariel Helwani Show",
+          "Operated camera and supported other production tasks as needed",
+          "Shadowed the Exec Producer, Graphics Producer, Technical Director, and Audio Engineer across departments",
+          "Went on-air weekly for Boys in the Back, hosting segments up to an hour long"
         ],
-        tags: ["SPORTS MEDIA", "CONTENT", "PRODUCTION", "NYC"]
+        tags: ["SPORTS MEDIA", "PRODUCTION", "LIVE TV", "ON-AIR", "NYC"]
       }
     }
   ]
