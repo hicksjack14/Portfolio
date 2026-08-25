@@ -2079,30 +2079,30 @@ body {
 }
 
 
-/* ── PANEL BODY PHOTOS — full-width row directly under The Role text ── */
+/* ── PANEL BODY PHOTOS — small row after What I Did ── */
 .panel-body-photos {
   display: flex;
-  gap: 1.2rem;
-  margin: 0.5rem 0 2.5rem;
+  gap: 1rem;
+  margin: 2.5rem 0 0.5rem;
 }
 .panel-body-photo-item {
-  flex: 1;
-  min-width: 0;
+  flex: 0 0 200px;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.5rem;
 }
 .panel-body-photo {
-  width: 100%;
-  height: 280px;
+  width: 200px;
+  height: 150px;
   object-fit: cover;
   border-radius: 4px;
   opacity: 0.88;
   filter: grayscale(10%);
 }
 @media (max-width: 600px) {
-  .panel-body-photos { flex-direction: column; }
-  .panel-body-photo { height: 220px; }
+  .panel-body-photos { flex-wrap: wrap; }
+  .panel-body-photo-item { flex: 0 0 calc(50% - 0.5rem); }
+  .panel-body-photo { width: 100%; height: 130px; }
 }
 
 /* ── PANEL PHOTO — alongside What I Did ── */
