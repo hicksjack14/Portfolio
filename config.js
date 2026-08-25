@@ -33,9 +33,9 @@ const SITE_CONFIG = {
   },
 
   // ── Projects ──────────────────────────────────────────────
-  // Ordered most recent first by actual date, regardless of active/current
-  // status: UU (May 2026) > Uncrowned (Summer 2026) > ESPYs (Jul 2026)
-  // > M&H (Jan 2026) > Loud and Clear (Jan 2025) > dormTALK (2023-24).
+  // UU and Loud and Clear are both ongoing (tagged "CURRENT") and grouped
+  // first; remaining cards ordered most recent first by actual date:
+  // Uncrowned (Summer 2026) > ESPYs (Jul 2026) > M&H (Jan 2026) > dormTALK (2023-24).
   projects: [
     {
       id: 3,
@@ -43,7 +43,7 @@ const SITE_CONFIG = {
       role: "DIRECTOR OF SOCIAL MEDIA",
       type: "COMMS / CONTENT CREATION",
       medium: "SOCIAL MEDIA",
-      year: "2026",
+      year: "CURRENT",
       image: "assets/work/university-union/thuumbnail.jpeg",
       imageFit: "contain",
       logo: "assets/work/university-union/thuumbnail.jpeg",
@@ -64,6 +64,34 @@ const SITE_CONFIG = {
           "Develop reels, stories, and captions aligned with a content planning calendar"
         ],
         tags: ["Social Media Strategy", "Event Marketing", "Content Creation", "Brand Communications", "Audience Growth"]
+      }
+    },
+    {
+      id: 2,
+      title: "LOUD AND CLEAR",
+      role: "TECHNICAL DIRECTOR",
+      type: "ORANGE TELEVISION NETWORK",
+      medium: "LIVE PRODUCTION",
+      year: "CURRENT",
+      image: "assets/work/orange-tv-network/thumbnail.png",
+      logo: "assets/work/orange-tv-network/otn%20logo.jpg",
+      photo: "assets/work/orange-tv-network/photo2.jpeg",
+      photoCaption: "Myself with the Loud and Clear crew after a successful Spring '26 sem",
+      link: "https://www.youtube.com/channel/UCrqsGFd3t6BhNosyUm_HU2Q",
+      detail: {
+        accent: "#7C3AED",
+        accentRgb: "124, 58, 237",
+        dates: "Jan 2025 to Present",
+        location: "Syracuse, NY",
+        description: "I started on Loud and Clear as a camera operator. By my second semester I was running day of show, and now I serve as Technical Director and talent booker for the production on Orange Television Network. I hope to step into the EP role next semester. This show taught me what patience in production actually looks like. I did A&R research to fully lock in our shoot schedule, and helped my colleague Kyra Rubenstein learn the ropes behind talent booking and day of show managing. She has blossomed into booking artists on her own. I sit at the switcher during live shoots, cutting between 2 to 4 camera feeds in real time. Every episode, start to finish.",
+        bullets: [
+          "Progressed from camera operator to day of show manager to Technical Director and Talent Booker",
+          "Conducted A&R research to identify and fully book out the semester shoot schedule",
+          "Mentored colleague Kyra Rubenstein in talent booking and day of show management",
+          "Operated video switchboard cutting between 2 to 4 live camera feeds during shoots",
+          "Managed end-to-end production workflow from outreach through final YouTube upload"
+        ],
+        tags: ["Live TV Production", "Technical Direction", "Multi-Camera Switching", "Talent Booking", "Post-Production"]
       }
     },
     {
@@ -153,34 +181,6 @@ const SITE_CONFIG = {
           "Completed A&R pitch for potential client honestav to UTA representatives. Named top pitch in the class"
         ],
         tags: ["Talent Management", "A&R Research", "Artist Development", "Live Booking", "Client Pitching"]
-      }
-    },
-    {
-      id: 2,
-      title: "LOUD AND CLEAR",
-      role: "TECHNICAL DIRECTOR",
-      type: "ORANGE TELEVISION NETWORK",
-      medium: "LIVE PRODUCTION",
-      year: "2025",
-      image: "assets/work/orange-tv-network/thumbnail.png",
-      logo: "assets/work/orange-tv-network/otn%20logo.jpg",
-      photo: "assets/work/orange-tv-network/photo2.jpeg",
-      photoCaption: "Myself with the Loud and Clear crew after a successful Spring '26 sem",
-      link: "https://www.youtube.com/channel/UCrqsGFd3t6BhNosyUm_HU2Q",
-      detail: {
-        accent: "#7C3AED",
-        accentRgb: "124, 58, 237",
-        dates: "Jan 2025 to Present",
-        location: "Syracuse, NY",
-        description: "I started on Loud and Clear as a camera operator. By my second semester I was running day of show, and now I serve as Technical Director and talent booker for the production on Orange Television Network. I hope to step into the EP role next semester. This show taught me what patience in production actually looks like. I did A&R research to fully lock in our shoot schedule, and helped my colleague Kyra Rubenstein learn the ropes behind talent booking and day of show managing. She has blossomed into booking artists on her own. I sit at the switcher during live shoots, cutting between 2 to 4 camera feeds in real time. Every episode, start to finish.",
-        bullets: [
-          "Progressed from camera operator to day of show manager to Technical Director and Talent Booker",
-          "Conducted A&R research to identify and fully book out the semester shoot schedule",
-          "Mentored colleague Kyra Rubenstein in talent booking and day of show management",
-          "Operated video switchboard cutting between 2 to 4 live camera feeds during shoots",
-          "Managed end-to-end production workflow from outreach through final YouTube upload"
-        ],
-        tags: ["Live TV Production", "Technical Direction", "Multi-Camera Switching", "Talent Booking", "Post-Production"]
       }
     },
     {
