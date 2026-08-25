@@ -1047,10 +1047,11 @@
     })();
 
     var MUSIC_TRACKS = [
-      { src: 'bakar-alive.mp3',                                                artist: 'BAKAR',         title: 'ALIVE!',                 color: '#FFE030', bgColor: '#2E7BB5', textColor: '#FFE030' },
-      { src: 'glen-campbell-wichita-lineman.mp3',                             artist: 'GLEN CAMPBELL', title: 'WICHITA LINEMAN',        color: '#F0EDE8', bgColor: '#5C1A28', textColor: '#F0EDE8' },
-      { src: 'daft-punk-lose-yourself-to-dance.mp3',                          artist: 'DAFT PUNK',     title: 'LOSE YOURSELF TO DANCE', color: '#C8AA52', bgColor: '#0D0D0F', textColor: '#C8AA52' },
-      { src: 'soul-for-real-candy-rain.mp3',                                  artist: 'SOUL FOR REAL', title: 'CANDY RAIN',             color: '#F0EDE8', bgColor: '#F0EDE8', textColor: '#0D0D0F' }
+      { src: 'steve-lacy-oh-yeah.mp3',                                        artist: 'STEVE LACY',        title: 'OH YEAH?',              color: '#FF9AD5', bgColor: '#251A38', textColor: '#FF9AD5' },
+      { src: '311-amber.mp3',                                                 artist: '311',               title: 'AMBER',                 color: '#F0EDE8', bgColor: '#C36027', textColor: '#F0EDE8' },
+      { src: 'pink-floyd-wots-uh-the-deal.mp3',                               artist: 'PINK FLOYD',        title: "WOT'S... UH THE DEAL",  color: '#B8C9C2', bgColor: '#2E3A38', textColor: '#B8C9C2' },
+      { src: 'chris-stapleton-loving-you-on-my-mind.mp3',                     artist: 'CHRIS STAPLETON',   title: 'LOVING YOU ON MY MIND', color: '#EE7555', bgColor: '#492B23', textColor: '#EE7555' },
+      { src: 'clairo-losing-pride.mp3',                                       artist: 'CLAIRO',            title: 'LOSING PRIDE',          color: '#F0EDE8', bgColor: '#F0EDE8', textColor: '#0D0D0F' }
     ];
 
     var mPreloaded = MUSIC_TRACKS.map(function (t) {
