@@ -183,7 +183,7 @@ const SITE_CONFIG = {
       type: "LIVE EVENTS",
       medium: "TALENT HANDLING",
       year: "2026",
-      image: "assets/work/espys/thumbnail.jpg",
+      image: "assets/work/espys/thumbnail.webp",
       logo: "",
       link: "https://www.espn.com/espys/",
       linkLabel: "Visit The ESPYs",
