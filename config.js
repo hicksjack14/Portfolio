@@ -33,7 +33,38 @@ const SITE_CONFIG = {
   },
 
   // ── Projects ──────────────────────────────────────────────
+  // Ordered most recent first: active roles (by most recent start), then
+  // completed roles/gigs (by most recent date).
   projects: [
+    {
+      id: 3,
+      title: "UNIVERSITY UNION",
+      role: "DIRECTOR OF SOCIAL MEDIA",
+      type: "COMMS / CONTENT CREATION",
+      medium: "SOCIAL MEDIA",
+      year: "2026",
+      image: "assets/work/university-union/thuumbnail.jpeg",
+      imageFit: "contain",
+      logo: "assets/work/university-union/thuumbnail.jpeg",
+      photo: "assets/work/university-union/photo2.jpeg",
+      photoCaption: "Myself with the socials board after a successful night at Block Party",
+      link: "https://www.instagram.com/universityunion/",
+      linkLabel: "View on Instagram",
+      detail: {
+        accent: "#059669",
+        accentRgb: "5, 150, 105",
+        dates: "Jan 2026 to Present",
+        location: "Syracuse, NY",
+        description: "University Union is one of the biggest student-run entertainment organizations in the country, booking artists for Syracuse's student events. I started on the board as Communications Coordinator and content creator, spending most of my time making content for our events. That meant going out on campus, getting students on camera, and building videos for events like Block Party. In May 2026 I stepped into the role of Director of Social Media alongside Elenore Fresnel. Our goal is to bring something new to the board: creative content strategies that actually grow a following, and a data-driven approach to posting so that everything we put out is backed by what we know works.",
+        bullets: [
+          "Promoted to Director of Social Media for the 2026–27 board, co-leading alongside Elenore Fresnel",
+          "Serve as primary liaison between the social media board and all other UU boards",
+          "Coordinate with external organizations to amplify event marketing reach",
+          "Develop reels, stories, and captions aligned with a content planning calendar"
+        ],
+        tags: ["Social Media Strategy", "Event Marketing", "Content Creation", "Brand Communications", "Audience Growth"]
+      }
+    },
     {
       id: 1,
       title: "M&H INC.",
@@ -95,60 +126,6 @@ const SITE_CONFIG = {
       }
     },
     {
-      id: 3,
-      title: "UNIVERSITY UNION",
-      role: "DIRECTOR OF SOCIAL MEDIA",
-      type: "COMMS / CONTENT CREATION",
-      medium: "SOCIAL MEDIA",
-      year: "2026",
-      image: "assets/work/university-union/thuumbnail.jpeg",
-      imageFit: "contain",
-      logo: "assets/work/university-union/thuumbnail.jpeg",
-      photo: "assets/work/university-union/photo2.jpeg",
-      photoCaption: "Myself with the socials board after a successful night at Block Party",
-      link: "https://www.instagram.com/universityunion/",
-      linkLabel: "View on Instagram",
-      detail: {
-        accent: "#059669",
-        accentRgb: "5, 150, 105",
-        dates: "Jan 2026 to Present",
-        location: "Syracuse, NY",
-        description: "University Union is one of the biggest student-run entertainment organizations in the country, booking artists for Syracuse's student events. I started on the board as Communications Coordinator and content creator, spending most of my time making content for our events. That meant going out on campus, getting students on camera, and building videos for events like Block Party. In May 2026 I stepped into the role of Director of Social Media alongside Elenore Fresnel. Our goal is to bring something new to the board: creative content strategies that actually grow a following, and a data-driven approach to posting so that everything we put out is backed by what we know works.",
-        bullets: [
-          "Promoted to Director of Social Media for the 2026–27 board, co-leading alongside Elenore Fresnel",
-          "Serve as primary liaison between the social media board and all other UU boards",
-          "Coordinate with external organizations to amplify event marketing reach",
-          "Develop reels, stories, and captions aligned with a content planning calendar"
-        ],
-        tags: ["Social Media Strategy", "Event Marketing", "Content Creation", "Brand Communications", "Audience Growth"]
-      }
-    },
-    {
-      id: 4,
-      title: "dormTALK PODCAST",
-      role: "CO-PRODUCER",
-      type: "PODCAST",
-      medium: "MULTI-PLATFORM",
-      year: "2024",
-      image: "assets/work/dormtalk-podcast/thumbnail.png",
-      logo: "assets/work/dormtalk-podcast/dormtalk%20logo.jpeg",
-      link: "https://www.youtube.com/@dormtalk5755",
-      linkLabel: "Watch on YouTube",
-      detail: {
-        accent: "#D4611C",
-        accentRgb: "212, 97, 28",
-        dates: "Sep 2023 to May 2024",
-        location: "Syracuse, NY",
-        description: "dormTALK started with a phone call from Tyler Gentry. He had the idea, and I helped him build it out, co-producing episodes in his apartment on south campus. I handled the creative side: visuals for Instagram and TikTok, captions that actually got people to stop scrolling, and filming and producing the episodes themselves. We also put out tinyDORM, our take on NPR's Tiny Desk, giving a stage to Syracuse student musicians. It was the first time I got to see what it looks like when good content connects with a real audience.",
-        bullets: [
-          "Co-produced podcast episodes filmed in-apartment with founder Tyler Gentry",
-          "Created visuals, captions, and content for Instagram and TikTok",
-          "Produced tinyDORM, a Tiny Desk-style series spotlighting Syracuse student artists"
-        ],
-        tags: ["Podcast Production", "Video Editing", "Social Media", "Content Strategy", "Visual Design"]
-      }
-    },
-    {
       id: 5,
       title: "UNCROWNED",
       role: "PRODUCTION INTERN",
@@ -199,6 +176,31 @@ const SITE_CONFIG = {
           "Worked the full live broadcast, getting a firsthand look at production at a major scale"
         ],
         tags: ["LIVE EVENTS", "TALENT HANDLING", "BROADCAST", "LOS ANGELES"]
+      }
+    },
+    {
+      id: 4,
+      title: "dormTALK PODCAST",
+      role: "CO-PRODUCER",
+      type: "PODCAST",
+      medium: "MULTI-PLATFORM",
+      year: "2024",
+      image: "assets/work/dormtalk-podcast/thumbnail.png",
+      logo: "assets/work/dormtalk-podcast/dormtalk%20logo.jpeg",
+      link: "https://www.youtube.com/@dormtalk5755",
+      linkLabel: "Watch on YouTube",
+      detail: {
+        accent: "#D4611C",
+        accentRgb: "212, 97, 28",
+        dates: "Sep 2023 to May 2024",
+        location: "Syracuse, NY",
+        description: "dormTALK started with a phone call from Tyler Gentry. He had the idea, and I helped him build it out, co-producing episodes in his apartment on south campus. I handled the creative side: visuals for Instagram and TikTok, captions that actually got people to stop scrolling, and filming and producing the episodes themselves. We also put out tinyDORM, our take on NPR's Tiny Desk, giving a stage to Syracuse student musicians. It was the first time I got to see what it looks like when good content connects with a real audience.",
+        bullets: [
+          "Co-produced podcast episodes filmed in-apartment with founder Tyler Gentry",
+          "Created visuals, captions, and content for Instagram and TikTok",
+          "Produced tinyDORM, a Tiny Desk-style series spotlighting Syracuse student artists"
+        ],
+        tags: ["Podcast Production", "Video Editing", "Social Media", "Content Strategy", "Visual Design"]
       }
     }
   ]
