@@ -33,8 +33,9 @@ const SITE_CONFIG = {
   },
 
   // ── Projects ──────────────────────────────────────────────
-  // Ordered most recent first: active roles (by most recent start), then
-  // completed roles/gigs (by most recent date).
+  // Ordered most recent first by actual date, regardless of active/current
+  // status: UU (May 2026) > Uncrowned (Summer 2026) > ESPYs (Jul 2026)
+  // > M&H (Jan 2026) > Loud and Clear (Jan 2025) > dormTALK (2023-24).
   projects: [
     {
       id: 3,
@@ -63,6 +64,59 @@ const SITE_CONFIG = {
           "Develop reels, stories, and captions aligned with a content planning calendar"
         ],
         tags: ["Social Media Strategy", "Event Marketing", "Content Creation", "Brand Communications", "Audience Growth"]
+      }
+    },
+    {
+      id: 5,
+      title: "UNCROWNED",
+      role: "PRODUCTION INTERN",
+      type: "SPORTS MEDIA",
+      medium: "INTERNSHIP",
+      year: "2026",
+      image: "assets/work/uncrowned/thumbnail.webp",
+      logo: "assets/work/uncrowned/crown-logo.png",
+      link: "https://www.uncrowned.com",
+      linkLabel: "Visit Uncrowned",
+      link2: "https://www.youtube.com/@ArielHelwani",
+      link2Label: "Ariel Helwani on YouTube",
+      detail: {
+        accent: "#E8B400",
+        accentRgb: "232, 180, 0",
+        dates: "Summer 2026",
+        location: "New York, NY",
+        description: "This summer I worked in New York with Uncrowned, Ariel Helwani's combat sports media company, as a Production Intern on the Ariel Helwani Show. Day to day I helped the show with developing assets, handling courtesies, and small production stuff like camera work and whatever else came up. I also shadowed our Exec Producer, Graphics Producer, Technical Director, and Audio Engineer, and picked up something from every department. On Thursdays I got handed a mic for Boys in the Back and went on air anywhere from a few minutes to a full hour.",
+        bullets: [
+          "Helped develop assets, courtesies, and day-to-day production needs for the Ariel Helwani Show",
+          "Supported other production tasks as needed",
+          "Shadowed the Exec Producer, Graphics Producer, Technical Director, and Audio Engineer across departments",
+          "Got air time weekly for Boys in the Back, up to an hour long"
+        ],
+        tags: ["SPORTS MEDIA", "PRODUCTION", "LIVE TV", "ON-AIR", "NYC"]
+      }
+    },
+    {
+      id: 6,
+      title: "THE ESPYS",
+      role: "TALENT ESCORT",
+      type: "LIVE EVENTS",
+      medium: "TALENT HANDLING",
+      year: "2026",
+      image: "assets/work/espys/thumbnail.webp",
+      logo: "assets/work/espys/thumbnail.webp",
+      link: "https://www.espn.com/espys/",
+      linkLabel: "Visit The ESPYs",
+      detail: {
+        accent: "#C9302C",
+        accentRgb: "201, 48, 44",
+        dates: "July 15, 2026",
+        location: "Los Angeles, CA",
+        description: "On July 15, 2026 I worked as a Talent Escort at The ESPYs, ESPN's annual awards show honoring the best in sports. I was assigned to escort Kelis Armstrong, Julia Howe, and Samuel Phillips throughout the night, and spent the rest of the show moving around other talent as needed. Getting to work the full event and see a live production at that scale up close was one of the most exciting things I've done.",
+        bullets: [
+          "Escorted talent Kelis Armstrong, Julia Howe, and Samuel Phillips throughout the show",
+          "Moved and assisted with additional talent across the event as needed",
+          "Worked the full live broadcast, getting a firsthand look at production at a major scale"
+        ],
+        tags: ["LIVE EVENTS", "TALENT HANDLING", "BROADCAST", "LOS ANGELES"]
       }
     },
     {
@@ -123,59 +177,6 @@ const SITE_CONFIG = {
           "Managed end-to-end production workflow from outreach through final YouTube upload"
         ],
         tags: ["Live TV Production", "Technical Direction", "Multi-Camera Switching", "Talent Booking", "Post-Production"]
-      }
-    },
-    {
-      id: 5,
-      title: "UNCROWNED",
-      role: "PRODUCTION INTERN",
-      type: "SPORTS MEDIA",
-      medium: "INTERNSHIP",
-      year: "2026",
-      image: "assets/work/uncrowned/thumbnail.webp",
-      logo: "assets/work/uncrowned/crown-logo.png",
-      link: "https://www.uncrowned.com",
-      linkLabel: "Visit Uncrowned",
-      link2: "https://www.youtube.com/@ArielHelwani",
-      link2Label: "Ariel Helwani on YouTube",
-      detail: {
-        accent: "#E8B400",
-        accentRgb: "232, 180, 0",
-        dates: "Summer 2026",
-        location: "New York, NY",
-        description: "This summer I worked in New York with Uncrowned, Ariel Helwani's combat sports media company, as a Production Intern on the Ariel Helwani Show. Day to day I helped the show with developing assets, handling courtesies, and small production stuff like camera work and whatever else came up. I also shadowed our Exec Producer, Graphics Producer, Technical Director, and Audio Engineer, and picked up something from every department. On Thursdays I got handed a mic for Boys in the Back and went on air anywhere from a few minutes to a full hour.",
-        bullets: [
-          "Helped develop assets, courtesies, and day-to-day production needs for the Ariel Helwani Show",
-          "Supported other production tasks as needed",
-          "Shadowed the Exec Producer, Graphics Producer, Technical Director, and Audio Engineer across departments",
-          "Got air time weekly for Boys in the Back, up to an hour long"
-        ],
-        tags: ["SPORTS MEDIA", "PRODUCTION", "LIVE TV", "ON-AIR", "NYC"]
-      }
-    },
-    {
-      id: 6,
-      title: "THE ESPYS",
-      role: "TALENT ESCORT",
-      type: "LIVE EVENTS",
-      medium: "TALENT HANDLING",
-      year: "2026",
-      image: "assets/work/espys/thumbnail.webp",
-      logo: "assets/work/espys/thumbnail.webp",
-      link: "https://www.espn.com/espys/",
-      linkLabel: "Visit The ESPYs",
-      detail: {
-        accent: "#C9302C",
-        accentRgb: "201, 48, 44",
-        dates: "July 15, 2026",
-        location: "Los Angeles, CA",
-        description: "On July 15, 2026 I worked as a Talent Escort at The ESPYs, ESPN's annual awards show honoring the best in sports. I was assigned to escort Kelis Armstrong, Julia Howe, and Samuel Phillips throughout the night, and spent the rest of the show moving around other talent as needed. Getting to work the full event and see a live production at that scale up close was one of the most exciting things I've done.",
-        bullets: [
-          "Escorted talent Kelis Armstrong, Julia Howe, and Samuel Phillips throughout the show",
-          "Moved and assisted with additional talent across the event as needed",
-          "Worked the full live broadcast, getting a firsthand look at production at a major scale"
-        ],
-        tags: ["LIVE EVENTS", "TALENT HANDLING", "BROADCAST", "LOS ANGELES"]
       }
     },
     {
