@@ -413,6 +413,18 @@
             '<p class="panel-text">' + (detail.description || '') + '</p>' +
           '</div>' +
 
+          (project.bodyPhotos && project.bodyPhotos.length
+            ? '<div class="panel-body-photos">' +
+                project.bodyPhotos.map(function (p) {
+                  var posStyle = p.position ? ' style="object-position: ' + escapeHTML(p.position) + '"' : '';
+                  return '<div class="panel-body-photo-item">' +
+                    '<img class="panel-body-photo" src="' + escapeHTML(p.src) + '" alt="On the job"' + posStyle + ' />' +
+                    (p.caption ? '<p class="panel-photo-caption">' + escapeHTML(p.caption) + '</p>' : '') +
+                  '</div>';
+                }).join('') +
+              '</div>'
+            : '') +
+
           '<div class="panel-whatidid-row">' +
             '<div class="panel-section" id="panelSec2">' +
               '<div class="panel-label">What I Did</div>' +

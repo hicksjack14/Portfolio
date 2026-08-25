@@ -107,7 +107,9 @@ const SITE_CONFIG = {
       linkLabel: "Visit Uncrowned",
       link2: "https://www.youtube.com/@ArielHelwani",
       link2Label: "Ariel Helwani on YouTube",
-      photos: [
+      photo: "assets/work/uncrowned/first-interns-story.jpg",
+      photoCaption: "Ariel's shoutout to the first-ever Uncrowned interns",
+      bodyPhotos: [
         { src: "assets/work/uncrowned/boys-in-the-back-crew.webp", caption: "With the crew of the Ariel Helwani Show" },
         { src: "assets/work/uncrowned/studio-crew.jpg", caption: "With GC and Ric from Boys in the Back", position: "center 15%" }
       ],
