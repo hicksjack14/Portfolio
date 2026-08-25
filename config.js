@@ -44,7 +44,7 @@ const SITE_CONFIG = {
       image: "assets/work/mh-inc/thumbnail.svg",
       imageFit: "contain",
       screenBlend: true,
-      logo: "",
+      logo: "assets/work/mh-inc/logo.jpeg",
       photo: "assets/work/mh-inc/photo2.jpg",
       photoCaption: "Myself with Nehru Madan at the UTA NYC offices pitching honestav",
       link: "https://open.spotify.com/artist/2iERIi50FwSNzNeT6j20K8?si=1Jc4MeznQ8CFODRMxWec4A",
