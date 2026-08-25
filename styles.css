@@ -2079,12 +2079,12 @@ body {
 }
 
 
-/* ── PANEL BODY PHOTOS — row after What I Did, sized to match the
-   row above (bullets + side photo) so the two rows read as symmetric ── */
+/* ── PANEL BODY PHOTOS — sits directly under What I Did, inside the
+   left column, filling the space beside the bottom of the tall photo ── */
 .panel-body-photos {
   display: flex;
   gap: 1.2rem;
-  margin: 2.5rem 0 0.5rem;
+  margin: 2rem 0 0.5rem;
 }
 .panel-body-photo-item {
   flex: 1;
@@ -2095,7 +2095,7 @@ body {
 }
 .panel-body-photo {
   width: 100%;
-  height: 280px;
+  height: 260px;
   object-fit: cover;
   border-radius: 4px;
   opacity: 0.88;
@@ -2112,9 +2112,11 @@ body {
   gap: 3rem;
   align-items: flex-start;
 }
-.panel-whatidid-row .panel-section {
+.panel-left-col {
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 .panel-photo-col {
   flex-shrink: 0;
