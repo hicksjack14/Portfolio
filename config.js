@@ -156,7 +156,7 @@ const SITE_CONFIG = {
       medium: "INTERNSHIP",
       year: "2026",
       image: "assets/work/uncrowned/thumbnail.webp",
-      logo: "assets/work/uncrowned/thumbnail.webp",
+      logo: "assets/work/uncrowned/crown-logo.png",
       link: "https://www.uncrowned.com",
       linkLabel: "Visit Uncrowned",
       link2: "https://www.youtube.com/@ArielHelwani",

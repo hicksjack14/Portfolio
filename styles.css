@@ -222,7 +222,7 @@ body {
 
 .work-table-header {
   display: grid;
-  grid-template-columns: 3.25rem 2fr 1fr 1.5fr 1.5fr 0.5fr;
+  grid-template-columns: 4rem 2fr 1fr 1.5fr 1.5fr 0.5fr;
   padding: 0 2rem;
   border-bottom: 1px solid var(--border);
   margin-top: 3.5rem;
@@ -258,7 +258,7 @@ body {
 .project-item {
   flex: 1;
   display: grid;
-  grid-template-columns: 3.25rem 2fr 1fr 1.5fr 1.5fr 0.5fr;
+  grid-template-columns: 4rem 2fr 1fr 1.5fr 1.5fr 0.5fr;
   align-items: center;
   padding: 0 2rem;
   border-bottom: 1px solid var(--border);
@@ -271,9 +271,9 @@ body {
 /* ── HOLO LOGO CHIP ── */
 .project-logo-chip {
   position: relative;
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 7px;
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 8px;
   overflow: hidden;
   background: var(--surface);
   border: 1px solid rgba(240, 237, 232, 0.14);
@@ -288,12 +288,8 @@ body {
   object-fit: cover;
   object-position: center;
   display: block;
-  filter: saturate(0.55) brightness(0.85) contrast(1.05);
+  filter: saturate(0.8) brightness(1.05) contrast(1.05);
   transition: filter 0.4s ease;
-}
-
-.project-item[data-index="4"] .project-logo-img {
-  object-position: 82% 42%;
 }
 
 .project-logo-chip--fallback {
@@ -346,7 +342,7 @@ body {
 
 .project-item:hover .project-logo-img,
 .project-item.active .project-logo-img {
-  filter: saturate(0.85) brightness(1) contrast(1.05);
+  filter: saturate(1) brightness(1.2) contrast(1.05);
 }
 
 .project-item:hover .project-logo-mono,
@@ -394,7 +390,7 @@ body {
 
 .project-data.title {
   font-family: var(--font-display);
-  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+  font-size: clamp(1.3rem, 2.6vw, 1.9rem);
   font-weight: 900;
   letter-spacing: 0.05em;
   color: var(--text);
@@ -1819,13 +1815,13 @@ body {
   .work-table-header { display: none; }
 
   .project-item {
-    grid-template-columns: 2.25rem 1fr auto;
+    grid-template-columns: 2.75rem 1fr auto;
     column-gap: 0.75rem;
   }
 
   .project-logo-chip {
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 2.75rem;
+    height: 2.75rem;
   }
 
   .project-data.role,
@@ -1835,7 +1831,7 @@ body {
     display: none;
   }
 
-  .project-data.title { font-size: 1rem; }
+  .project-data.title { font-size: 1.2rem; }
 
   .about-grid {
     grid-template-columns: 1fr;
