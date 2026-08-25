@@ -49,7 +49,12 @@
       li.setAttribute('role', 'listitem');
       li.setAttribute('tabindex', '0');
 
+      var logoChipHTML = project.logo
+        ? '<span class="project-logo-chip" aria-hidden="true"><img class="project-logo-img" src="' + escapeHTML(project.logo) + '" alt="" loading="lazy" /><span class="project-logo-holo"></span></span>'
+        : '<span class="project-logo-chip project-logo-chip--fallback" aria-hidden="true"><span class="project-logo-mono">' + escapeHTML((project.title || '').split(' ')[0]) + '</span><span class="project-logo-holo"></span></span>';
+
       li.innerHTML =
+        logoChipHTML +
         '<span class="project-data title">'  + project.title  + '</span>' +
         '<span class="project-data role">'   + project.role   + '</span>' +
         '<span class="project-data type">'   + project.type   + '</span>' +

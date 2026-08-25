@@ -156,7 +156,7 @@ const SITE_CONFIG = {
       medium: "INTERNSHIP",
       year: "2026",
       image: "assets/work/uncrowned/thumbnail.webp",
-      logo: "",
+      logo: "assets/work/uncrowned/thumbnail.webp",
       link: "https://www.uncrowned.com",
       linkLabel: "Visit Uncrowned",
       link2: "https://www.youtube.com/@ArielHelwani",
@@ -184,7 +184,7 @@ const SITE_CONFIG = {
       medium: "TALENT HANDLING",
       year: "2026",
       image: "assets/work/espys/thumbnail.webp",
-      logo: "",
+      logo: "assets/work/espys/thumbnail.webp",
       link: "https://www.espn.com/espys/",
       linkLabel: "Visit The ESPYs",
       detail: {

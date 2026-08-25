@@ -222,7 +222,7 @@ body {
 
 .work-table-header {
   display: grid;
-  grid-template-columns: 2fr 1fr 1.5fr 1.5fr 0.5fr;
+  grid-template-columns: 3.25rem 2fr 1fr 1.5fr 1.5fr 0.5fr;
   padding: 0 2rem;
   border-bottom: 1px solid var(--border);
   margin-top: 3.5rem;
@@ -258,7 +258,7 @@ body {
 .project-item {
   flex: 1;
   display: grid;
-  grid-template-columns: 2fr 1fr 1.5fr 1.5fr 0.5fr;
+  grid-template-columns: 3.25rem 2fr 1fr 1.5fr 1.5fr 0.5fr;
   align-items: center;
   padding: 0 2rem;
   border-bottom: 1px solid var(--border);
@@ -266,6 +266,108 @@ body {
   transition: background 0.15s;
   user-select: none;
   position: relative;
+}
+
+/* ── HOLO LOGO CHIP ── */
+.project-logo-chip {
+  position: relative;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 7px;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid rgba(240, 237, 232, 0.14);
+  flex-shrink: 0;
+  isolation: isolate;
+  transition: border-color 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  filter: saturate(0.55) brightness(0.85) contrast(1.05);
+  transition: filter 0.4s ease;
+}
+
+.project-item[data-index="4"] .project-logo-img {
+  object-position: 82% 42%;
+}
+
+.project-logo-chip--fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--surface) 100%, transparent);
+}
+
+.project-logo-mono {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  color: color-mix(in srgb, var(--text) 45%, transparent);
+  transition: color 0.4s ease;
+}
+
+/* Rainbow foil sheen, masked to a diagonal sweep, blended over the mark */
+.project-logo-holo {
+  position: absolute;
+  inset: -20%;
+  background: linear-gradient(
+    115deg,
+    transparent 12%,
+    rgba(255, 45, 170, 0.6) 26%,
+    rgba(60, 200, 255, 0.6) 40%,
+    rgba(255, 214, 0, 0.6) 54%,
+    rgba(160, 60, 255, 0.6) 68%,
+    transparent 84%
+  );
+  background-size: 260% 260%;
+  background-position: 0% 50%;
+  mix-blend-mode: color-dodge;
+  opacity: 0.35;
+  pointer-events: none;
+  animation: holoDrift 7s ease-in-out infinite;
+}
+
+@keyframes holoDrift {
+  0%, 100% { background-position: 10% 30%; }
+  50%      { background-position: 90% 70%; }
+}
+
+.project-item:hover .project-logo-chip,
+.project-item.active .project-logo-chip {
+  border-color: rgba(201, 162, 39, 0.55);
+  transform: scale(1.05);
+}
+
+.project-item:hover .project-logo-img,
+.project-item.active .project-logo-img {
+  filter: saturate(0.85) brightness(1) contrast(1.05);
+}
+
+.project-item:hover .project-logo-mono,
+.project-item.active .project-logo-mono {
+  color: var(--accent);
+}
+
+.project-item:hover .project-logo-holo,
+.project-item.active .project-logo-holo {
+  opacity: 0.65;
+  animation-duration: 2.4s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-logo-holo {
+    animation: none;
+    background-position: 30% 40%;
+  }
+  .project-logo-chip {
+    transition: none;
+  }
 }
 
 .project-item:hover,
@@ -1717,7 +1819,13 @@ body {
   .work-table-header { display: none; }
 
   .project-item {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 2.25rem 1fr auto;
+    column-gap: 0.75rem;
+  }
+
+  .project-logo-chip {
+    width: 2.25rem;
+    height: 2.25rem;
   }
 
   .project-data.role,
