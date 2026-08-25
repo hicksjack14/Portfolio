@@ -113,14 +113,14 @@ const SITE_CONFIG = {
         accent: "#C9302C",
         accentRgb: "201, 48, 44",
         dates: "July 15, 2026",
-        location: "Los Angeles, CA",
+        location: "New York, NY",
         description: "On July 15, 2026 I worked as a Talent Escort at The ESPYs, ESPN's annual awards show honoring the best in sports. I was assigned to escort Kelis Armstrong, Julia Howe, and Samuel Phillips throughout the night, and spent the rest of the show moving around other talent as needed. Getting to work the full event and see a live production at that scale up close was one of the most exciting things I've done.",
         bullets: [
           "Escorted talent Kelis Armstrong, Julia Howe, and Samuel Phillips throughout the show",
           "Moved and assisted with additional talent across the event as needed",
           "Worked the full live broadcast, getting a firsthand look at production at a major scale"
         ],
-        tags: ["LIVE EVENTS", "TALENT HANDLING", "BROADCAST", "LOS ANGELES"]
+        tags: ["LIVE EVENTS", "TALENT HANDLING", "BROADCAST", "NYC"]
       }
     },
     {
