@@ -344,10 +344,10 @@
 
     var testImg = new Image();
     testImg.onload = function () {
-      photoEl.style.backgroundImage = "url('assets/profile/profile-photo.jpg')";
+      photoEl.style.backgroundImage = "url('assets/profile/profile-photo.webp')";
       photoEl.classList.add('has-image');
     };
-    testImg.src = 'assets/profile/profile-photo.jpg';
+    testImg.src = 'assets/profile/profile-photo.webp';
   }
 
   // ── 14. PROJECT PANEL ─────────────────────────────────────
