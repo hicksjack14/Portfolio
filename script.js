@@ -1047,11 +1047,11 @@
     })();
 
     var MUSIC_TRACKS = [
-      { src: 'steve-lacy-oh-yeah.mp3',                                        artist: 'STEVE LACY',        title: 'OH YEAH?',              color: '#FF9AD5', bgColor: '#251A38', textColor: '#FF9AD5' },
-      { src: '311-amber.mp3',                                                 artist: '311',               title: 'AMBER',                 color: '#F0EDE8', bgColor: '#C36027', textColor: '#F0EDE8' },
-      { src: 'pink-floyd-wots-uh-the-deal.mp3',                               artist: 'PINK FLOYD',        title: "WOT'S... UH THE DEAL",  color: '#B8C9C2', bgColor: '#2E3A38', textColor: '#B8C9C2' },
+      { src: 'steve-lacy-oh-yeah.mp3',                                        artist: 'STEVE LACY',        title: 'OH YEAH?',              color: '#FF3DBF', bgColor: '#181C40', textColor: '#FF3DBF' },
+      { src: '311-amber.mp3',                                                 artist: '311',               title: 'AMBER',                 color: '#F2C98C', bgColor: '#C36027', textColor: '#F2C98C' },
+      { src: 'pink-floyd-wots-uh-the-deal.mp3',                               artist: 'PINK FLOYD',        title: "WOT'S... UH THE DEAL",  color: '#F0EDE8', bgColor: '#2E3A38', textColor: '#F0EDE8' },
       { src: 'chris-stapleton-loving-you-on-my-mind.mp3',                     artist: 'CHRIS STAPLETON',   title: 'LOVING YOU ON MY MIND', color: '#EE7555', bgColor: '#492B23', textColor: '#EE7555' },
-      { src: 'clairo-losing-pride.mp3',                                       artist: 'CLAIRO',            title: 'LOSING PRIDE',          color: '#F0EDE8', bgColor: '#F0EDE8', textColor: '#0D0D0F' }
+      { src: 'clairo-losing-pride.mp3',                                       artist: 'CLAIRO',            title: 'LOSING PRIDE',          color: '#F0EDE8', bgColor: '#6E655C', textColor: '#F0EDE8' }
     ];
 
     var mPreloaded = MUSIC_TRACKS.map(function (t) {

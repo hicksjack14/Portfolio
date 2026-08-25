@@ -48,16 +48,16 @@ section#landing .song-btn {
 }
 
 /* Button glow borders — each button glows its own color */
-section#landing .btn-steve  { color: rgba(255, 154, 213, 0.85); border-color: rgba(255, 154, 213, 0.55); box-shadow: 0 0 8px rgba(255,154,213,0.35), 0 0 18px rgba(255,154,213,0.15); }
-section#landing .btn-311    { color: rgba(240, 237, 232, 0.85); border-color: rgba(240, 237, 232, 0.55); box-shadow: 0 0 8px rgba(240,237,232,0.35), 0 0 18px rgba(240,237,232,0.15); }
-section#landing .btn-pink   { color: rgba(184, 201, 194, 0.85); border-color: rgba(184, 201, 194, 0.55); box-shadow: 0 0 8px rgba(184,201,194,0.35), 0 0 18px rgba(184,201,194,0.15); }
+section#landing .btn-steve  { color: rgba(255,  61, 191, 0.85); border-color: rgba(255,  61, 191, 0.55); box-shadow: 0 0 8px rgba(255, 61,191,0.35), 0 0 18px rgba(255, 61,191,0.15); }
+section#landing .btn-311    { color: rgba(242, 201, 140, 0.85); border-color: rgba(242, 201, 140, 0.55); box-shadow: 0 0 8px rgba(242,201,140,0.35), 0 0 18px rgba(242,201,140,0.15); }
+section#landing .btn-pink   { color: rgba(240, 237, 232, 0.85); border-color: rgba(240, 237, 232, 0.55); box-shadow: 0 0 8px rgba(240,237,232,0.35), 0 0 18px rgba(240,237,232,0.15); }
 section#landing .btn-chris  { color: rgba(238, 117,  85, 0.85); border-color: rgba(238, 117,  85, 0.55); box-shadow: 0 0 8px rgba(238,117, 85,0.35), 0 0 18px rgba(238,117, 85,0.15); }
 section#landing .btn-clairo { color: rgba(240, 237, 232, 0.85); border-color: rgba(240, 237, 232, 0.55); box-shadow: 0 0 8px rgba(240,237,232,0.35), 0 0 18px rgba(240,237,232,0.15); }
 
 /* is-playing — stronger glow + color wash */
-section#landing .btn-steve.is-playing  { background: rgba(255, 154, 213, 0.14); box-shadow: 0 0 12px rgba(255,154,213,0.55), 0 0 28px rgba(255,154,213,0.25); }
-section#landing .btn-311.is-playing    { background: rgba(240, 237, 232, 0.14); box-shadow: 0 0 12px rgba(240,237,232,0.55), 0 0 28px rgba(240,237,232,0.25); }
-section#landing .btn-pink.is-playing   { background: rgba(184, 201, 194, 0.14); box-shadow: 0 0 12px rgba(184,201,194,0.55), 0 0 28px rgba(184,201,194,0.25); }
+section#landing .btn-steve.is-playing  { background: rgba(255,  61, 191, 0.14); box-shadow: 0 0 12px rgba(255, 61,191,0.55), 0 0 28px rgba(255, 61,191,0.25); }
+section#landing .btn-311.is-playing    { background: rgba(242, 201, 140, 0.14); box-shadow: 0 0 12px rgba(242,201,140,0.55), 0 0 28px rgba(242,201,140,0.25); }
+section#landing .btn-pink.is-playing   { background: rgba(240, 237, 232, 0.14); box-shadow: 0 0 12px rgba(240,237,232,0.55), 0 0 28px rgba(240,237,232,0.25); }
 section#landing .btn-chris.is-playing  { background: rgba(238, 117,  85, 0.14); box-shadow: 0 0 12px rgba(238,117, 85,0.55), 0 0 28px rgba(238,117, 85,0.25); }
 section#landing .btn-clairo.is-playing { background: rgba(240, 237, 232, 0.14); box-shadow: 0 0 12px rgba(240,237,232,0.55), 0 0 28px rgba(240,237,232,0.25); }
 
