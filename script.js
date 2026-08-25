@@ -429,8 +429,8 @@
                   }).join('') +
                 '</div>'
               : (project.photo
-                  ? '<div class="panel-photo-col">' +
-                      '<img class="panel-photo" src="' + escapeHTML(project.photo) + '" alt="On the job" />' +
+                  ? '<div class="panel-photo-col' + (project.photoTall ? ' panel-photo-col--tall' : '') + '">' +
+                      '<img class="panel-photo' + (project.photoTall ? ' panel-photo--tall' : '') + '" src="' + escapeHTML(project.photo) + '" alt="On the job" />' +
                       (project.photoCaption ? '<p class="panel-photo-caption">' + escapeHTML(project.photoCaption) + '</p>' : '') +
                     '</div>'
                   : '')) +
