@@ -1292,7 +1292,7 @@ body {
    sitting just above the Personal nav button */
 .resume-photo {
   position: absolute;
-  bottom: 26rem;
+  bottom: 41.5rem;
   left: 75%;
   transform: translateX(-50%);
   width: 420px;
