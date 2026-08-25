@@ -14,12 +14,12 @@
 /* ── LANDING PAGE PLACEMENT ── */
 section#landing #soundboard-box {
   position: absolute;
-  top: 1.2rem;
+  top: 1rem;
   left: 0.8rem;
   z-index: 5;
-  width: clamp(190px, 18vw, 240px);
-  gap: 0.32rem;
-  padding: 0.5rem;
+  width: clamp(168px, 16vw, 214px);
+  gap: 0.28rem;
+  padding: 0.45rem;
   background: transparent;
   border: none;
   backdrop-filter: none;
@@ -34,14 +34,14 @@ section#landing .music-header {
 }
 
 /* Title: slightly bigger so it reads clearly */
-section#landing .music-title { font-size: 0.84rem; }
+section#landing .music-title { font-size: 0.74rem; }
 
-section#landing .song-buttons { margin-bottom: 0; gap: 0.34rem; justify-content: center; }
+section#landing .song-buttons { margin-bottom: 0; gap: 0.3rem; justify-content: center; }
 
 /* ── LANDING — SONG BUTTONS ── */
 section#landing .song-btn {
-  width: 34px;
-  height: 34px;
+  width: 30px;
+  height: 30px;
   background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(1px);
   -webkit-backdrop-filter: blur(1px);
@@ -63,38 +63,38 @@ section#landing .btn-clairo.is-playing { background: rgba(240, 237, 232, 0.14); 
 
 /* ── LANDING — ICON ── */
 section#landing .song-btn-icon {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
 }
 
 /* ── LANDING — SPOTIFY BUTTON ── */
 section#landing .spotify-btn {
-  height: 38px;
-  min-height: 38px;
+  height: 34px;
+  min-height: 34px;
   background: transparent;
   border-color: rgba(29, 185, 84, 0.4);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
-  font-size: 0.58rem;
+  font-size: 0.52rem;
 }
 
 /* ── LANDING — NOW PLAYING BAR ── */
 section#landing .now-playing {
-  height: 38px;
-  min-height: 38px;
+  height: 34px;
+  min-height: 34px;
   background: transparent;
   border: 1px solid rgba(201, 162, 39, 0.15);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
 }
 
-section#landing .np-text { font-size: 0.72rem; }
+section#landing .np-text { font-size: 0.64rem; }
 
 section#landing .np-playpause {
-  width: 22px;
-  height: 22px;
-  min-width: 22px;
-  min-height: 22px;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
 }
 
 /* Brightness-only breathe pulse for active pad */
