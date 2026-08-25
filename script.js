@@ -344,10 +344,10 @@
 
     var testImg = new Image();
     testImg.onload = function () {
-      photoEl.style.backgroundImage = "url('assets/profile/camera%20op%20photo.jpg')";
+      photoEl.style.backgroundImage = "url('assets/profile/profile-photo.jpg')";
       photoEl.classList.add('has-image');
     };
-    testImg.src = 'assets/profile/camera%20op%20photo.jpg';
+    testImg.src = 'assets/profile/profile-photo.jpg';
   }
 
   // ── 14. PROJECT PANEL ─────────────────────────────────────
@@ -420,12 +420,20 @@
                 ? '<p class="panel-text panel-coming-soon-text">COMING SOON</p>'
                 : '<ul class="panel-bullets">' + bulletsHTML + '</ul>') +
             '</div>' +
-            (project.photo
+            (project.photos && project.photos.length
               ? '<div class="panel-photo-col">' +
-                  '<img class="panel-photo" src="' + project.photo + '" alt="On the job" />' +
-                  (project.photoCaption ? '<p class="panel-photo-caption">' + project.photoCaption + '</p>' : '') +
+                  project.photos.map(function (p) {
+                    var posStyle = p.position ? ' style="object-position: ' + escapeHTML(p.position) + '"' : '';
+                    return '<img class="panel-photo" src="' + escapeHTML(p.src) + '" alt="On the job"' + posStyle + ' />' +
+                      (p.caption ? '<p class="panel-photo-caption">' + escapeHTML(p.caption) + '</p>' : '');
+                  }).join('') +
                 '</div>'
-              : '') +
+              : (project.photo
+                  ? '<div class="panel-photo-col">' +
+                      '<img class="panel-photo" src="' + escapeHTML(project.photo) + '" alt="On the job" />' +
+                      (project.photoCaption ? '<p class="panel-photo-caption">' + escapeHTML(project.photoCaption) + '</p>' : '') +
+                    '</div>'
+                  : '')) +
           '</div>' +
 
           '<div class="panel-tags" id="panelTags">' + tagsHTML + '</div>' +
