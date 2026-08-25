@@ -1905,11 +1905,31 @@ body {
     transform: translateX(-50%);
   }
 
-  .resume-photo {
-    left: 50%;
+  /* Reserve dedicated bottom space so the nav button never overlaps
+     the About text, regardless of how many lines it wraps to */
+  #about {
+    padding-bottom: 10rem;
+  }
+
+  #about .section-nav-btn {
+    bottom: 3rem;
+  }
+
+  /* Resume grid stacks to a single column on mobile, so the photo and
+     the Personal nav button switch from absolute (dead-space-filling)
+     to normal flow, right after the Skills list */
+  #resume .resume-photo {
+    position: static;
     width: min(300px, 80vw);
     height: 340px;
-    bottom: 22rem;
+    margin: 3rem auto 0;
+    transform: none;
+  }
+
+  #resume .section-nav-btn {
+    position: static;
+    margin: 2rem auto 0;
+    transform: none;
   }
 
   /* Grid gaps */
