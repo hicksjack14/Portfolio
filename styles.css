@@ -1715,13 +1715,13 @@ body {
 
 .personal-projects-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.25rem;
 }
 
 .personal-project-card {
   border: 1px solid var(--border);
-  padding: 2rem;
+  padding: 1.6rem;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
@@ -1730,9 +1730,28 @@ body {
 .pp-img-strip {
   display: flex;
   gap: 3px;
-  height: 130px;
-  margin: -2rem -2rem 1.2rem -2rem;
+  height: 110px;
+  margin: -1.6rem -1.6rem 1.2rem -1.6rem;
   overflow: hidden;
+}
+
+.pp-img-strip--game {
+  align-items: center;
+  justify-content: center;
+  background: rgba(201, 162, 39, 0.06);
+}
+
+.pp-game-glyph {
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  color: var(--accent);
+  opacity: 0.5;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.personal-project-card--game:hover .pp-game-glyph {
+  opacity: 0.9;
+  transform: scale(1.1);
 }
 
 .pp-img {
@@ -1830,6 +1849,14 @@ body {
 
   .panel-content {
     padding: 2rem 1.5rem;
+  }
+
+  .personal-projects-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .personal-project-card--game {
+    grid-column: 1 / -1;
   }
 }
 
