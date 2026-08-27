@@ -520,7 +520,7 @@ class CinematicScene extends Phaser.Scene {
   }
 
   _addTitle() {
-    const title = this.add.text(GAME_W / 2, 16, 'MUSIC RUN', {
+    const title = this.add.text(GAME_W / 2, 16, 'TRACKZ', {
       fontSize: '18px', fontFamily: 'monospace', fill: '#FFFFFF', fontStyle: 'bold'
     }).setOrigin(0.5).setShadow(2, 2, '#000000', 0, true, true);
     this.add.text(GAME_W / 2, 31, 'A JACK HICKS GAME', {
