@@ -4,6 +4,7 @@ const SITE_CONFIG = {
   instagram: "https://www.instagram.com/jackzfilmz/",
   spotify:   "https://open.spotify.com/user/h%C3%B6lup%C3%ABan%C3%BCt?si=9822c7bb3f5e48eb",
   imdb:      "https://www.imdb.com/user/ur212405079/?ref_=up_nv_profile",
+  strava:    "https://strava.app.link/DHMGAKfPW5b",
   youtube:   "",
 
   // ── Music Player ──────────────────────────────────────────

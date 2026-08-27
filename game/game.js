@@ -2,6 +2,8 @@
 const GAME_W = 480, GAME_H = 270;
 const GROUND_Y = 230;
 const JACK_GROUND_Y = GROUND_Y - 14; // sprite is 28 tall, center-origin → feet on ground line
+const FLAGPOLE_H = 190; // huge Mario-style pole — reaches from near the top of the sky down to the ground
+const WIN_SCORE = 1500; // reaching this score also spawns the flagpole, even mid-song
 
 // ── Song Config ────────────────────────────────────────────────────────────
 const SONGS = [
@@ -494,18 +496,22 @@ class BootScene extends Phaser.Scene {
     g.fillStyle(0x6B3A1F); g.fillRect(3, 3, 14, 20);
     g.fillStyle(0xFFD700); g.fillRect(14, 14, 3, 3);
     g.generateTexture('door', 20, 30);
-    // Flagpole (10×55) — tall metal pole with waving flag on top
+    // Flagpole (18×FLAGPOLE_H) — huge Mario-style pole: gold ball cap, big
+    // waving flag, tall shaft. Origin is bottom-center so it plants on GROUND_Y.
     g.clear();
-    g.fillStyle(0xAAAAAA); g.fillRect(4, 0, 3, 55);   // pole
-    g.fillStyle(0xCCCCCC); g.fillRect(4, 0, 1, 55);   // pole highlight
-    g.fillStyle(0x888888); g.fillRect(6, 0, 1, 55);   // pole shadow
-    g.fillStyle(0xFFD700); g.fillRect(4, 0, 6, 5);    // flag body
-    g.fillRect(4, 5, 5, 4);
-    g.fillRect(4, 9, 4, 3);
-    g.fillStyle(0xFFAA00); g.fillRect(5, 1, 4, 2);    // flag stripe
-    g.fillStyle(0xFFFF88); g.fillRect(5, 4, 3, 1);    // flag shine
-    g.fillStyle(0xFFCC00); g.fillRect(3, 54, 5, 1);   // base nub
-    g.generateTexture('flagpole', 10, 55);
+    const pw = 18, poleCX = pw / 2;
+    g.fillStyle(0xFFD700); g.fillCircle(poleCX, 5, 5);        // gold ball cap
+    g.fillStyle(0xFFEE88); g.fillCircle(poleCX - 1.5, 3.5, 2); // cap shine
+    g.fillStyle(0xAAAAAA); g.fillRect(poleCX - 1, 9, 3, FLAGPOLE_H - 9);  // pole shaft
+    g.fillStyle(0xCCCCCC); g.fillRect(poleCX - 1, 9, 1, FLAGPOLE_H - 9); // shaft highlight
+    g.fillStyle(0x777777); g.fillRect(poleCX + 1, 9, 1, FLAGPOLE_H - 9); // shaft shadow
+    // Flag, waving off the right side near the top
+    const fx = poleCX + 1.5;
+    g.fillStyle(0xFFD700); g.fillRect(fx, 13, 7, 6); g.fillRect(fx, 19, 6, 5); g.fillRect(fx, 24, 4, 4);
+    g.fillStyle(0xFFAA00); g.fillRect(fx + 1, 15, 4, 2);
+    g.fillStyle(0xFFFF88); g.fillRect(fx + 1, 20, 3, 2);
+    g.fillStyle(0xFFCC00); g.fillRect(poleCX - 3, FLAGPOLE_H - 1, 7, 1);   // base nub
+    g.generateTexture('flagpole', pw, FLAGPOLE_H);
     g.destroy();
   }
 }
@@ -1610,28 +1616,64 @@ class RunnerScene extends Phaser.Scene {
       this.jumpHint.setText('JUMP THE FLAGPOLE!').setAlpha(1);
       this.tweens.add({ targets: this.jumpHint, alpha: 0, delay: 2500, duration: 500 });
     }
-    // Overlap: touching flagpole = win
+    // Overlap: touching flagpole = win — can't be missed, since it kills
+    // horizontal velocity the instant it fires, so Jack always grabs on.
     this.physics.add.overlap(this.jack, this.flagpole, () => {
       if (!this.gameActive) return;
       this.gameActive = false;
-      // Jump onto pole — kill gravity so the tween isn't fighting physics
       this.jack.setVelocityX(0);
       this.jack.setVelocityY(0);
       this.jack.body.setAllowGravity(false);
+
+      // Mario-style catch: wherever Jack is in the air right when he touches
+      // the pole is where he grabs on — jump later/higher, catch higher, and
+      // the height difference from the ground becomes a score bonus.
+      const catchCeiling = this.flagpole.y - FLAGPOLE_H + 30;
+      const catchY = Phaser.Math.Clamp(this.jack.y, catchCeiling, JACK_GROUND_Y);
+      const heightBonus = Math.round((JACK_GROUND_Y - catchY) * 5);
+      this.score += heightBonus;
+      this.scoreTxt.setText(String(this.score));
+
+      if (heightBonus > 15) {
+        const bonusTxt = this.add.text(this.flagpole.x, catchY - 12, `+${heightBonus} HEIGHT BONUS`, {
+          fontSize: '7px', fontFamily: 'monospace', fill: '#FFD700', fontStyle: 'bold'
+        }).setOrigin(0.5).setDepth(20);
+        this.tweens.add({
+          targets: bonusTxt, y: bonusTxt.y - 20, alpha: 0, duration: 1200,
+          onComplete: () => bonusTxt.destroy()
+        });
+      }
+
+      // Snap onto the pole at the catch point, then slide down it
       this.tweens.add({
         targets: this.jack,
         x: this.flagpole.x,
-        y: this.flagpole.y - 50,
-        duration: 300,
-        ease: 'Power2',
+        y: catchY,
+        duration: 120,
+        ease: 'Power1',
         onComplete: () => {
           this.tweens.add({
-            targets: this.jack, y: GROUND_Y - 14, duration: 400, ease: 'Bounce',
-            onComplete: () => {
-              this.music?.stop();
-              this.time.delayedCall(600, () => this._triggerWin());
-            }
+            targets: this.jack, y: JACK_GROUND_Y, duration: 500, ease: 'Sine.easeIn',
+            onComplete: () => this.time.delayedCall(150, () => this._showMarioBubble())
           });
+        }
+      });
+    });
+  }
+
+  _showMarioBubble() {
+    const bubble = this.add.text(this.jack.x, JACK_GROUND_Y - 46, "IT'S-A ME, MARIO!", {
+      fontSize: '8px', fontFamily: 'monospace', fill: '#111111', fontStyle: 'bold',
+      backgroundColor: '#FFFFFF', padding: { x: 7, y: 5 }
+    }).setOrigin(0.5).setAlpha(0).setDepth(21);
+    this.tweens.add({ targets: bubble, alpha: 1, duration: 250 });
+    this.time.delayedCall(1400, () => {
+      this.tweens.add({
+        targets: bubble, alpha: 0, duration: 300,
+        onComplete: () => {
+          bubble.destroy();
+          this.music?.stop();
+          this._triggerWin();
         }
       });
     });
@@ -1731,6 +1773,10 @@ class RunnerScene extends Phaser.Scene {
     // Score = distance run
     this.score = Math.floor(this.jack.x / 10);
     this.scoreTxt.setText(String(this.score));
+
+    // Hitting the score target spawns the flagpole immediately, same as
+    // finishing the song — whichever comes first ends the run.
+    if (!this.flagSpawned && this.score >= WIN_SCORE) this._spawnFlagpole();
 
     // Cleanup obstacles the player has already passed
     this.obstacles.getChildren().forEach(obs => {
