@@ -994,10 +994,21 @@ body {
 
 .social-icon-link svg { display: block; }
 
+.strava-wordmark-icon {
+  display: block;
+  width: auto;
+  opacity: 0.62;
+  transition: opacity 0.45s ease;
+}
+
+.social-icon-link:hover .strava-wordmark-icon { opacity: 1; }
+
 .social-row .social-icon-link svg {
   width: 18px;
   height: 18px;
 }
+
+.social-row .strava-wordmark-icon { height: 15px; }
 
 /* ── LANDING SOCIAL ICONS (top-right) ── */
 .landing-social-icons {
@@ -1015,6 +1026,8 @@ body {
   width: 13px;
   height: 13px;
 }
+
+.landing-social-icons .strava-wordmark-icon { height: 11px; }
 
 /* CHANGE 1 — gap:0 since dot is removed */
 .music-header {
