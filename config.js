@@ -11,7 +11,7 @@ const SITE_CONFIG = {
   spotifyPlaylist: "https://open.spotify.com/playlist/3yiy1sG74w6meId6oABqFT?si=mKiMjJqRQ4CLhxADaGelUg",
 
   // ── Contact ───────────────────────────────────────────────
-  email: "jhhicks@syr.edu",
+  email: "jack.hunter.hicks@gmail.com",
 
   // ── Identity ──────────────────────────────────────────────
   location: "36.0334° N, 86.7825° W",
