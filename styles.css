@@ -994,14 +994,21 @@ body {
 
 .social-icon-link svg { display: block; }
 
+/* Rendered as a CSS mask (not <img>) so it fills with currentColor and
+   shifts with the rest of the icons when the song theme changes the
+   --muted/--accent variables — a plain image can't respond to that. */
 .strava-icon {
   display: block;
-  object-fit: contain;
-  opacity: 0.82;
-  transition: opacity 0.45s ease;
+  background-color: currentColor;
+  -webkit-mask-image: url('assets/social/strava-mark.png');
+  mask-image: url('assets/social/strava-mark.png');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
 }
-
-.social-icon-link:hover .strava-icon { opacity: 1; }
 
 .social-row .social-icon-link svg {
   width: 18px;
