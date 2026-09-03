@@ -89,6 +89,40 @@
     }
   }
 
+  // ── 1b. LANDING NAV — expandable tabs ─────────────────────
+  function initNavTabs() {
+    var nav = document.getElementById('landingNavTabs');
+    if (!nav) return;
+    var tabs = Array.prototype.slice.call(nav.querySelectorAll('.nav-tab'));
+    var selected = null;
+
+    function setSelected(index) {
+      selected = index;
+      tabs.forEach(function (tab, i) {
+        tab.classList.toggle('is-active', i === index);
+      });
+    }
+
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener('click', function (e) {
+        e.stopPropagation();
+        setSelected(selected === i ? null : i);
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (selected !== null && !nav.contains(e.target)) {
+        setSelected(null);
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && selected !== null) {
+        setSelected(null);
+      }
+    });
+  }
+
   // ── 2. TIME DISPLAY ──────────────────────────────────────
   function updateTime() {
     if (!timeEl || !SITE_CONFIG.timeZone) return;
@@ -1201,6 +1235,7 @@
     initLandingScramble();
     initDottedSurface();
     initScrollBtn();
+    initNavTabs();
     initRobotSpotlight();
 
     initDownloadWidget();
