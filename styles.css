@@ -1066,11 +1066,10 @@ body {
 /* Rendered as a CSS mask (not <img>) so it fills with currentColor and
    shifts with the rest of the icons when the song theme changes the
    --muted/--accent variables — a plain image can't respond to that. */
-.strava-icon {
+.strava-icon,
+.letterboxd-icon {
   display: block;
   background-color: currentColor;
-  -webkit-mask-image: url('assets/social/strava-mark.png');
-  mask-image: url('assets/social/strava-mark.png');
   -webkit-mask-size: contain;
   mask-size: contain;
   -webkit-mask-repeat: no-repeat;
@@ -1079,12 +1078,25 @@ body {
   mask-position: center;
 }
 
+.strava-icon {
+  -webkit-mask-image: url('assets/social/strava-mark.png');
+  mask-image: url('assets/social/strava-mark.png');
+}
+
+.letterboxd-icon {
+  -webkit-mask-image: url('assets/social/letterboxd-mark.png');
+  mask-image: url('assets/social/letterboxd-mark.png');
+}
+
 .social-row .social-icon-link svg {
   width: 18px;
   height: 18px;
 }
 
 .social-row .strava-icon { width: 18px; height: 18px; }
+/* Mark is a wide 2.7:1 shape (not square like the others) — size by its
+   own aspect ratio so it reads at the same visual weight as its neighbors. */
+.social-row .letterboxd-icon { width: 48px; height: 18px; }
 
 /* ── LANDING SOCIAL ICONS (top-right) ── */
 .landing-social-icons {
@@ -1100,6 +1112,7 @@ body {
 }
 
 .landing-social-icons .strava-icon { width: 13px; height: 13px; }
+.landing-social-icons .letterboxd-icon { width: 35px; height: 13px; }
 
 /* CHANGE 1 — gap:0 since dot is removed */
 .music-header {

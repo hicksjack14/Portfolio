@@ -5,6 +5,15 @@ const JACK_GROUND_Y = GROUND_Y - 14; // sprite is 28 tall, center-origin → fee
 const FLAGPOLE_H = 190; // huge Mario-style pole — reaches from near the top of the sky down to the ground
 const WIN_SCORE = 1500; // reaching this score also spawns the flagpole, even mid-song
 
+// ── Volume (persisted master volume, applied to Phaser's global SoundManager) ──
+function getVolume() {
+  const v = parseFloat(localStorage.getItem('game_volume'));
+  return isNaN(v) ? 0.75 : v;
+}
+function setVolume(v) {
+  localStorage.setItem('game_volume', String(v));
+}
+
 // ── Song Config ────────────────────────────────────────────────────────────
 const SONGS = [
   {
@@ -130,6 +139,7 @@ class BootScene extends Phaser.Scene {
   }
 
   create() {
+    this.sound.volume = getVolume();
     this._buildJackTextures();
     this._buildWizardTexture();
     this._buildHeartTextures();
@@ -1523,6 +1533,21 @@ class RunnerScene extends Phaser.Scene {
     this.scoreTxt = this.add.text(GAME_W - 8, 8, '0', {
       fontSize: '8px', fontFamily: 'monospace', fill: '#FFFFFF'
     }).setOrigin(1, 0).setScrollFactor(0).setDepth(10);
+
+    // Pause button (top-right corner, under the score)
+    const pauseIcon = this.add.graphics().setScrollFactor(0).setDepth(10);
+    const drawPauseIcon = (color) => {
+      pauseIcon.clear();
+      pauseIcon.fillStyle(color);
+      pauseIcon.fillRect(GAME_W - 15, 19, 3, 9);
+      pauseIcon.fillRect(GAME_W - 9, 19, 3, 9);
+    };
+    drawPauseIcon(0xFFFFFF);
+    pauseIcon.setInteractive(new Phaser.Geom.Rectangle(GAME_W - 17, 17, 14, 13), Phaser.Geom.Rectangle.Contains);
+    pauseIcon.on('pointerover', () => drawPauseIcon(0xFFD700));
+    pauseIcon.on('pointerout', () => drawPauseIcon(0xFFFFFF));
+    pauseIcon.on('pointerdown', () => this._pauseGame());
+
     // Song name
     this.add.text(GAME_W / 2, 8, `${this.songCfg.label} — ${this.songCfg.sublabel}`, {
       fontSize: '5px', fontFamily: 'monospace', fill: '#AAAAAA'
@@ -1545,6 +1570,21 @@ class RunnerScene extends Phaser.Scene {
     this.leftKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
     this.rightKey= this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
     this.input.on('pointerdown', () => this._tryJump());
+    this.input.keyboard.on('keydown-ESC', () => this._pauseGame());
+  }
+
+  _pauseGame() {
+    if (!this.gameActive) return; // already paused, mid-death, or run has ended
+    this.gameActive = false;
+    this.music?.pause();
+    this.scene.pause();
+    this.scene.launch('PauseScene', { songIdx: this.songCfg.idx });
+  }
+
+  _resumeGame() {
+    this.gameActive = true;
+    this.music?.resume();
+    this.scene.resume();
   }
 
   _startMusic() {
@@ -1785,6 +1825,138 @@ class RunnerScene extends Phaser.Scene {
         obs.destroy();
       }
     });
+  }
+}
+
+class PauseScene extends Phaser.Scene {
+  constructor() { super('PauseScene'); }
+
+  init(data) {
+    this.songCfg = SONGS[data.songIdx ?? 0];
+  }
+
+  create() {
+    const accent = this.songCfg.accentColor;
+
+    // Dim the frozen game behind the panel
+    this.add.rectangle(GAME_W / 2, GAME_H / 2, GAME_W, GAME_H, 0x000000, 0.72);
+
+    // Panel — thick uniform pixel border (8bitcn card.tsx technique)
+    const panelW = 190, panelH = 176, border = 5;
+    const px = Math.round(GAME_W / 2 - panelW / 2), py = Math.round(GAME_H / 2 - panelH / 2);
+    const panel = this.add.graphics();
+    panel.fillStyle(accent);
+    panel.fillRect(px, py, panelW, panelH);
+    panel.fillStyle(0x111116);
+    panel.fillRect(px + border, py + border, panelW - border * 2, panelH - border * 2);
+
+    // Title
+    this.add.text(GAME_W / 2, py + 18, 'PAUSED', {
+      fontSize: '13px', fontFamily: 'monospace', fill: '#FFFFFF', fontStyle: 'bold'
+    }).setOrigin(0.5);
+
+    // Buttons — RESUME / RESTART / QUIT
+    const btnW = panelW - 32, btnH = 22, btnGap = 8;
+    const btnX = px + 16;
+    let btnY = py + 42;
+    [
+      { label: 'RESUME', action: () => this._resume() },
+      { label: 'RESTART', action: () => this._restart() },
+      { label: 'QUIT', action: () => this._quit() },
+    ].forEach(item => {
+      this._buildButton(btnX, btnY, btnW, btnH, item.label, item.action);
+      btnY += btnH + btnGap;
+    });
+
+    // Volume slider
+    this._buildVolumeSlider(btnX, btnY + 4, btnW, accent);
+
+    this.input.keyboard.on('keydown-ESC', () => this._resume());
+  }
+
+  _buildButton(x, y, w, h, label, onClick) {
+    const g = this.add.graphics();
+    const txt = this.add.text(x + w / 2, y + h / 2, label, {
+      fontSize: '7px', fontFamily: 'monospace', fill: '#111111', fontStyle: 'bold'
+    }).setOrigin(0.5);
+
+    const draw = (fill) => {
+      g.clear();
+      g.fillStyle(fill);
+      g.fillRect(x, y, w, h);
+      // Beveled highlight (top/left) + shadow (bottom/right) strips —
+      // the flat-rect version of 8bitcn's stacked border decoration spans.
+      g.fillStyle(0xFFFFFF, 0.5);
+      g.fillRect(x, y, w, 2);
+      g.fillRect(x, y, 2, h);
+      g.fillStyle(0x000000, 0.25);
+      g.fillRect(x, y + h - 2, w, 2);
+      g.fillRect(x + w - 2, y, 2, h);
+    };
+    draw(0xF0EDE8);
+
+    const zone = this.add.zone(x + w / 2, y + h / 2, w, h).setInteractive();
+    zone.on('pointerover', () => draw(0xC9A227));
+    zone.on('pointerout', () => draw(0xF0EDE8));
+    zone.on('pointerdown', () => {
+      this.tweens.add({ targets: [g, txt], y: '+=2', duration: 60, yoyo: true });
+      onClick();
+    });
+  }
+
+  _buildVolumeSlider(x, y, w, accent) {
+    this.add.text(x, y, 'VOLUME', {
+      fontSize: '6px', fontFamily: 'monospace', fill: '#AAAAAA'
+    });
+
+    const trackY = y + 12, trackH = 8, thumbW = 8, thumbH = 14;
+    let vol = Phaser.Math.Clamp(this.sound.volume, 0, 1);
+    const g = this.add.graphics();
+
+    const draw = () => {
+      g.clear();
+      g.fillStyle(0x333340);
+      g.fillRect(x, trackY, w, trackH);
+      const fillW = Math.round(w * vol);
+      g.fillStyle(accent);
+      g.fillRect(x, trackY, fillW, trackH);
+      const thumbX = Phaser.Math.Clamp(x + fillW - thumbW / 2, x, x + w - thumbW);
+      g.fillStyle(0xF0EDE8);
+      g.fillRect(thumbX, trackY + trackH / 2 - thumbH / 2, thumbW, thumbH);
+    };
+    draw();
+
+    const setFromPointer = (pointer) => {
+      vol = Phaser.Math.Clamp((pointer.x - x) / w, 0, 1);
+      vol = Math.round(vol * 100) / 100;
+      this.sound.volume = vol;
+      setVolume(vol);
+      draw();
+    };
+
+    const zone = this.add.zone(x + w / 2, trackY + trackH / 2, w, thumbH + 6).setInteractive();
+    let dragging = false;
+    zone.on('pointerdown', (pointer) => { dragging = true; setFromPointer(pointer); });
+    zone.on('pointermove', (pointer) => { if (dragging) setFromPointer(pointer); });
+    this.input.on('pointerup', () => { dragging = false; });
+  }
+
+  _resume() {
+    this.scene.get('RunnerScene')._resumeGame();
+    this.scene.stop();
+  }
+
+  _restart() {
+    const songIdx = this.songCfg.idx;
+    this.scene.stop('RunnerScene');
+    this.cameras.main.fade(300, 0, 0, 0);
+    this.time.delayedCall(300, () => this.scene.start('RunnerScene', { songIdx }));
+  }
+
+  _quit() {
+    this.scene.stop('RunnerScene');
+    this.cameras.main.fade(300, 0, 0, 0);
+    this.time.delayedCall(300, () => this.scene.start('SpotifyScene'));
   }
 }
 
@@ -2288,7 +2460,7 @@ const config = {
     default: 'arcade',
     arcade: { gravity: { y: 900 }, debug: false }
   },
-  scene: [BootScene, CinematicScene, SpotifyScene, RunnerScene, WinScene, GameOverScene, RecordRoomScene, EasterEggScene]
+  scene: [BootScene, CinematicScene, SpotifyScene, RunnerScene, PauseScene, WinScene, GameOverScene, RecordRoomScene, EasterEggScene]
 };
 
 window.__game = new Phaser.Game(config);
