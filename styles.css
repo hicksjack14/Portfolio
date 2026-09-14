@@ -1097,6 +1097,9 @@ body {
 /* Mark is a wide 2.7:1 shape (not square like the others) — size by its
    own aspect ratio so it reads at the same visual weight as its neighbors. */
 .social-row .letterboxd-icon { width: 30px; height: 11px; }
+/* Pull its neighbors in slightly — the wide, short mark leaves more visual
+   air on each side than the row's uniform gap accounts for. */
+.social-row .social-icon-link:has(.letterboxd-icon) { margin-inline: -6px; }
 
 /* ── LANDING SOCIAL ICONS (top-right) ── */
 .landing-social-icons {
@@ -1113,6 +1116,7 @@ body {
 
 .landing-social-icons .strava-icon { width: 13px; height: 13px; }
 .landing-social-icons .letterboxd-icon { width: 22px; height: 8px; }
+.landing-social-icons .social-icon-link:has(.letterboxd-icon) { margin-inline: -3px; }
 
 /* CHANGE 1 — gap:0 since dot is removed */
 .music-header {
