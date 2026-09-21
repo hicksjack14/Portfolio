@@ -1817,7 +1817,7 @@ body {
 
 .personal-projects-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 1.25rem;
 }
 
@@ -2454,4 +2454,220 @@ body {
 .ds-submit:hover {
   background: var(--ds-accent);
   color: #080808;
+}
+
+
+/* ── CRATES CARD + PANEL ──────────────────────────────────── */
+.pp-cover-strip { height: 110px; }
+.pp-cover-tile {
+  flex: 1;
+  background-color: rgba(224,164,88,0.07);
+  opacity: 0;
+  transition: opacity 0.6s ease, filter 0.3s ease;
+}
+.pp-cover-tile.is-loaded { opacity: 1; }
+
+.crates-panel {
+  --cr-accent: #E0A458;
+  --cr-accent-rgb: 224, 164, 88;
+}
+
+.cr-hero {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  padding: 3rem 3rem 3rem;
+  border-bottom: 1px solid rgba(240,237,232,0.08);
+}
+.cr-hero-left  { flex: 1; min-width: 0; }
+.cr-hero-right { flex: 1; display: flex; justify-content: center; }
+
+.cr-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: var(--cr-accent);
+  margin-bottom: 1rem;
+}
+.cr-headline {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin: 0 0 1.5rem;
+}
+.cr-body {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.75;
+  color: rgba(240,237,232,0.65);
+  max-width: 540px;
+  margin: 0 0 1rem;
+}
+.cr-cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+.cr-cta {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.7rem 1.2rem;
+  border: 1px solid var(--cr-accent);
+  background: var(--cr-accent);
+  color: #0D0D0F;
+  transition: background 0.2s, color 0.2s;
+}
+.cr-cta:hover { background: transparent; color: var(--cr-accent); }
+.cr-cta--ghost { background: transparent; color: var(--cr-accent); }
+.cr-cta--ghost:hover { background: var(--cr-accent); color: #0D0D0F; }
+
+/* Fanned album covers */
+.cr-cover-fan {
+  position: relative;
+  width: min(100%, 420px);
+  aspect-ratio: 1;
+}
+.cr-cover {
+  position: absolute;
+  width: 46%;
+  aspect-ratio: 1;
+  left: calc(4% + var(--i) * 5.5%);
+  top: calc(2% + (var(--i) % 4) * 12%);
+  transform: rotate(calc((var(--i) - 3.5) * 4deg));
+  background: rgba(224,164,88,0.08);
+  border: 1px solid rgba(240,237,232,0.12);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.55);
+  opacity: 0;
+  transition: opacity 0.6s ease calc(var(--i) * 0.08s), transform 0.4s ease;
+}
+.cr-cover.is-loaded { opacity: 1; }
+.cr-cover:hover { transform: rotate(0deg) translateY(-8px) scale(1.04); z-index: 10; }
+.cr-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.cr-section { padding: 2.5rem 3rem; border-bottom: 1px solid rgba(240,237,232,0.08); }
+.cr-section--last { border-bottom: 0; padding-bottom: 3.5rem; }
+
+.cr-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+.cr-feature {
+  border: 1px solid rgba(224,164,88,0.3);
+  padding: 1.1rem 1.1rem 1.25rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+.cr-feature:hover { border-color: var(--cr-accent); background: rgba(224,164,88,0.04); }
+.cr-feature-name {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  color: var(--cr-accent);
+  margin-bottom: 0.6rem;
+}
+.cr-feature-text {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.7;
+  color: rgba(240,237,232,0.7);
+  margin: 0;
+}
+
+.cr-steps { list-style: none; margin: 1.5rem 0 0; padding: 0; max-width: 760px; }
+.cr-step {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.4rem 0;
+  border-top: 1px solid rgba(240,237,232,0.08);
+}
+.cr-step:first-child { border-top: 0; padding-top: 0; }
+.cr-step-num {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--cr-accent);
+  flex-shrink: 0;
+  width: 3rem;
+}
+.cr-step-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin: 0 0 0.45rem;
+}
+.cr-step-text {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  line-height: 1.8;
+  color: rgba(240,237,232,0.65);
+  margin: 0;
+}
+
+.cr-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.1rem; }
+.cr-tag {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  border: 1px solid rgba(224,164,88,0.4);
+  color: var(--cr-accent);
+  padding: 0.3rem 0.7rem;
+}
+
+@media (max-width: 800px) {
+  .cr-hero { flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; gap: 2rem; }
+  .cr-hero-right { width: 100%; }
+  .cr-section { padding: 2rem 1.5rem; }
+  .cr-step { gap: 1rem; }
+  .cr-step-num { font-size: 1.8rem; width: 2.2rem; }
+}
+
+.cr-why { max-width: 680px; margin-top: 1.25rem; }
+.cr-why-text {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.9;
+  color: rgba(240,237,232,0.78);
+  margin: 0 0 1.1rem;
+}
+
+/* Text + photo side by side */
+.cr-split {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  margin-top: 1.25rem;
+}
+.cr-split > .cr-why, .cr-split > .cr-steps { flex: 1 1 0; min-width: 0; margin-top: 0; }
+.cr-figure { margin: 0; flex: 0 0 auto; }
+.cr-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid rgba(240,237,232,0.12);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.55);
+}
+.cr-figure figcaption {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(240,237,232,0.4);
+  margin-top: 0.7rem;
+}
+.cr-figure--portrait { width: min(320px, 34%); }
+.cr-figure-stack { flex: 0 0 auto; width: min(460px, 42%); display: flex; flex-direction: column; gap: 1.5rem; }
+
+@media (max-width: 800px) {
+  .cr-split { flex-direction: column; gap: 1.75rem; }
+  .cr-figure--portrait { width: 100%; }
+  .cr-figure-stack { width: 100%; max-width: 480px; }
+  .cr-figure--portrait { max-width: 300px; }
 }

@@ -34,6 +34,54 @@ const SITE_CONFIG = {
     ]
   },
 
+  // ── Crates ────────────────────────────────────────────────
+  crates: {
+    url: "https://crates-chi.vercel.app",
+    // Album art is pulled live from the iTunes API (nothing stored in the repo)
+    covers: [
+      "Frank Ocean Blonde",
+      "Kendrick Lamar good kid m.A.A.d city",
+      "Steve Lacy Gemini Rights",
+      "Mk.gee Two Star and the Dream Police",
+      "Clairo Sling",
+      "Tyler the Creator IGOR",
+      "Pink Floyd Wish You Were Here",
+      "Joni Mitchell Blue"
+    ],
+    photoWhy:   "assets/crates/high-school.jpg",
+    photoWhyCaption: "Me in high school, when my friends and I were rating albums",
+    photosBuild: [
+      { src: "assets/crates/crates-ui.webp",       caption: "What Crates looks like today" },
+      { src: "assets/crates/crates-profile.webp",  caption: "Your profile and shelf" },
+      { src: "assets/crates/crates-catalogs.webp", caption: "Catalogs, for digging through the bins" }
+    ],
+    why: [
+      "I've always wanted something made specifically for reviewing music, and for doing it with friends. In high school, my friends Adarsh and Ian and I would listen to albums together and review them afterward. I wish we had kept a record of everything we listened to back then. Now we can.",
+      "I used Claude to build Crates, but it wasn't just a prompt and done. The engineering, the prompting, and a lot of the coding were mine, and I went out and found the free assets and data sources I'm allowed to use to fill it in."
+    ],
+    features: [
+      { name: "LOG",     text: "Star ratings out of 5, format, listen date, and private liner notes for every album." },
+      { name: "LISTS",   text: "Sort albums into your own colored crates, however you want to group them." },
+      { name: "QUEUE",   text: "Save albums you want to hear next, drag them into the order you'll listen, and see the genres your queue leans toward." },
+      { name: "POSTS",   text: "Share a rating or just say something. Like posts, reply, and switch the feed between everyone and the people you follow." },
+      { name: "FRIENDS", text: "Follow people, read their posts, see what they're spinning." },
+      { name: "TASTE",   text: "A short quiz feeds suggestions, so a new account never starts empty." }
+    ],
+    build: [
+      { title: "Start with the feeling",
+        text: "Before any code, I wrote down the mood: vinyl at night. Warm near-black, real album art as the only color, one amber accent. Everything got built to serve that." },
+      { title: "Build it with Claude Code",
+        text: "I planned the structure, wrote the prompts, read and edited the code, and pushed each piece until it felt right. Claude did a lot of the typing, but the decisions were mine. Next.js on the front, Tailwind for style, Framer Motion for movement." },
+      { title: "Plug in real music data",
+        text: "Search runs on Spotify, with Deezer as a backup and MusicBrainz for genres. Spotify once locked my app out for 18 hours after I over-called it, so now every search is cached and Deezer steps in when Spotify says no." },
+      { title: "Give it accounts and a memory",
+        text: "Email and password sign-in with encrypted sessions, and a Postgres database on Neon holding every log, list, follow and post. Rate limits live in the database, because a serverless app can't remember anything in memory." },
+      { title: "Ship it to friends",
+        text: "Pushed to GitHub, deployed on Vercel, tested with throwaway accounts before anyone real touched it. It's live now and owned by my LLC, JHH LLC." }
+    ],
+    stack: ["NEXT.JS 16", "TAILWIND", "FRAMER MOTION", "PRISMA", "NEON POSTGRES", "VERCEL", "SPOTIFY API", "DEEZER API", "CLAUDE CODE"]
+  },
+
   // ── Projects ──────────────────────────────────────────────
   // UU and Loud and Clear are both ongoing (tagged "CURRENT") and grouped
   // first; remaining cards ordered most recent first by actual date:

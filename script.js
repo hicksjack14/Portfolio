@@ -736,6 +736,149 @@
     });
   }
 
+  // ── CRATES PANEL ──────────────────────────────────────────
+  // Album art comes live from the iTunes API (same approach as Dubstamper).
+  // All panel text comes from SITE_CONFIG.crates (my own content), never user input.
+  function fetchAlbumArt(query, size, cb) {
+    fetch('https://itunes.apple.com/search?term=' + encodeURIComponent(query) + '&entity=album&limit=1')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.results && data.results[0]) {
+          cb(data.results[0].artworkUrl100.replace('100x100', size + 'x' + size));
+        }
+      })
+      .catch(function () {});
+  }
+
+  function initCratesCardStrip() {
+    var strip = document.getElementById('cratesCardStrip');
+    var cfg = SITE_CONFIG.crates;
+    if (!strip || !cfg) return;
+    cfg.covers.slice(0, 5).forEach(function (q) {
+      var tile = document.createElement('div');
+      tile.className = 'pp-img pp-cover-tile';
+      strip.appendChild(tile);
+      fetchAlbumArt(q, 300, function (url) {
+        tile.style.backgroundImage = "url('" + url + "')";
+        tile.classList.add('is-loaded');
+      });
+    });
+  }
+
+  function buildCratesPanel() {
+    var cfg = SITE_CONFIG.crates;
+    var panel = document.createElement('div');
+    panel.className = 'project-panel crates-panel';
+    panel.id = 'panel-crates';
+
+    var coversHTML = cfg.covers.map(function (q, i) {
+      return '<div class="cr-cover" style="--i:' + i + '"><img src="" alt="' + q + '" data-q="' + q + '" /></div>';
+    }).join('');
+
+    var featuresHTML = cfg.features.map(function (f) {
+      return '<div class="cr-feature">' +
+        '<div class="cr-feature-name">' + f.name + '</div>' +
+        '<p class="cr-feature-text">' + f.text + '</p>' +
+      '</div>';
+    }).join('');
+
+    var buildHTML = cfg.build.map(function (s, i) {
+      return '<li class="cr-step">' +
+        '<span class="cr-step-num">' + String(i + 1).padStart(2, '0') + '</span>' +
+        '<div class="cr-step-body">' +
+          '<h3 class="cr-step-title">' + s.title + '</h3>' +
+          '<p class="cr-step-text">' + s.text + '</p>' +
+        '</div>' +
+      '</li>';
+    }).join('');
+
+    var whyHTML = cfg.why.map(function (p) {
+      return '<p class="cr-why-text">' + p + '</p>';
+    }).join('');
+
+    var shotsHTML = cfg.photosBuild.map(function (p) {
+      return '<figure class="cr-figure"><img src="' + p.src + '" alt="' + p.caption + '" loading="lazy" /><figcaption>' + p.caption + '</figcaption></figure>';
+    }).join('');
+
+    var stackHTML = cfg.stack.map(function (t) {
+      return '<span class="cr-tag">' + t + '</span>';
+    }).join('');
+
+    panel.innerHTML =
+      '<div class="panel-canvas"></div>' +
+      '<div class="panel-topbar">' +
+        '<button class="panel-back-btn" id="cratesPanelBackBtn"><span class="panel-back-arrow">←</span> Back</button>' +
+        '<span class="panel-topbar-title">Jack Hicks · Crates</span>' +
+        '<span style="width:60px"></span>' +
+      '</div>' +
+      '<div class="panel-scroll">' +
+        '<div class="cr-hero">' +
+          '<div class="cr-hero-left">' +
+            '<div class="cr-eyebrow">CRATES · LIVE</div>' +
+            '<h2 class="cr-headline">Letterboxd,<br>for albums.</h2>' +
+            '<p class="cr-body">Crates is a diary for the music you listen to. Log an album, rate it, write yourself a private note, drop it in a list. Then see what your friends are spinning.</p>' +
+            '<div class="cr-cta-row">' +
+              '<a class="cr-cta" href="' + cfg.url + '" target="_blank" rel="noopener">Open Crates ↗</a>' +
+            '</div>' +
+          '</div>' +
+          '<div class="cr-hero-right"><div class="cr-cover-fan">' + coversHTML + '</div></div>' +
+        '</div>' +
+        '<div class="cr-section">' +
+          '<div class="panel-label">Why I made it</div>' +
+          '<div class="cr-split">' +
+            '<div class="cr-why">' + whyHTML + '</div>' +
+            '<figure class="cr-figure cr-figure--portrait"><img src="' + cfg.photoWhy + '" alt="' + cfg.photoWhyCaption + '" loading="lazy" /><figcaption>' + cfg.photoWhyCaption + '</figcaption></figure>' +
+          '</div>' +
+        '</div>' +
+        '<div class="cr-section">' +
+          '<div class="panel-label">What it does</div>' +
+          '<div class="cr-features">' + featuresHTML + '</div>' +
+        '</div>' +
+        '<div class="cr-section">' +
+          '<div class="panel-label">How I built it</div>' +
+          '<div class="cr-split">' +
+            '<ol class="cr-steps">' + buildHTML + '</ol>' +
+            '<div class="cr-figure-stack">' + shotsHTML + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="cr-section cr-section--last">' +
+          '<div class="panel-label">Under the hood</div>' +
+          '<div class="cr-tags">' + stackHTML + '</div>' +
+        '</div>' +
+      '</div>';
+
+    return panel;
+  }
+
+  function openCratesPanel(e) {
+    if (e && e.target.closest && e.target.closest('a')) return; // let the "Open Crates" link work normally
+    stopIdleAnimation();
+    clearTimeout(idleTimeout);
+    if (currentPanel) { currentPanel.remove(); currentPanel = null; }
+
+    var panel = buildCratesPanel();
+    document.body.appendChild(panel);
+    currentPanel = panel;
+    panelOpen = true;
+    document.body.style.overflow = 'hidden';
+    panel.classList.add('is-open');
+
+    initPanelDotWave(panel);
+
+    if (typeof gsap !== 'undefined') {
+      gsap.fromTo(panel, { x: '100%' }, { x: '0%', duration: 0.5, ease: 'power3.out' });
+    }
+
+    panel.querySelector('#cratesPanelBackBtn').addEventListener('click', closePanel);
+
+    panel.querySelectorAll('.cr-cover img').forEach(function (img) {
+      fetchAlbumArt(img.getAttribute('data-q'), 500, function (url) {
+        img.src = url;
+        img.parentNode.classList.add('is-loaded');
+      });
+    });
+  }
+
   // ── 13. LANDING NAME SCRAMBLE ─────────────────────────────
   var LANDING_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$&%!?1234567890';
 
@@ -1210,6 +1353,12 @@
 
     var dubCard = document.getElementById('dubstamperCard');
     if (dubCard) dubCard.addEventListener('click', openDubstamperPanel);
+
+    var cratesCard = document.getElementById('cratesCard');
+    if (cratesCard) {
+      cratesCard.addEventListener('click', openCratesPanel);
+      initCratesCardStrip();
+    }
 
     updateTime();
     setInterval(updateTime, 1000);
