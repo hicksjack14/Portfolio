@@ -219,8 +219,8 @@
   }
 
   function init() {
-    initRoles(); initNumbers(); initNow(); initReveal();
-    initRowPeek(); initScrollPeek(); initWaveSections();
+    initRoles(); initNumbers(); initReveal();
+    initScrollPeek(); initWaveSections();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
