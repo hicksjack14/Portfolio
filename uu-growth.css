@@ -1,0 +1,76 @@
+/* UU growth motion piece. Colors follow the panel accent (--panel-accent) so it stays UU emerald. */
+.ug {
+  --ug-c: color-mix(in srgb, var(--panel-accent, #059669) 62%, #fff);   /* lifted accent for small text/lines */
+  --ug-fill: var(--panel-accent, #059669);
+  --ug-ease: cubic-bezier(0.22, 1, 0.36, 1);                            /* ease-out-quint */
+  color: var(--ug-c);
+  margin: 3rem 0 2.5rem;
+  font-family: 'IBM Plex Mono', monospace;
+}
+.ug-top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1.75rem; }
+.ug-eyebrow { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted, #888880); }
+.ug-replay {
+  background: none; border: 1px solid var(--border, #222228); color: var(--muted, #888880); cursor: pointer;
+  font: 500 10px 'IBM Plex Mono', monospace; letter-spacing: .16em; padding: 7px 12px; border-radius: 2px;
+  transition: color .25s var(--ug-ease), border-color .25s var(--ug-ease);
+}
+.ug-replay:hover { color: var(--ug-c); border-color: var(--ug-c); }
+
+.ug-counters { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 2.25rem; }
+.ug-clabel { font-size: 10px; letter-spacing: .2em; color: var(--muted, #888880); margin-bottom: 10px; text-transform: uppercase; }
+.ug-big { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; color: var(--text, #F0EDE8);
+          font-size: clamp(54px, 9vw, 104px); line-height: .95; font-variant-numeric: tabular-nums; }
+.ug-big--e { color: var(--ug-c); }
+.ug-sub { font-size: 12px; letter-spacing: .06em; margin-top: 10px; color: var(--ug-c); }
+.ug-charts { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+.ug-chart { width: 100%; height: auto; display: block; overflow: visible; }
+.ug-note { font-size: 11px; color: var(--muted, #888880); line-height: 1.7; margin-top: 1.25rem; max-width: 60ch; letter-spacing: .03em; }
+.ug-sample { color: #0D0D0F; background: #E8B400; font-size: 9px; letter-spacing: .14em; padding: 2px 6px; border-radius: 2px; margin-left: 8px; }
+
+/* svg parts */
+.ug-grid { stroke: var(--border, #222228); stroke-width: 1; }
+.ug-tick, .ug-xlabel { fill: var(--muted, #888880); font: 400 10px 'IBM Plex Mono', monospace; letter-spacing: .08em; }
+.ug-xlabel { fill: var(--text, #F0EDE8); font-weight: 500; opacity: 0; }
+.ug-base { stroke: var(--muted, #888880); stroke-dasharray: 3 5; opacity: .7; }
+.ug-line { fill: none; stroke: var(--ug-c); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.ug-line--e { stroke: var(--text, #F0EDE8); stroke-width: 2; }
+.ug-area, .ug-bracket, .ug-gain, .ug-barval, .ug-dot { opacity: 0; }
+.ug-bracket { stroke: var(--ug-c); stroke-width: 1; }
+.ug-gain { fill: var(--ug-c); font: 500 11px 'IBM Plex Mono', monospace; letter-spacing: .08em; }
+.ug-gain--e { fill: var(--text, #F0EDE8); }
+.ug-barval { fill: var(--ug-c); font: 500 10px 'IBM Plex Mono', monospace; letter-spacing: .06em; }
+.ug-dot { fill: #0D0D0F; stroke: var(--ug-c); stroke-width: 2; }
+.ug-dot--end { fill: var(--ug-c); }
+.ug-dot--endE { fill: var(--text, #F0EDE8); stroke: var(--text, #F0EDE8); }
+.ug-halo { fill: var(--ug-c); opacity: 0; transform-box: fill-box; transform-origin: center; }
+.ug-halo--e { fill: var(--text, #F0EDE8); }
+.ug-bar { fill: var(--ug-fill); opacity: 0; transform-box: fill-box; transform-origin: bottom; transform: scaleY(0); }
+
+/* the choreography: nothing moves until .ug-go is on the root */
+.ug-go .ug-line--f   { animation: ug-draw 1.6s var(--ug-ease) .15s forwards; }
+.ug-go .ug-area      { animation: ug-in .9s var(--ug-ease) 1s forwards; }
+.ug-go .ug-dot--start{ animation: ug-in .4s var(--ug-ease) .1s forwards; }
+.ug-go .ug-dot--end  { animation: ug-in .4s var(--ug-ease) 1.5s forwards; }
+.ug-go .ug-bracket, .ug-go .ug-gain:not(.ug-gain--e) { animation: ug-in .6s var(--ug-ease) 1.7s forwards; }
+.ug-go .ug-bar       { animation: ug-rise .8s var(--ug-ease) var(--d) forwards; }
+.ug-go .ug-barval    { animation: ug-in .5s var(--ug-ease) 1.5s forwards; }
+.ug-go .ug-line--e   { animation: ug-draw 1.5s var(--ug-ease) 1.5s forwards; }
+.ug-go .ug-dot--endE { animation: ug-in .4s var(--ug-ease) 2.9s forwards; }
+.ug-go .ug-gain--e   { animation: ug-in .6s var(--ug-ease) 3s forwards; }
+.ug-go .ug-xlabel    { animation: ug-in .5s var(--ug-ease) .4s forwards; }
+.ug-go .ug-halo      { animation: ug-pulse 2.6s var(--ug-ease) 2s infinite; }
+.ug-go .ug-halo--e   { animation-delay: 3.2s; }
+@keyframes ug-draw  { to { stroke-dashoffset: 0; } }
+@keyframes ug-in    { to { opacity: 1; } }
+@keyframes ug-rise  { to { opacity: 1; transform: scaleY(1); } }
+@keyframes ug-pulse { 0% { opacity: .45; transform: scale(1); } 100% { opacity: 0; transform: scale(3.2); } }
+
+@media (max-width: 820px) {
+  .ug-counters, .ug-charts { grid-template-columns: 1fr; gap: 2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ug .ug-line { stroke-dashoffset: 0; animation: none !important; }
+  .ug .ug-area, .ug .ug-bracket, .ug .ug-gain, .ug .ug-barval, .ug .ug-dot, .ug .ug-xlabel { opacity: 1; animation: none !important; }
+  .ug .ug-bar { opacity: 1; transform: none; animation: none !important; }
+  .ug .ug-halo { animation: none !important; }
+}

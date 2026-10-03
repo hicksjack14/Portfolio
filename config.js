@@ -59,6 +59,10 @@ const SITE_CONFIG = {
       "I've always wanted something made specifically for reviewing music, and for doing it with friends. In high school, my friends Adarsh and Ian and I would listen to albums together and review them afterward. I wish we had kept a record of everything we listened to back then. Now we can.",
       "I used Claude to build Crates, but it wasn't just a prompt and done. The engineering, the prompting, and a lot of the coding were mine, and I went out and found the free assets and data sources I'm allowed to use to fill it in."
     ],
+    playlist: {
+      id: "78wu85fvi7lwO9OhIr4ACz",
+      text: "Before Crates, this playlist was how I kept track of what I listened to. It has almost all of the music I've ever played on Spotify. I haven't added to it recently, but there's a lot in here."
+    },
     features: [
       { name: "LOG",     text: "Star ratings out of 5, format, listen date, and private liner notes for every album." },
       { name: "LISTS",   text: "Sort albums into your own colored crates, however you want to group them." },
@@ -99,6 +103,20 @@ const SITE_CONFIG = {
       logo: "assets/work/university-union/thuumbnail.jpeg",
       photo: "assets/work/university-union/photo2.jpeg",
       photoCaption: "Myself with the socials board after a successful night at Block Party",
+      // Month-one growth piece (uu-growth.js). Month one = late Aug to late Sep 2026.
+      // To update: add a month to engagements.months each month, and add points to
+      // followers.points (or later, feed them live). Values are Jack's real numbers.
+      growth: {
+        eyebrow: "Month one as Director of Social Media",
+        followers: {
+          points: [ { label: "LATE AUG", value: 12600 }, { label: "LATE SEP", value: 13200 } ],
+          axisMin: 12000, axisMax: 13500
+        },
+        engagements: {
+          months: [ { label: "AUG 25 - SEP 25", value: 500000 } ]
+        },
+        note: "Followers axis starts at 12K so the change is readable."
+      },
       link: "https://www.instagram.com/universityunion/",
       linkLabel: "View on Instagram",
       detail: {

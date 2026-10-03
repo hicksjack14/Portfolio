@@ -455,6 +455,8 @@
                   : '')) +
           '</div>' +
 
+          (project.growth ? '<div class="panel-section" id="panelGrowth"></div>' : '') +
+
           '<div class="panel-tags" id="panelTags">' + tagsHTML + '</div>' +
           (project.link && project.link !== '#'
             ? '<div class="panel-link-row">' +
@@ -557,6 +559,10 @@
     initPanelDotWave(panel);
     currentPanel = panel;
     panelOpen = true;
+
+    if (project.growth && window.UUGrowth) {
+      UUGrowth.mount(panel.querySelector('#panelGrowth'), project.growth, panel.querySelector('.panel-scroll'));
+    }
 
     // Prevent body scroll
     document.body.style.overflow = 'hidden';
@@ -975,7 +981,7 @@
     camera.position.set(0, 355, 1220);
 
     var renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
@@ -999,44 +1005,104 @@
     geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
     geometry.setAttribute('color',    new THREE.Float32BufferAttribute(colors, 3));
 
-    var material = new THREE.PointsMaterial({
-      size: 7,
-      vertexColors: true,
+    // Same square dots as PointsMaterial, but dots fade out toward the horizon
+    // (fog that works on any song background, since it fades alpha, not color).
+    var material = new THREE.ShaderMaterial({
       transparent: true,
-      opacity: 0.45,
-      sizeAttenuation: true
+      depthWrite: false,
+      uniforms: {
+        size:    { value: 7 * renderer.getPixelRatio() },
+        scale:   { value: window.innerHeight / 2 },
+        opacity: { value: 0.45 },
+        fadeNear: { value: 2200 },
+        fadeFar:  { value: 5200 }
+      },
+      vertexShader: [
+        'uniform float size; uniform float scale; uniform float fadeNear; uniform float fadeFar;',
+        'attribute vec3 color; varying vec3 vColor; varying float vFade;',
+        'void main() {',
+        '  vec4 mv = modelViewMatrix * vec4(position, 1.0);',
+        '  vColor = color;',
+        '  vFade = 1.0 - smoothstep(fadeNear, fadeFar, -mv.z);',
+        '  gl_PointSize = size * (scale / -mv.z);',
+        '  gl_Position = projectionMatrix * mv;',
+        '}'
+      ].join('\n'),
+      fragmentShader: [
+        'uniform float opacity; varying vec3 vColor; varying float vFade;',
+        'void main() { gl_FragColor = vec4(vColor, opacity * vFade); }'
+      ].join('\n')
     });
 
     var points = new THREE.Points(geometry, material);
     scene.add(points);
 
-    var count = 0;
+    // Cursor ripple: the mouse is projected onto the wave's floor, and dots
+    // near that spot swell upward. It eases in and out so it never snaps.
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var raycaster = new THREE.Raycaster();
+    var floor     = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+    var mouseNDC  = new THREE.Vector2();
+    var hit       = new THREE.Vector3();
+    var ripple    = { x: 0, z: 0, strength: 0, target: 0 };
+    var RIPPLE_RADIUS = 520, RIPPLE_HEIGHT = 110;
 
-    function animate() {
-      requestAnimationFrame(animate);
+    window.addEventListener('mousemove', function (e) {
+      mouseNDC.set((e.clientX / window.innerWidth) * 2 - 1, -(e.clientY / window.innerHeight) * 2 + 1);
+      raycaster.setFromCamera(mouseNDC, camera);
+      if (raycaster.ray.intersectPlane(floor, hit)) {
+        ripple.x += (hit.x - ripple.x) * 0.5;
+        ripple.z += (hit.z - ripple.z) * 0.5;
+        ripple.target = 1;
+      }
+    });
+    document.addEventListener('mouseleave', function () { ripple.target = 0; });
+
+    var count = 0;
+    var rafId = null;
+
+    function frame() {
+      rafId = requestAnimationFrame(frame);
       var posAttr = geometry.attributes.position;
       var arr     = posAttr.array;
+      ripple.strength += (ripple.target - ripple.strength) * 0.06;
+      var rippleOn = !reducedMotion && ripple.strength > 0.01;
       var i = 0;
       for (var x = 0; x < AMOUNTX; x++) {
         for (var y = 0; y < AMOUNTY; y++) {
-          arr[i * 3 + 1] =
+          var h =
             Math.sin((x + count) * 0.3) * 50 +
             Math.sin((y + count) * 0.5) * 50;
+          if (rippleOn) {
+            var dx = arr[i * 3]     - ripple.x;
+            var dz = arr[i * 3 + 2] - ripple.z;
+            h += Math.exp(-(dx * dx + dz * dz) / (RIPPLE_RADIUS * RIPPLE_RADIUS)) * RIPPLE_HEIGHT * ripple.strength;
+          }
+          arr[i * 3 + 1] = h;
           i++;
         }
       }
       posAttr.needsUpdate = true;
       renderer.render(scene, camera);
-      count += 0.1;
+      if (!reducedMotion) count += 0.1;
     }
+
+    function start() { if (rafId === null) frame(); }
+    function stop()  { if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; } }
+
+    // Don't burn GPU on a background nobody can see.
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stop(); else start();
+    });
 
     window.addEventListener('resize', function () {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
+      material.uniforms.scale.value = window.innerHeight / 2;
     });
 
-    animate();
+    start();
 
     window._setDotColor = function (hex) {
       var colAttr = geometry.attributes.color;
