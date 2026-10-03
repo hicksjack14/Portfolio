@@ -163,6 +163,34 @@ const SITE_CONFIG = {
       }
     },
     {
+      id: 7,
+      title: "LINEUP",
+      role: "CO-CREATOR & PROJECT LEAD",
+      roleShort: "CO-CREATOR / LEAD",
+      type: "RUGBY TECH / RECRUITING",
+      medium: "APP IN DEVELOPMENT",
+      year: "2026",
+      image: "assets/work/lineup/logo.svg",
+      imageFit: "contain",
+      logo: "assets/work/lineup/logo.svg",
+      // DRAFT COPY: Jack to approve before this goes live. Open questions are listed in Portfolio/Ideas Backlog.md.
+      showcase: "lineup",
+      detail: {
+        accent: "#5E93F5",
+        accentRgb: "94, 147, 245",
+        dates: "Mar 2026 to Present",
+        location: "Syracuse, NY",
+        description: "Lineup is a recruiting network for rugby, built for players of all ages and especially early development, the years that lead to college and pro play. Players build a real profile and coaches actually find them. Rugby comes first, with other sports to follow. It grew out of Coach X, an AI film-analysis platform I started, using the Syracuse men's rugby team as a test. I co-created it and lead the project, from the pitch to the build, and in September I presented the MVP proposal to my two advisors.",
+        bullets: [
+          "Pitched the Lineup MVP in September 2026: a focused first version with links instead of uploads, and a \"who's viewed me\" feature that turns a directory into a network",
+          "Started as Coach X: a computer-vision pipeline that detects every player, tracks body position, and writes coaching reports with AI agents",
+          "Produced the 58-second Coach X pitch film in Remotion and designed the Lineup identity and proposal deck",
+          "Built on Next.js, Supabase and Vercel"
+        ],
+        tags: ["Product Strategy", "Computer Vision", "AI Agents", "Brand Design", "Sports Tech", "Video Production"]
+      }
+    },
+    {
       id: 5,
       title: "UNCROWNED",
       role: "PRODUCTION INTERN",
@@ -280,4 +308,81 @@ const SITE_CONFIG = {
       }
     }
   ]
+};
+
+// ── Numbers strip + Now section (redesign.js) ───────────────
+SITE_CONFIG.numbers = [
+  { value: 500,  suffix: "K+", label: "ENGAGEMENTS",       detail: "University Union, month one as director" },
+  { value: 4.8,  prefix: "+", suffix: "%", decimals: 1, label: "FOLLOWER GROWTH", detail: "12.6K to 13.2K in the same month" },
+  { value: 1500, prefix: "+", label: "MONTHLY LISTENERS",  detail: "Isabella Allon, signed through M&H Inc." },
+  { text: "TD",     label: "LOUD AND CLEAR",   detail: "Live multi-camera, Orange Television Network" },
+  { text: "ON AIR", label: "UNCROWNED",        detail: "Ariel Helwani Show, Summer 2026" }
+];
+
+// Update each month or so. "open" matches a work-table title; "href" is an outside link.
+SITE_CONFIG.now = {
+  label: "NOW, FALL 2026",
+  items: [
+    { title: "UNIVERSITY UNION", tag: "DIRECTOR OF SOCIAL MEDIA", text: "Running social for the 2026-27 board. Month one: +4.8% followers, 500K engagements.", open: "UNIVERSITY UNION" },
+    { title: "LOUD AND CLEAR",   tag: "TECHNICAL DIRECTOR",       text: "Cutting the live show, booking talent, and aiming for the EP chair next semester.", open: "LOUD AND CLEAR" },
+    { title: "LINEUP",           tag: "CO-CREATOR & PROJECT LEAD", text: "Building a recruiting network for rugby, from early development to college and pro. It started as Coach X.", open: "LINEUP" },
+    { title: "CRATES",           tag: "LIVE",                     text: "Letterboxd for music, in the hands of real users.", href: "https://crates-chi.vercel.app" },
+    { title: "RUN LAB",          tag: "TRAINING",                 text: "Half marathon on October 18, training inside the app I built for it.", href: "https://hicksjack14.github.io/run-lab/" }
+  ]
+};
+
+// ── Lineup / Coach X case study (redesign.js, mountShowcase) ─
+SITE_CONFIG.showcases = {
+  lineup: {
+    timeline: [
+      { when: "MAR 2026", title: "Coach X begins", text: "AI film analysis for rugby, shaped by five problems a coach sees every week." },
+      { when: "MAY 2026", title: "The pitch film",  text: "A 58-second trailer, built in Remotion." },
+      { when: "SEP 2026", title: "Lineup",          text: "Narrowed to one sport, one level, one clear user. Proposal presented." }
+    ],
+    lineup: {
+      kicker: "CHAPTER 01 · NOW",
+      name: "LINEUP",
+      tagline: ["GET SEEN.", "GET RECRUITED."],
+      sub: "A recruiting network for rugby, from early development to college and pro.",
+      problem: "Recruiting is still word of mouth. Clips live in group chats and random links, players post and hope, and the tools that exist are built for reviewing film, not for discovery.",
+      steps: [
+        { t: "POST",           d: "A player builds a profile and links their clips" },
+        { t: "GET DISCOVERED", d: "Coaches search by position, grad year and region" },
+        { t: "CONNECT",        d: "The coach messages the player directly, in the app" }
+      ],
+      players: ["Build a real profile: position, grad year, stats, team", "Link clips you already have (Hudl, YouTube, Vimeo)", "See exactly which coaches viewed you", "Get messaged directly, no guessing"],
+      coaches: ["Search and filter by position, grad year, region", "Browse real player profiles", "Message players in the app", "See who else is watching the same prospects"],
+      watching: "Players know they're not shouting into the void. Coaches see real signal. That one feature is the difference between a listing site and a network.",
+      scope: ["RUGBY FIRST", "ALL AGES", "EARLY DEVELOPMENT TO COLLEGE + PRO", "MORE SPORTS NEXT"],
+      app: { src: "assets/work/lineup/media/lineup-app.mp4", poster: "assets/work/lineup/media/lineup-poster.jpg",
+             steps: ["GET SEEN", "POST", "GET DISCOVERED", "SEE WHO'S WATCHING", "CONNECT", "PHASE 2: AI HIGHLIGHTS"], marks: [0, 5, 12, 20, 26, 31, 38] },
+      legal: "Lineup: name, logo, lettering, concept and designs © 2026 Jack Hicks. All rights reserved. This page is a concept preview; sample names and data are fictional.",
+      phase2: "Phase 2: upload raw match footage and the Coach X vision pipeline cuts the highlights for you.",
+      palette: [ { n: "NAVY", c: "#10203D" }, { n: "ICE BLUE", c: "#AFC6E9" }, { n: "AMBER", c: "#F2A93B" } ]
+    },
+    coachx: {
+      kicker: "CHAPTER 02 · WHERE IT STARTED",
+      name: "COACH X",
+      tagline: ["BEFORE LINEUP,", "THERE WAS COACH X."],
+      intro: "Lineup grew out of Coach X, an AI film-analysis platform I started for rugby, using the Syracuse men's rugby team as a test. It taught me the sport's real problems, and its computer vision is what will power Lineup's Phase 2 highlights.",
+      trailer: { src: "assets/work/lineup/media/coach-x-trailer.mp4", poster: "assets/work/lineup/media/trailer-poster.jpg", caption: "The pitch film, 58 seconds, built in Remotion" },
+      compare: { them: "HUDL", themPrice: "€10,000 / yr", themText: "Stores your footage.", us: "COACH X", usText: "Watches it, then tells you what happened." },
+      problems: [
+        { t: "Decision-making under pressure", d: "Players struggle to read a closing defence and pick pass, kick or carry." },
+        { t: "Skill execution",                d: "Passing, tackling and handling hold up in training and crack in matches." },
+        { t: "Defensive line shifting",        d: "A line that bunches leaves gaps. Where was each defender when it broke?" },
+        { t: "Off-ball work rate",             d: "Cameras follow the ball carrier. Everyone else goes untracked." },
+        { t: "Set piece to attack",            d: "The lineout is won, then the shape falls apart." }
+      ],
+      problemsNote: "These came from a coach, not from me. They're what he sees on the pitch every week.",
+      pipeline: [
+        { k: "DETECT",  t: "Find every player", d: "A vision model boxes every player in every frame of match footage." },
+        { k: "POSE",    t: "Read the body",     d: "A pose model maps 17 keypoints on each player: head, shoulders, elbows, hips, knees, ankles." },
+        { k: "ENRICH",  t: "Turn pixels into metrics", d: "A data agent converts raw coordinates into joint angles, speed and coaching flags." },
+        { k: "REPORT",  t: "Write the coaching note",  d: "An analyst agent writes a specific report tied to that exact moment." }
+      ],
+      raw: [ ["left_knee y:290, ankle y:332", "kneeBend 179°", "upright_pass_posture"], ["hip y:248, nose y:180", "spineAngle 0.0°", "torso fully vertical"], ["left_wrist x:395, shoulder x:430", "armAngle 179°", "arm_fully_extended_at_release"] ],
+      report: { who: "SU_09 · SCRUM-HALF · OFF-NINE PASS", text: "Knee bend of 179 degrees and a spine angle of 0 means SU_09 is standing fully upright while passing. That creates three problems: defenders can read an upright nine, there is no torque because the pass is all arm, and the ball is exposed to a strip. Encourage a lower base to generate torque and protect the ball." }
+    }
+  }
 };

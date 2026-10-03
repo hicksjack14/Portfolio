@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- record rising out of the crate -->
+  <g>
+    <circle cx="256" cy="212" r="152" fill="#0f150e" stroke="#b3f835" stroke-width="10"/>
+    <g fill="none" stroke="#253321" stroke-width="3">
+      <circle cx="256" cy="212" r="128"/><circle cx="256" cy="212" r="112"/>
+      <circle cx="256" cy="212" r="96"/><circle cx="256" cy="212" r="80"/>
+    </g>
+    <circle cx="256" cy="212" r="52" fill="#b3f835"/>
+    <circle cx="256" cy="212" r="9" fill="#060806"/>
+  </g>
+  <rect x="80" y="262" width="352" height="174" rx="8" fill="#060806"/>
+  <!-- crate: three slats with gaps, handle slot in the top slat -->
+  <g fill="#b3f835">
+    <path fill-rule="evenodd" d="M88 262h336a8 8 0 0 1 8 8v58H80v-58a8 8 0 0 1 8-8Z M206 286h100a12 12 0 0 1 0 24H206a12 12 0 0 1 0-24Z"/>
+    <rect x="80" y="342" width="352" height="36"/>
+    <path d="M80 392h352v36a8 8 0 0 1-8 8H88a8 8 0 0 1-8-8Z"/>
+  </g>
+</svg>

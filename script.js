@@ -56,7 +56,7 @@
       li.innerHTML =
         logoChipHTML +
         '<span class="project-data title">'  + project.title  + '</span>' +
-        '<span class="project-data role">'   + project.role   + '</span>' +
+        '<span class="project-data role">'   + (project.roleShort || project.role) + '</span>' +
         '<span class="project-data type">'   + project.type   + '</span>' +
         (project.comingSoon
           ? '<button class="project-open-btn project-open-btn--soon" tabindex="-1"><span class="project-open-label">COMING SOON</span></button>'
@@ -456,6 +456,7 @@
           '</div>' +
 
           (project.growth ? '<div class="panel-section" id="panelGrowth"></div>' : '') +
+          (project.showcase ? '<div class="panel-section" id="panelShowcase"></div>' : '') +
 
           '<div class="panel-tags" id="panelTags">' + tagsHTML + '</div>' +
           (project.link && project.link !== '#'
@@ -560,6 +561,7 @@
     currentPanel = panel;
     panelOpen = true;
 
+    window.dispatchEvent(new CustomEvent('panel:open', { detail: { project: project, panel: panel } }));
     if (project.growth && window.UUGrowth) {
       UUGrowth.mount(panel.querySelector('#panelGrowth'), project.growth, panel.querySelector('.panel-scroll'));
     }
@@ -1060,9 +1062,14 @@
 
     var count = 0;
     var rafId = null;
+    // Camera height and wave strength ease toward a per-section target (set by redesign.js).
+    var wave = window._wave = { y: 355, amp: 1, ty: 355, tamp: 1 };
 
     function frame() {
       rafId = requestAnimationFrame(frame);
+      wave.y   += (wave.ty   - wave.y)   * 0.04;
+      wave.amp += (wave.tamp - wave.amp) * 0.04;
+      camera.position.y = wave.y;
       var posAttr = geometry.attributes.position;
       var arr     = posAttr.array;
       ripple.strength += (ripple.target - ripple.strength) * 0.06;
@@ -1070,9 +1077,9 @@
       var i = 0;
       for (var x = 0; x < AMOUNTX; x++) {
         for (var y = 0; y < AMOUNTY; y++) {
-          var h =
+          var h = (
             Math.sin((x + count) * 0.3) * 50 +
-            Math.sin((y + count) * 0.5) * 50;
+            Math.sin((y + count) * 0.5) * 50) * wave.amp;
           if (rippleOn) {
             var dx = arr[i * 3]     - ripple.x;
             var dz = arr[i * 3 + 2] - ripple.z;
@@ -1369,10 +1376,18 @@
       mIdx = idx; mPlaying = true;
       songBtns[idx].classList.add('is-playing');
       npDotEl.classList.add('live');
-      npScrollEl.textContent = 'NOW PLAYING - ' + t.artist + ' - ' + t.title;
+      // Seamless loop: two copies of the title with a blank gap between, scrolled by exactly one copy.
+      npScrollEl.textContent = '';
+      for (var c = 0; c < 2; c++) {
+        var item = document.createElement('span');
+        item.className = 'np-item';
+        item.textContent = 'NOW PLAYING - ' + t.artist + ' - ' + t.title;
+        npScrollEl.appendChild(item);
+      }
       npScrollEl.style.animation = 'none';
-      void npScrollEl.offsetWidth;  // reflow — resets ticker to frame 0 on every new song
+      void npScrollEl.offsetWidth;  // reflow, restarts the ticker on every new song
       npScrollEl.style.animation = '';
+      npScrollEl.style.setProperty('--np-dur', Math.max(8, npScrollEl.firstChild.offsetWidth / 38).toFixed(1) + 's');
       npTextEl.classList.add('live');
       ppBtnEl.classList.add('live');
       mSetIcon(true);
