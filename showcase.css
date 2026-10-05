@@ -6,6 +6,9 @@
   --soft: rgba(var(--text-rgb), 0.58); --hair: rgba(var(--text-rgb), 0.14);
   margin: 3rem 0 2rem;
 }
+/* once a song is chosen the page chrome follows the song; devices and the network keep Lineup's own colors */
+html[data-song] .sc { --amber: var(--accent); --cxc: var(--accent); --cxb: var(--accent); }
+.sc .sc-net, .sc .sc-stage, .sc .sc-frame, .sc .sc-trailer { --amber: #F2A93B; --cxc: #00D4FF; --cxb: #1E78FF; }
 .sc * { box-sizing: border-box; }
 
 /* panel header: the logo sits straight on the normal panel background */
@@ -42,12 +45,12 @@
 
 /* lineup flow */
 .sc-flow { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin: 0 0 3.6rem; }
-.sc-flow-line { position: absolute; left: 16.6%; right: 16.6%; top: 41px; height: 1px; background: var(--hair); }
+.sc-flow-line { position: absolute; left: calc((100% - 2.8rem) / 6); right: calc((100% - 2.8rem) / 6); top: calc(.58rem + .5rem + .55rem + 6.5px); height: 1px; background: var(--hair); }
 .sc-flow-line::before { content: ''; position: absolute; inset: 0; background: var(--panel-accent); transform: scaleX(0); transform-origin: left; }
 .sc-flow-dot { position: absolute; top: -2px; left: 0; width: 5px; height: 5px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 12px var(--amber); opacity: 0; }
 .sc-flow-step { display: flex; flex-direction: column; align-items: center; text-align: center; gap: .5rem; opacity: 0; transform: translateY(10px); }
 .sc-flow-n { font: 500 .58rem/1 var(--font-mono); letter-spacing: .2em; color: var(--soft); }
-.sc-flow-node { width: 13px; height: 13px; margin: .55rem 0 .7rem; border-radius: 50%; border: 1px solid var(--panel-accent); background: var(--bg); transition: background-color 300ms ease; }
+.sc-flow-node { position: relative; z-index: 1; width: 13px; height: 13px; margin: .55rem 0 .7rem; border-radius: 50%; border: 1px solid var(--panel-accent); background: var(--bg); transition: background-color 300ms ease; }
 .sc-flow-t { font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; letter-spacing: .1em; }
 .sc-flow-d { font: 400 .7rem/1.55 var(--font-mono); color: var(--soft); max-width: 22ch; }
 .sc-flow.sc-in .sc-flow-line::before { animation: sc-draw 1.4s var(--ease-io) .2s forwards; }
@@ -75,7 +78,7 @@
 
 .sc-meta { display: flex; flex-direction: column; gap: 1.1rem; }
 .sc-chips { display: flex; flex-wrap: wrap; gap: .6rem; }
-.sc-chip { font: 500 .58rem/1 var(--font-mono); letter-spacing: .18em; padding: .55rem .8rem; border: 1px solid rgba(242,169,59,.5); color: var(--amber); border-radius: 2px; }
+.sc-chip { font: 500 .58rem/1 var(--font-mono); letter-spacing: .18em; padding: .55rem .8rem; border: 1px solid color-mix(in srgb, var(--amber) 50%, transparent); color: var(--amber); border-radius: 2px; }
 .sc-phase2 { font: 400 .74rem/1.7 var(--font-mono); color: var(--soft); margin: 0; max-width: 62ch; }
 .sc-pal { display: flex; gap: 1.4rem; flex-wrap: wrap; }
 .sc-sw { display: inline-flex; align-items: center; gap: .55rem; font: 500 .56rem/1 var(--font-mono); letter-spacing: .14em; color: var(--soft); }

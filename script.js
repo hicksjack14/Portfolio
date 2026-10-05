@@ -1290,11 +1290,11 @@
     })();
 
     var MUSIC_TRACKS = [
-      { src: 'steve-lacy-oh-yeah.mp3',                                        artist: 'STEVE LACY',        title: 'OH YEAH?',              color: '#FF3DBF', bgColor: '#181C40', textColor: '#FF3DBF' },
-      { src: '311-amber.mp3',                                                 artist: '311',               title: 'AMBER',                 color: '#F2C98C', bgColor: '#C36027', textColor: '#331A0C' },
-      { src: 'pink-floyd-wots-uh-the-deal.mp3',                               artist: 'PINK FLOYD',        title: "WOT'S... UH THE DEAL",  color: '#F0EDE8', bgColor: '#2E3A38', textColor: '#F0EDE8' },
-      { src: 'chris-stapleton-loving-you-on-my-mind.mp3',                     artist: 'CHRIS STAPLETON',   title: 'LOVING YOU ON MY MIND', color: '#EE7555', bgColor: '#492B23', textColor: '#EE7555' },
-      { src: 'clairo-losing-pride.mp3',                                       artist: 'CLAIRO',            title: 'LOSING PRIDE',          color: '#F0EDE8', bgColor: '#6E655C', textColor: '#F0EDE8' }
+      { src: 'steve-lacy-oh-yeah.mp3',                                        artist: 'STEVE LACY',        title: 'OH YEAH?',              color: '#FF3DBF', bgColor: '#181C40', textColor: '#FF3DBF', accent: '#FFC857' },
+      { src: '311-amber.mp3',                                                 artist: '311',               title: 'AMBER',                 color: '#F2C98C', bgColor: '#C36027', textColor: '#331A0C', accent: '#FFF1D6' },
+      { src: 'pink-floyd-wots-uh-the-deal.mp3',                               artist: 'PINK FLOYD',        title: "WOT'S... UH THE DEAL",  color: '#F0EDE8', bgColor: '#2E3A38', textColor: '#F0EDE8', accent: '#F2A93B' },
+      { src: 'chris-stapleton-loving-you-on-my-mind.mp3',                     artist: 'CHRIS STAPLETON',   title: 'LOVING YOU ON MY MIND', color: '#EE7555', bgColor: '#492B23', textColor: '#EE7555', accent: '#F6D28B' },
+      { src: 'clairo-losing-pride.mp3',                                       artist: 'CLAIRO',            title: 'LOSING PRIDE',          color: '#F0EDE8', bgColor: '#6E655C', textColor: '#F0EDE8', accent: '#FFD27A' }
     ];
 
     var mPreloaded = MUSIC_TRACKS.map(function (t) {
@@ -1322,6 +1322,12 @@
       document.documentElement.style.setProperty('--muted', textColor);
       document.documentElement.style.setProperty('--border', 'rgba('+r+','+g+','+b+',0.25)');
       if (t.bgColor) document.documentElement.style.setProperty('--bg', t.bgColor);
+      if (t.accent) {
+        var ah = t.accent.replace('#', '');
+        document.documentElement.style.setProperty('--accent', t.accent);
+        document.documentElement.style.setProperty('--accent-rgb', parseInt(ah.slice(0,2),16) + ',' + parseInt(ah.slice(2,4),16) + ',' + parseInt(ah.slice(4,6),16));
+      }
+      document.documentElement.setAttribute('data-song', '1');
       if (window._setDotColor) window._setDotColor(textColor);
       songBtns.forEach(function(btn) {
         btn.style.color       = textColor;

@@ -94,6 +94,7 @@
     cv.addEventListener('pointermove', function (e) { var r = cv.getBoundingClientRect(); mouse = { x: e.clientX - r.left, y: e.clientY - r.top }; });
     cv.addEventListener('pointerleave', function () { mouse = null; });
     window.addEventListener('resize', function () { var o = W; resize(); if (o && Math.abs(o - W) > 40) seed(); });
+    if (window.ResizeObserver) new ResizeObserver(function () { var o = W; resize(); if (o && Math.abs(o - W) > 40) seed(); }).observe(host);
     document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else if (inView) start(); });
     resize();
     if (reduce) {

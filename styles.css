@@ -1571,8 +1571,8 @@ body {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(13, 13, 15, 0.1) 0%,
-    rgba(13, 13, 15, 0.75) 100%
+    color-mix(in srgb, var(--bg) 10%, transparent) 0%,
+    color-mix(in srgb, var(--bg) 78%, transparent) 100%
   );
   z-index: 1;
 }
@@ -1588,7 +1588,7 @@ body {
   right: 0;
   padding: 2.5rem 2rem;
   z-index: 2;
-  background: linear-gradient(to top, rgba(13,13,15,0.92) 0%, transparent 100%);
+  background: linear-gradient(to top, color-mix(in srgb, var(--bg) 92%, transparent) 0%, transparent 100%);
 }
 
 .panel-badge {
@@ -1730,7 +1730,7 @@ body {
 
 .panel-link-btn:hover {
   background: var(--panel-accent);
-  color: #080808;
+  color: var(--bg);
 }
 
 .panel-link-btn--secondary {
@@ -2671,3 +2671,6 @@ body {
   .cr-figure-stack { width: 100%; max-width: 480px; }
   .cr-figure--portrait { max-width: 300px; }
 }
+
+/* Once a song is chosen, project panels follow the song theme instead of their own brand accent */
+html[data-song] .project-panel { --panel-accent: var(--accent) !important; --panel-accent-rgb: var(--accent-rgb) !important; }
