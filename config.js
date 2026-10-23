@@ -137,7 +137,8 @@ const SITE_CONFIG = {
     {
       id: 2,
       title: "LOUD AND CLEAR",
-      role: "TECHNICAL DIRECTOR",
+      role: "TECHNICAL DIRECTOR / MUSIC JOURNALIST",
+      roleShort: "TD / MUSIC JOURNALIST",
       type: "ORANGE TELEVISION NETWORK",
       medium: "LIVE PRODUCTION",
       year: "CURRENT",
@@ -151,15 +152,16 @@ const SITE_CONFIG = {
         accentRgb: "124, 58, 237",
         dates: "Jan 2025 to Present",
         location: "Syracuse, NY",
-        description: "I started on Loud and Clear as a camera operator. By my second semester I was running day of show, and now I serve as Technical Director and talent booker for the production on Orange Television Network. I hope to step into the EP role next semester. This show taught me what patience in production actually looks like. I did A&R research to fully lock in our shoot schedule, and helped my colleague Kyra Rubenstein learn the ropes behind talent booking and day of show managing. She has blossomed into booking artists on her own. I sit at the switcher during live shoots, cutting between 2 to 4 camera feeds in real time. Every episode, start to finish.",
+        description: "I started on Loud and Clear as a camera operator. By my second semester I was running day of show, and now I serve as Technical Director and talent booker for the production on Orange Television Network. I also serve as the show's music journalist: I write my own questions and interview the talent for 15 to 30 minutes, and those interviews run in the same episodes as the performances. I hope to step into the EP role next semester. This show taught me what patience in production actually looks like. I did A&R research to fully lock in our shoot schedule, and helped my colleague Kyra Rubenstein learn the ropes behind talent booking and day of show managing. She has blossomed into booking artists on her own. I sit at the switcher during live shoots, cutting between 2 to 4 camera feeds in real time. Every episode, start to finish.",
         bullets: [
           "Progressed from camera operator to day of show manager to Technical Director and Talent Booker",
           "Conducted A&R research to identify and fully book out the semester shoot schedule",
+          "Interview the talent as the show's music journalist, writing my own questions for 15 to 30 minute conversations that run alongside the performances",
           "Mentored colleague Kyra Rubenstein in talent booking and day of show management",
           "Operated video switchboard cutting between 2 to 4 live camera feeds during shoots",
           "Managed end-to-end production workflow from outreach through final YouTube upload"
         ],
-        tags: ["Live TV Production", "Technical Direction", "Multi-Camera Switching", "Talent Booking", "Post-Production"]
+        tags: ["Live TV Production", "Technical Direction", "Multi-Camera Switching", "Talent Booking", "Music Journalism", "Interviewing", "Post-Production"]
       }
     },
     {
@@ -315,7 +317,7 @@ SITE_CONFIG.numbers = [
   { value: 500,  suffix: "K+", label: "ENGAGEMENTS",       detail: "University Union, month one as director" },
   { value: 4.8,  prefix: "+", suffix: "%", decimals: 1, label: "FOLLOWER GROWTH", detail: "12.6K to 13.2K in the same month" },
   { value: 1500, prefix: "+", label: "MONTHLY LISTENERS",  detail: "Isabella Allon, signed through M&H Inc." },
-  { text: "TD",     label: "LOUD AND CLEAR",   detail: "Live multi-camera, Orange Television Network" },
+  { text: "TD",     label: "LOUD AND CLEAR",   detail: "Technical Director and music journalist, Orange Television Network" },
   { text: "ON AIR", label: "UNCROWNED",        detail: "Ariel Helwani Show, Summer 2026" }
 ];
 
@@ -324,7 +326,7 @@ SITE_CONFIG.now = {
   label: "NOW, FALL 2026",
   items: [
     { title: "UNIVERSITY UNION", tag: "DIRECTOR OF SOCIAL MEDIA", text: "Running social for the 2026-27 board. Month one: +4.8% followers, 500K engagements.", open: "UNIVERSITY UNION" },
-    { title: "LOUD AND CLEAR",   tag: "TECHNICAL DIRECTOR",       text: "Cutting the live show, booking talent, and aiming for the EP chair next semester.", open: "LOUD AND CLEAR" },
+    { title: "LOUD AND CLEAR",   tag: "TD / MUSIC JOURNALIST",   text: "Cutting the live show, booking talent, interviewing the artists on camera, and aiming for the EP chair next semester.", open: "LOUD AND CLEAR" },
     { title: "LINEUP",           tag: "CO-CREATOR & PROJECT LEAD", text: "Building a recruiting network for rugby, from early development to college and pro. It started as Coach X.", open: "LINEUP" },
     { title: "CRATES",           tag: "LIVE",                     text: "Letterboxd for music, in the hands of real users.", href: "https://crates-chi.vercel.app" },
     { title: "RUN LAB",          tag: "TRAINING",                 text: "Half marathon on October 18, training inside the app I built for it.", href: "https://hicksjack14.github.io/run-lab/" }

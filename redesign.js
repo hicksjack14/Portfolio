@@ -24,7 +24,7 @@
   function initRoles() {
     var node = document.getElementById('rolesText');
     if (!node) return;
-    var roles = ['TALENT REP', 'TECHNICAL DIRECTOR', 'CONTENT STRATEGIST'];
+    var roles = ['TALENT REP', 'TECHNICAL DIRECTOR', 'MUSIC JOURNALIST', 'CONTENT STRATEGIST'];
     var GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     var i = 0, busy = false;
     node.textContent = roles[0];
