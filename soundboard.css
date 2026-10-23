@@ -48,18 +48,18 @@ section#landing .song-btn {
 }
 
 /* Button glow borders — each button glows its own color */
-section#landing .btn-steve  { color: rgba(255,  61, 191, 0.85); border-color: rgba(255,  61, 191, 0.55); box-shadow: 0 0 8px rgba(255, 61,191,0.35), 0 0 18px rgba(255, 61,191,0.15); }
-section#landing .btn-311    { color: rgba(242, 201, 140, 0.85); border-color: rgba(242, 201, 140, 0.55); box-shadow: 0 0 8px rgba(242,201,140,0.35), 0 0 18px rgba(242,201,140,0.15); }
-section#landing .btn-pink   { color: rgba(240, 237, 232, 0.85); border-color: rgba(240, 237, 232, 0.55); box-shadow: 0 0 8px rgba(240,237,232,0.35), 0 0 18px rgba(240,237,232,0.15); }
-section#landing .btn-chris  { color: rgba(238, 117,  85, 0.85); border-color: rgba(238, 117,  85, 0.55); box-shadow: 0 0 8px rgba(238,117, 85,0.35), 0 0 18px rgba(238,117, 85,0.15); }
-section#landing .btn-clairo { color: rgba(240, 237, 232, 0.85); border-color: rgba(240, 237, 232, 0.55); box-shadow: 0 0 8px rgba(240,237,232,0.35), 0 0 18px rgba(240,237,232,0.15); }
+section#landing .btn-eagles { color: rgba(247, 178, 103, 0.85); border-color: rgba(247, 178, 103, 0.55); box-shadow: 0 0 8px rgba(247,178,103,0.35), 0 0 18px rgba(247,178,103,0.15); }
+section#landing .btn-cole { color: rgba(230, 230, 230, 0.85); border-color: rgba(230, 230, 230, 0.55); box-shadow: 0 0 8px rgba(230,230,230,0.35), 0 0 18px rgba(230,230,230,0.15); }
+section#landing .btn-ozzy { color: rgba(255, 74, 61, 0.85); border-color: rgba(255, 74, 61, 0.55); box-shadow: 0 0 8px rgba(255,74,61,0.35), 0 0 18px rgba(255,74,61,0.15); }
+section#landing .btn-mac { color: rgba(244, 208, 63, 0.85); border-color: rgba(244, 208, 63, 0.55); box-shadow: 0 0 8px rgba(244,208,63,0.35), 0 0 18px rgba(244,208,63,0.15); }
+section#landing .btn-kendrick { color: rgba(233, 223, 200, 0.85); border-color: rgba(233, 223, 200, 0.55); box-shadow: 0 0 8px rgba(233,223,200,0.35), 0 0 18px rgba(233,223,200,0.15); }
 
 /* is-playing — stronger glow + color wash */
-section#landing .btn-steve.is-playing  { background: rgba(255,  61, 191, 0.14); box-shadow: 0 0 12px rgba(255, 61,191,0.55), 0 0 28px rgba(255, 61,191,0.25); }
-section#landing .btn-311.is-playing    { background: rgba(242, 201, 140, 0.14); box-shadow: 0 0 12px rgba(242,201,140,0.55), 0 0 28px rgba(242,201,140,0.25); }
-section#landing .btn-pink.is-playing   { background: rgba(240, 237, 232, 0.14); box-shadow: 0 0 12px rgba(240,237,232,0.55), 0 0 28px rgba(240,237,232,0.25); }
-section#landing .btn-chris.is-playing  { background: rgba(238, 117,  85, 0.14); box-shadow: 0 0 12px rgba(238,117, 85,0.55), 0 0 28px rgba(238,117, 85,0.25); }
-section#landing .btn-clairo.is-playing { background: rgba(240, 237, 232, 0.14); box-shadow: 0 0 12px rgba(240,237,232,0.55), 0 0 28px rgba(240,237,232,0.25); }
+section#landing .btn-eagles.is-playing { background: rgba(247, 178, 103, 0.14); box-shadow: 0 0 12px rgba(247,178,103,0.55), 0 0 28px rgba(247,178,103,0.25); }
+section#landing .btn-cole.is-playing { background: rgba(230, 230, 230, 0.14); box-shadow: 0 0 12px rgba(230,230,230,0.55), 0 0 28px rgba(230,230,230,0.25); }
+section#landing .btn-ozzy.is-playing { background: rgba(255, 74, 61, 0.14); box-shadow: 0 0 12px rgba(255,74,61,0.55), 0 0 28px rgba(255,74,61,0.25); }
+section#landing .btn-mac.is-playing { background: rgba(244, 208, 63, 0.14); box-shadow: 0 0 12px rgba(244,208,63,0.55), 0 0 28px rgba(244,208,63,0.25); }
+section#landing .btn-kendrick.is-playing { background: rgba(233, 223, 200, 0.14); box-shadow: 0 0 12px rgba(233,223,200,0.55), 0 0 28px rgba(233,223,200,0.25); }
 
 /* ── LANDING — ICON ── */
 section#landing .song-btn-icon {
@@ -123,3 +123,18 @@ section#landing .np-playpause {
 }
 
 /* .soundboard-caption lives in styles.css */
+
+
+/* Chrome text — J. Cole (Born Sinner). Polished-metal gradient on the big landing type. */
+html[data-chrome] #landingName,
+html[data-chrome] #landingName *,
+html[data-chrome] .music-title {
+  background: linear-gradient(180deg, #ffffff 0%, #c4c8ce 28%, #8d929a 44%, #2a2d33 50%, #7b8088 58%, #e9ecef 80%, #b4b9c0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Chrome song: the roles line under the name stays plain silver (no gradient) */
+html[data-chrome] .roles-text { color: #B8BCC3; }

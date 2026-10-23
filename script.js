@@ -1290,11 +1290,11 @@
     })();
 
     var MUSIC_TRACKS = [
-      { src: 'steve-lacy-oh-yeah.mp3',                                        artist: 'STEVE LACY',        title: 'OH YEAH?',              color: '#FF3DBF', bgColor: '#181C40', textColor: '#FF3DBF', accent: '#FFC857' },
-      { src: '311-amber.mp3',                                                 artist: '311',               title: 'AMBER',                 color: '#F2C98C', bgColor: '#C36027', textColor: '#331A0C', accent: '#FFF1D6' },
-      { src: 'pink-floyd-wots-uh-the-deal.mp3',                               artist: 'PINK FLOYD',        title: "WOT'S... UH THE DEAL",  color: '#F0EDE8', bgColor: '#2E3A38', textColor: '#F0EDE8', accent: '#F2A93B' },
-      { src: 'chris-stapleton-loving-you-on-my-mind.mp3',                     artist: 'CHRIS STAPLETON',   title: 'LOVING YOU ON MY MIND', color: '#EE7555', bgColor: '#492B23', textColor: '#EE7555', accent: '#F6D28B' },
-      { src: 'clairo-losing-pride.mp3',                                       artist: 'CLAIRO',            title: 'LOSING PRIDE',          color: '#F0EDE8', bgColor: '#6E655C', textColor: '#F0EDE8', accent: '#FFD27A' }
+      { src: 'eagles-try-and-love-again.mp3',                               artist: 'EAGLES',          title: 'TRY AND LOVE AGAIN',    color: '#F7B267', bgColor: '#F29B5C', textColor: '#3A2F7D', accent: '#B33D0C' },
+      { src: 'j-cole-crooked-smile.mp3',                                    artist: 'J. COLE',         title: 'CROOKED SMILE',         color: '#E6E6E6', bgColor: '#0D0D0F', textColor: '#E6E6E8', accent: '#C4C8CE', chrome: true },
+      { src: 'ozzy-osbourne-dreamer.mp3',                                   artist: 'OZZY OSBOURNE',   title: 'DREAMER',               color: '#FF4A3D', bgColor: '#14357A', textColor: '#FF4A3D', accent: '#F2F2F0' },
+      { src: 'mac-demarco-still-beating.mp3',                               artist: 'MAC DEMARCO',     title: 'STILL BEATING',         color: '#F4D03F', bgColor: '#F4D03F', textColor: '#111111', accent: '#111111' },
+      { src: 'kendrick-lamar-sing-about-me.mp3',                            artist: 'KENDRICK LAMAR',  title: 'SING ABOUT ME, I\'M DYING OF THIRST', color: '#E9DFC8', bgColor: '#E9DFC8', textColor: '#2B4C7E', accent: '#C8372D' }
     ];
 
     var mPreloaded = MUSIC_TRACKS.map(function (t) {
@@ -1328,6 +1328,7 @@
         document.documentElement.style.setProperty('--accent-rgb', parseInt(ah.slice(0,2),16) + ',' + parseInt(ah.slice(2,4),16) + ',' + parseInt(ah.slice(4,6),16));
       }
       document.documentElement.setAttribute('data-song', '1');
+      if (t.chrome) document.documentElement.setAttribute('data-chrome', '1'); else document.documentElement.removeAttribute('data-chrome');
       if (window._setDotColor) window._setDotColor(textColor);
       songBtns.forEach(function(btn) {
         btn.style.color       = textColor;
@@ -1341,6 +1342,7 @@
     }
 
     function mClearColor() {
+      document.documentElement.removeAttribute('data-chrome');
       document.documentElement.style.removeProperty('--text');
       document.documentElement.style.removeProperty('--text-rgb');
       document.documentElement.style.removeProperty('--muted');
@@ -1367,6 +1369,133 @@
       mClearColor();
       if (mIdx >= 0) songBtns[mIdx].classList.remove('is-playing');
     }
+
+
+    // ── Claude logo: a gooey, lava-lamp burst that breathes in time with the song ──
+    // Beat detection feeds a small phase-locked loop (beatPos counts beats). Motion is drawn from beatPos,
+    // so it keeps swelling on the beat even between detections and follows the song's tempo.
+    var claudeLogo = document.querySelector('.robot-claude-logo');
+    var claudeRays = claudeLogo ? [].map.call(claudeLogo.querySelectorAll('line'), function (el, i) { return { el: el, base: Math.abs(parseFloat(el.getAttribute('y2'))), angle: i * 30 }; }) : [];
+    var claudeCore = claudeLogo ? claudeLogo.querySelector('.claude-core') : null;
+    var N = claudeRays.length;
+    var beat = {
+      ctx: null, analyser: null, srcs: {}, data: null,
+      avg: 0.2, lastBeat: 0, intervals: [], period: 520, beatPos: 0, swell: 0,
+      bands: claudeRays.map(function () { return 0; }), lens: claudeRays.map(function () { return 0.8; }),
+      sways: claudeRays.map(function () { return 0; }), level: 0, scale: 1, last: 0, playedAt: 0, sawSignal: false
+    };
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function beatConnect(idx, el) {
+      try {
+        var AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return;
+        if (!beat.ctx) {
+          beat.ctx = new AC();
+          beat.analyser = beat.ctx.createAnalyser();
+          beat.analyser.fftSize = 1024;
+          beat.analyser.smoothingTimeConstant = 0.55;
+          beat.analyser.connect(beat.ctx.destination);
+          beat.data = new Uint8Array(beat.analyser.frequencyBinCount);
+        }
+        if (beat.ctx.state === 'suspended') beat.ctx.resume();
+        // an <audio> element can only be wired into Web Audio once, so cache its source per track
+        if (!beat.srcs[idx]) {
+          beat.srcs[idx] = beat.ctx.createMediaElementSource(el);
+          beat.srcs[idx].connect(beat.analyser);
+        }
+      } catch (e) { /* no Web Audio: the logo keeps a steady tempo */ }
+      beat.playedAt = performance.now();
+      beat.sawSignal = false;
+      beat.intervals = [];
+      beat.lastBeat = 0;
+      beat.avg = 0.2;
+    }
+
+    function median(a) { var b = a.slice().sort(function (x, y) { return x - y; }); return b[Math.floor(b.length / 2)]; }
+
+    function onBeat(now) {
+      if (beat.lastBeat) {
+        var gap = now - beat.lastBeat;
+        while (gap > 1100) gap /= 2;               // a missed beat is a double gap, fold it back
+        if (gap >= 280) {
+          beat.intervals.push(gap);
+          if (beat.intervals.length > 14) beat.intervals.shift();
+          if (beat.intervals.length >= 4) beat.period += (median(beat.intervals) - beat.period) * 0.12;
+        }
+      }
+      beat.lastBeat = now;
+      // nudge the beat counter toward the nearest whole beat so the loop locks to the song's phase
+      var err = Math.round(beat.beatPos) - beat.beatPos;
+      if (Math.abs(err) < 0.4) beat.beatPos += err * 0.4;
+    }
+
+    function ease01(t) { return t * t * (3 - 2 * t); }
+
+    function beatFrame(now) {
+      var dt = beat.last ? Math.min(0.05, (now - beat.last) / 1000) : 0.016;
+      beat.last = now;
+      var playing = mPlaying && mAudio && !mAudio.paused;
+      var follow = 1 - Math.pow(0.07, dt);           // slow catch-up: motion flows like wax instead of snapping
+
+      if (playing) {
+        var bass = 0, usable = beat.analyser && beat.data;
+        if (usable) {
+          beat.analyser.getByteFrequencyData(beat.data);
+          for (var i = 1; i <= 5; i++) bass += beat.data[i];
+          bass = bass / 5 / 255;
+          if (bass > 0) beat.sawSignal = true;
+        }
+        if (usable && (beat.sawSignal || now - beat.playedAt < 1500)) {
+          beat.level += (bass - beat.level) * 0.15;
+          if (bass > beat.avg * 1.16 && bass > 0.28 && now - beat.lastBeat > Math.max(220, beat.period * 0.55)) onBeat(now);
+          beat.avg += (bass - beat.avg) * 0.04;
+        }
+        beat.beatPos += dt * 1000 / beat.period;
+      } else {
+        beat.level *= 0.94;
+        beat.beatPos += dt * 1000 / 2600;           // idle: one slow breath every ~2.6s
+      }
+
+      if (claudeLogo) {
+        var phase = beat.beatPos - Math.floor(beat.beatPos);
+        // one swell per beat: quick rise, long soft fall
+        var swellT = phase < 0.4 ? ease01(phase / 0.4) : 1 - ease01((phase - 0.4) / 0.6);
+        beat.swell += (swellT - beat.swell) * follow;
+        var bar = beat.beatPos / 4;                  // a wave of reach travels once around the ring every 4 beats
+        var depth = playing ? 1 : 0.35;
+
+        for (var r = 0; r < N; r++) {
+          var ray = claudeRays[r], pos = r / N;
+          var target = 0;
+          if (playing && beat.data && beat.sawSignal) {
+            var lo = 1 + r * 3, band = 0;
+            for (var k = lo; k < lo + 3; k++) band += beat.data[k];
+            target = band / 3 / 255;
+          }
+          beat.bands[r] += (target - beat.bands[r]) * follow * 0.7;
+
+          var wave = 0.5 + 0.5 * Math.cos(2 * Math.PI * (pos - bar));          // the traveling bump
+          var drift = 0.14 * Math.sin(now / 2300 + r * 0.9) + 0.09 * Math.sin(now / 3700 + r * 1.9);
+          var want = 0.7 + drift + depth * (0.5 * beat.swell * (0.45 + 0.55 * wave) + 0.34 * beat.bands[r] + 0.16 * wave * beat.level);
+          beat.lens[r] += (want - beat.lens[r]) * follow;
+          ray.el.setAttribute('y2', (-ray.base * beat.lens[r]).toFixed(1));
+
+          // rays also lean sideways a little as the wave passes, so the burst twists and oozes
+          var swayWant = depth * (7 * Math.sin(2 * Math.PI * (pos - bar)) * (0.4 + 0.6 * beat.swell)) + 4 * Math.sin(now / 3100 + r * 1.3);
+          beat.sways[r] += (swayWant - beat.sways[r]) * follow * 0.6;
+          ray.el.setAttribute('transform', 'rotate(' + (ray.angle + beat.sways[r]).toFixed(2) + ')');
+          ray.el.style.strokeWidth = (6.4 + 2.6 * Math.sin(now / 1900 + r * 1.4) + 3 * depth * beat.swell * wave).toFixed(2);
+        }
+        if (claudeCore) claudeCore.setAttribute('r', (7.5 + depth * (6 * beat.swell + 3 * beat.level)).toFixed(2));
+        beat.scale += ((1 + depth * (0.09 * beat.swell + 0.04 * beat.level)) - beat.scale) * follow;
+        claudeLogo.style.transform = 'scale(' + beat.scale.toFixed(3) + ')';
+        claudeLogo.style.filter = 'drop-shadow(0 0 ' + (4 + 16 * depth * beat.swell).toFixed(1) + 'px rgba(var(--logo-rgb),' + (0.2 + 0.5 * depth * beat.swell).toFixed(2) + '))';
+        claudeLogo.setAttribute('data-bpm', playing ? Math.round(60000 / beat.period) : '');
+      }
+      requestAnimationFrame(beatFrame);
+    }
+    if (claudeLogo && !reduceMotion) requestAnimationFrame(beatFrame);
 
     function mStop() {
       if (mAudio) { mAudio.pause(); mAudio.currentTime = 0; mAudio = null; }
@@ -1398,6 +1527,7 @@
       ppBtnEl.classList.add('live');
       mSetIcon(true);
       mSetColor(t);
+      beatConnect(idx, mAudio);
       mAudio.play().catch(function () { mStop(); });
       mAudio.addEventListener('ended', mStop);
     }

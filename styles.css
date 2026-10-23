@@ -2114,11 +2114,20 @@ body {
 }
 
 .robot-claude-logo {
-  width: 42px;
-  height: 42px;
-  opacity: 0.9;
-  margin-bottom: 0.4rem;
+  width: clamp(64px, 6vw, 84px);
+  height: clamp(64px, 6vw, 84px);
+  margin-bottom: 0.9rem;
+  overflow: visible;
+  transform-origin: 50% 50%;
+  will-change: transform, filter;
+  --logo-rgb: 217, 119, 87;
 }
+.robot-claude-logo g { transition: stroke 600ms ease; }
+/* while a song plays, the logo takes that song's text color */
+html[data-song] .robot-claude-logo { --logo-rgb: var(--text-rgb); }
+html[data-song] .robot-claude-logo g { stroke: var(--text); }
+.robot-claude-logo .claude-core { fill: #D97757; transition: fill 600ms ease; }
+html[data-song] .robot-claude-logo .claude-core { fill: var(--text); }
 
 .robot-eyebrow {
   font-family: var(--font-mono);
