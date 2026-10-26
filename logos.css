@@ -56,9 +56,16 @@
 /* where they live */
 .lg-slot { margin: 0 0 1.5rem; min-height: 64px; display: flex; align-items: center; }
 .lg-slot .lg { --h: 64px; }
-.sc-hero-lockup { position: absolute; right: clamp(1.2rem, 6vw, 5rem); top: 50%; transform: translateY(-50%); z-index: 2; }
+.sc-hero-lockup { position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%); z-index: 2; }
+.sc-hero-lockup .lg { --h: clamp(104px, 15vw, 210px); }
+/* match the film: flat ice lettering with no sheen or glow, and a soft blue halo that rises behind the mark */
+.lg--clean .lg-sheen { display: none; }
+.lg--clean .lg-w--lineup { filter: none; }
+.sc-hero-lockup::before { content: ''; position: absolute; inset: -70% -35%; z-index: -1; pointer-events: none; opacity: 0;
+  background: radial-gradient(closest-side, rgba(94,147,245,.2), transparent 72%); animation: sc-halo 1.8s var(--lg-ease, cubic-bezier(.23,1,.32,1)) .6s forwards; }
+@keyframes sc-halo { to { opacity: 1; } }
 .panel--showcase .sc-hero-mark { display: none; }
-@media (max-width: 760px) { .sc-hero-lockup { right: 1rem; } .sc-hero-lockup .lg { --h: 56px; } }
+@media (max-width: 760px) { .sc-hero-lockup .lg { --h: 72px; } }
 /* the animated logo is the card title: keep the text for screen readers, hide it visually */
 .personal-project-card:has(.lg-slot) .pp-title { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .lg-hint { font: 500 .5rem/1 var(--font-mono); letter-spacing: .2em; color: rgba(var(--text-rgb), .4); margin-left: 1rem; }

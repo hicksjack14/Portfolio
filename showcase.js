@@ -1,4 +1,4 @@
-/* Lineup / Coach X case study for the project panel.
+/* Lineup case study for the project panel.
    Content comes from SITE_CONFIG.showcases (config.js). Pure DOM building, no innerHTML. */
 (function () {
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -40,9 +40,21 @@
     return t;
   }
 
+  function playOnView(v, target) {
+    if (reduce) { v.controls = true; v.removeAttribute('loop'); return; }
+    if (!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting) v.play().catch(function () {}); else v.pause(); }); }, { root: scrollRoot, threshold: 0.35 });
+    io.observe(target || v); observers.push(io);
+  }
+  function loopClip(src, cls) {
+    var v = document.createElement('video'); v.muted = true; v.loop = true; v.setAttribute('playsinline', ''); v.preload = 'metadata'; v.src = src;
+    if (cls) v.className = cls;
+    return v;
+  }
+
   /* ---------- timeline ---------- */
   function timeline(items) {
-    var wrap = h('div', 'sc-tl'); var line = h('div', 'sc-tl-line'); wrap.appendChild(line);
+    var wrap = h('div', 'sc-tl'); wrap.style.setProperty('--n', items.length); var line = h('div', 'sc-tl-line'); wrap.appendChild(line);
     items.forEach(function (it, i) {
       var n = h('div', 'sc-tl-item'); n.style.setProperty('--i', i);
       add(n, h('span', 'sc-tl-dot'), h('span', 'sc-tl-when', it.when), h('span', 'sc-tl-title', it.title), h('span', 'sc-tl-text', it.text));
@@ -72,14 +84,14 @@
     ch.appendChild(flow);
     var ap = appShowcase(d.app); ch._vids = [ap._video]; ch.appendChild(reveal(ap, 0));
 
-    // both sides
-    var twin = h('div', 'sc-twin');
-    [['PLAYERS', d.players], ['COACHES', d.coaches]].forEach(function (side, i) {
-      var col = h('div', 'sc-side'); col.appendChild(h('div', 'sc-label', side[0]));
-      var ul = h('ul', 'sc-list'); side[1].forEach(function (t) { ul.appendChild(h('li', null, t)); }); col.appendChild(ul);
-      twin.appendChild(reveal(col, i));
+    // three sides: ruled lists, one column each
+    var trio = h('div', 'sc-trio');
+    d.sides.forEach(function (side, i) {
+      var col = h('div', 'sc-side'); col.appendChild(h('div', 'sc-label', side.k));
+      var ul = h('ul', 'sc-list'); side.items.forEach(function (t) { ul.appendChild(h('li', null, t)); }); col.appendChild(ul);
+      trio.appendChild(reveal(col, i));
     });
-    ch.appendChild(twin);
+    ch.appendChild(trio);
 
     // an animated network: people connecting with people, next to the statement
     var watch = h('div', 'sc-watch');
@@ -100,11 +112,11 @@
     return ch;
   }
 
-  /* ---------- Chapter 2: Coach X ---------- */
+  /* ---------- Chapter 2: where it started (film analysis) ---------- */
   function trailerPlayer(t) {
     var box = h('div', 'sc-trailer');
     var v = document.createElement('video'); v.preload = 'none'; v.poster = t.poster; v.setAttribute('playsinline', ''); v.src = t.src;
-    var btn = h('button', 'sc-play'); btn.type = 'button'; btn.setAttribute('aria-label', 'Play the Coach X pitch film');
+    var btn = h('button', 'sc-play'); btn.type = 'button'; btn.setAttribute('aria-label', 'Play the Lineup pitch film');
     add(btn, h('span', 'sc-play-ring', '▶'), h('span', 'sc-play-label', 'WATCH THE PITCH FILM'), h('span', 'sc-play-meta', '0:58 · SOUND ON'));
     btn.addEventListener('click', function () { btn.classList.add('gone'); v.controls = true; v.play(); });
     add(box, v, btn);
@@ -137,6 +149,13 @@
   var POSE = { nose: [100, 40], le: [94, 34], re: [106, 34], lea: [86, 38], rea: [114, 38], ls: [78, 80], rs: [122, 80], lel: [60, 120], rel: [140, 120], lw: [46, 154], rw: [154, 154], lh: [86, 164], rh: [114, 164], lk: [84, 222], rk: [116, 222], la: [82, 280], ra: [118, 280] };
   var BONES = [['ls', 'rs'], ['ls', 'lh'], ['rs', 'rh'], ['lh', 'rh'], ['ls', 'lel'], ['lel', 'lw'], ['rs', 'rel'], ['rel', 'rw'], ['lh', 'lk'], ['lk', 'la'], ['rh', 'rk'], ['rk', 'ra'], ['nose', 'le'], ['nose', 're'], ['le', 'lea'], ['re', 'rea']];
 
+  function detectClip(src) {
+    var box = h('div', 'sc-detect');
+    var v = loopClip(src); box.appendChild(v);
+    box.appendChild(h('span', 'sc-detect-tag', 'REAL MATCH FOOTAGE \u00B7 RF-DETR'));
+    box._video = v;
+    return box;
+  }
   function detectScene() {
     var sv = s('svg', { viewBox: '0 0 560 300', 'class': 'sc-svg', role: 'img', 'aria-label': 'Players detected on a rugby pitch' });
     s('rect', { x: 10, y: 10, width: 540, height: 280, rx: 4, 'class': 'sc-pitch' }, sv);
@@ -183,9 +202,9 @@
   function pipeline(d) {
     var wrap = h('div', 'sc-pipe'); wrap.appendChild(h('div', 'sc-label', 'HOW IT WORKS. REAL OUTPUT FROM THE SYSTEM.'));
     var tabs = h('div', 'sc-tabs'); var stage = h('div', 'sc-stage');
-    var scenes = [], tabEls = [], cur = -1, timer = null, hover = false, active = false, typeTimer = null;
+    var detectClips = [], scenes = [], tabEls = [], cur = -1, timer = null, hover = false, active = false, typeTimer = null;
 
-    function visual(k) { return k === 'DETECT' ? detectScene() : k === 'POSE' ? poseScene() : k === 'ENRICH' ? enrichScene(d.raw) : reportScene(d.report); }
+    function visual(k) { return k === 'DETECT' ? (d.detectVideo ? (detectClips.push(detectClip(d.detectVideo)), detectClips[detectClips.length - 1]) : detectScene()) : k === 'POSE' ? poseScene() : k === 'ENRICH' ? enrichScene(d.raw) : reportScene(d.report); }
     d.pipeline.forEach(function (st, i) {
       var tb = h('button', 'sc-tab'); tb.type = 'button';
       add(tb, h('span', 'sc-tab-n', '0' + (i + 1)), h('span', 'sc-tab-k', st.k), h('span', 'sc-tab-bar'));
@@ -220,6 +239,8 @@
     stage.addEventListener('pointerleave', function () { hover = false; });
     go(0, true); clearTimeout(timer);
     seen(wrap, function () { active = true; wrap.classList.add('sc-in'); if (!reduce) { tabEls[0].classList.remove('run'); void tabs.offsetWidth; tabEls[0].classList.add('run'); arm(); } }, 0.35);
+    detectClips.forEach(function (c) { playOnView(c._video, c); });
+    wrap._vids = detectClips.map(function (c) { return c._video; });
     wrap._stop = function () { active = false; clearTimeout(timer); clearInterval(typeTimer); };
     return wrap;
   }
@@ -246,15 +267,70 @@
     return wrap;
   }
 
-  function coachxChapter(d) {
-    var ch = h('section', 'sc-ch sc-ch--coachx'); var vids = [], stops = [];
+  function visionChapter(d) {
+    var ch = h('section', 'sc-ch sc-ch--vision'); var vids = [], stops = [];
     add(ch, kicker(d.kicker), tagline(d.tagline, 'sc-cyan'));
     if (d.intro) ch.appendChild(reveal(h('p', 'sc-body', d.intro), 1));
     var tr = trailerPlayer(d.trailer); vids.push(tr._video); ch.appendChild(reveal(tr, 0));
     ch.appendChild(compare(d.compare));
     ch.appendChild(problems(d.problems, d.problemsNote));
-    var pp = pipeline(d); stops.push(pp._stop); ch.appendChild(pp);
+    var pp = pipeline(d); stops.push(pp._stop); (pp._vids || []).forEach(function (v) { vids.push(v); }); ch.appendChild(pp);
     ch._vids = vids; ch._stops = stops;
+    return ch;
+  }
+
+  /* ---------- Chapter 3: the AI test ---------- */
+  function countUp(el, to) {
+    if (reduce) { el.textContent = to; return; }
+    var t0 = null;
+    function tick(t) { if (t0 == null) t0 = t; var p = Math.min(1, (t - t0) / 1100); el.textContent = Math.round(to * (1 - Math.pow(1 - p, 4))); if (p < 1) requestAnimationFrame(tick); }
+    requestAnimationFrame(tick);
+  }
+  function findingsChapter(d) {
+    var ch = h('section', 'sc-ch sc-ch--find'); var vids = [];
+    add(ch, kicker(d.kicker), tagline(d.tagline, 'sc-amber'));
+    ch.appendChild(reveal(h('p', 'sc-body', d.intro), 1));
+
+    var cmp = h('div', 'sc-vs');
+    var heads = h('div', 'sc-vs-heads');
+    add(heads, add(h('div', 'sc-vs-head'), h('span', 'sc-vs-n', d.compare.a.n), h('span', 'sc-vs-l', d.compare.a.l)), add(h('div', 'sc-vs-head'), h('span', 'sc-vs-n', d.compare.b.n), h('span', 'sc-vs-l', d.compare.b.l)));
+    var frame = h('div', 'sc-vs-frame'); var v = loopClip(d.compare.src); frame.appendChild(v); vids.push(v);
+    playOnView(v, frame);
+    add(cmp, heads, frame, h('p', 'sc-cap', d.compare.caption));
+    ch.appendChild(reveal(cmp, 0));
+
+    var tbl = h('div', 'sc-vs-table');
+    d.rows.forEach(function (r, i) {
+      var row = h('div', 'sc-vs-row'); add(row, h('span', 'sc-vs-k', r[0]), h('span', 'sc-vs-a', r[1]), h('span', 'sc-vs-b', r[2]));
+      tbl.appendChild(reveal(row, i));
+    });
+    ch.appendChild(tbl);
+    add(ch, reveal(h('p', 'sc-statement sc-verdict', d.verdict), 0), reveal(h('p', 'sc-note', d.caveat), 1));
+
+    var gaps = h('div', 'sc-gaps'); gaps.appendChild(h('div', 'sc-label', d.gapsLabel));
+    var gl = h('ul', 'sc-list'); d.gaps.forEach(function (t) { gl.appendChild(h('li', null, t)); }); gaps.appendChild(gl);
+    ch.appendChild(reveal(gaps, 0));
+
+    var vet = h('div', 'sc-vet'); vet.appendChild(h('div', 'sc-label', d.vetLabel));
+    var stats = h('div', 'sc-vet-row'); var nums = [];
+    d.vet.forEach(function (st) {
+      var c = h('div', 'sc-stat' + (st.n === 0 ? ' sc-stat--hot' : '')); var n = h('span', 'sc-stat-n', reduce ? String(st.n) : '0'); nums.push([n, st.n]);
+      add(c, n, h('span', 'sc-stat-l', st.l)); stats.appendChild(c);
+    });
+    add(vet, stats, h('p', 'sc-note', d.vetNote));
+    seen(vet, function () { nums.forEach(function (x) { countUp(x[0], x[1]); }); }, 0.4);
+    ch.appendChild(vet);
+
+    var road = h('div', 'sc-road'); road.appendChild(h('div', 'sc-label', d.roadLabel));
+    var cols = h('div', 'sc-road-cols');
+    d.road.forEach(function (p, i) {
+      var col = h('div', 'sc-road-col'); col.appendChild(h('div', 'sc-road-t', p.t));
+      var ul = h('ul', 'sc-list'); p.items.forEach(function (t) { ul.appendChild(h('li', null, t)); }); col.appendChild(ul);
+      cols.appendChild(reveal(col, i));
+    });
+    add(road, cols, h('p', 'sc-note', d.roadNote));
+    ch.appendChild(road);
+    ch._vids = vids;
     return ch;
   }
 
@@ -267,19 +343,19 @@
     var vis = panel.querySelector('.panel-visual');
     if (vis && window.Logos) {
       var lock = document.createElement('div'); lock.className = 'sc-hero-lockup'; vis.appendChild(lock);
-      window.Logos.lineup(lock, { size: 'xl', idle: true, root: scrollRoot });
+      window.Logos.lineup(lock, { size: 'xl', clean: true, root: scrollRoot });
     }
     var root = h('div', 'sc');
     root.appendChild(timeline(d.timeline));
-    var c1 = lineupChapter(d.lineup), c2 = coachxChapter(d.coachx);
-    add(root, c1, c2);
+    var c1 = lineupChapter(d.lineup), c2 = visionChapter(d.vision), c3 = d.findings ? findingsChapter(d.findings) : null;
+    add(root, c1, c2); if (c3) root.appendChild(c3);
     if (d.lineup.legal) root.appendChild(h('p', 'sc-legal', d.lineup.legal));
     host.appendChild(root);
     // stop videos, timers and observers when the panel closes
     var prev = panel._dotWaveCleanup;
     panel._dotWaveCleanup = function () {
       if (prev) prev();
-      c2._vids.concat(c1._vids || []).forEach(function (v) { v.pause(); v.removeAttribute('src'); v.load(); });
+      c2._vids.concat(c1._vids || [], c3 ? c3._vids : []).forEach(function (v) { v.pause(); v.removeAttribute('src'); v.load(); });
       c2._stops.forEach(function (f) { f(); });
       observers.forEach(function (o) { o.disconnect(); });
     };

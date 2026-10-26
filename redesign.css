@@ -1,4 +1,4 @@
-/* Portfolio redesign layer: hero polish, numbers strip, Now list, row preview, Coach X flow.
+/* Portfolio redesign layer: hero polish, numbers strip, Now list, row preview, film-analysis flow.
    Colors use the site's song-driven variables (--text-rgb, --accent), so everything recolors with the music. */
 :root {
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);          /* strong ease-out */

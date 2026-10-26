@@ -1,4 +1,4 @@
-/* Lineup / Coach X case study (panel). Lineup uses navy / ice blue / amber; Coach X uses its electric blue + cyan. */
+/* Lineup case study (panel). Lineup uses navy / ice blue / amber; the film-analysis chapter uses an electric blue + cyan. */
 .sc {
   --navy: #10203D; --ice: #AFC6E9; --amber: #F2A93B;
   --cxb: #1E78FF; --cxc: #00D4FF; --cxbg: #070B14; --red: #FF3B30; --det: #3CFF7A;
@@ -27,7 +27,7 @@ html[data-song] .sc { --amber: var(--accent); --cxc: var(--accent); --cxb: var(-
 .sc-body { font: 400 .8rem/1.8 var(--font-mono); color: var(--soft); max-width: 66ch; margin: 0 0 2.6rem; }
 
 /* timeline */
-.sc-tl { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 0 0 5rem; padding-top: 1.6rem; }
+.sc-tl { position: relative; display: grid; grid-template-columns: repeat(var(--n, 3), 1fr); gap: 1.5rem; margin: 0 0 5rem; padding-top: 1.6rem; }
 .sc-tl-line { position: absolute; left: 0; right: 0; top: 5px; height: 1px; background: var(--hair); }
 .sc-tl-line::after { content: ''; position: absolute; inset: 0; background: var(--amber); transform: scaleX(0); transform-origin: left; }
 .sc-tl.sc-in .sc-tl-line::after { animation: sc-draw 1.5s var(--ease-io) .1s forwards; }
@@ -41,7 +41,7 @@ html[data-song] .sc { --amber: var(--accent); --cxc: var(--accent); --cxb: var(-
 @keyframes sc-draw { to { transform: scaleX(1); } } @keyframes sc-up { to { opacity: 1; transform: none; } }
 
 .sc-ch { margin: 0 0 6rem; }
-.sc-ch--coachx { padding-top: 3.5rem; border-top: 1px solid var(--hair); }
+.sc-ch--vision { padding-top: 3.5rem; border-top: 1px solid var(--hair); }
 
 /* lineup flow */
 .sc-flow { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin: 0 0 3.6rem; }
@@ -60,8 +60,8 @@ html[data-song] .sc { --amber: var(--accent); --cxc: var(--accent); --cxb: var(-
 @keyframes sc-travel { 0% { opacity: 0; transform: translateX(0); } 8%, 86% { opacity: 1; } 100% { opacity: 0; transform: translateX(var(--run, 100%)); } }
 .sc-flow-line { --run: min(520px, 100%); }
 
-/* both sides */
-.sc-twin { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin: 0 0 3.2rem; }
+/* three sides */
+.sc-trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.2rem; margin: 0 0 3.2rem; }
 .sc-list { list-style: none; margin: 0; padding: 0; }
 .sc-list li { padding: .8rem 0; border-top: 1px solid var(--hair); font: 400 .76rem/1.55 var(--font-mono); }
 .sc-list li:last-child { border-bottom: 1px solid var(--hair); }
@@ -84,7 +84,7 @@ html[data-song] .sc { --amber: var(--accent); --cxc: var(--accent); --cxb: var(-
 .sc-sw { display: inline-flex; align-items: center; gap: .55rem; font: 500 .56rem/1 var(--font-mono); letter-spacing: .14em; color: var(--soft); }
 .sc-sw i { width: 14px; height: 14px; border-radius: 3px; border: 1px solid var(--hair); display: inline-block; }
 
-/* ---------- Coach X ---------- */
+/* ---------- Where it started: film analysis ---------- */
 .sc-trailer { position: relative; aspect-ratio: 16 / 9; background: var(--cxbg); border: 1px solid rgba(0,212,255,.25); border-radius: 6px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,85,255,.18); }
 .sc-trailer video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .sc-play { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .7rem; border: 0; cursor: pointer; color: #fff;
@@ -160,12 +160,12 @@ html[data-song] .sc { --amber: var(--accent); --cxc: var(--accent); --cxb: var(-
 .sc-frame-bar i { width: 8px; height: 8px; border-radius: 50%; background: rgba(240,244,255,.2); }
 .sc-frame-bar span { margin-left: .6rem; font: 500 .5rem/1 var(--font-mono); letter-spacing: .22em; color: rgba(240,244,255,.45); }
 .sc-frame video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
-.sc-app-steps { display: grid; grid-template-columns: repeat(var(--n, 4), 1fr); gap: .6rem; margin-top: 1rem; }
+.sc-app-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(104px, 1fr)); gap: .6rem; margin-top: 1rem; }
 .sc-app-step { font: 500 .56rem/1.4 var(--font-mono); letter-spacing: .16em; color: var(--soft); padding-top: .7rem; border-top: 1px solid var(--hair); transition: color 300ms, border-color 300ms; }
 .sc-app-step.on { color: var(--cxc); border-top-color: var(--cxc); }
 
 @media (max-width: 820px) {
-  .sc-tl, .sc-flow, .sc-twin, .sc-compare { grid-template-columns: 1fr; }
+  .sc-tl, .sc-flow, .sc-trio, .sc-compare, .sc-road-cols, .sc-vet-row { grid-template-columns: 1fr; }
   .sc-flow-line, .sc-flow-dot, .sc-tl-line { display: none; }
   .sc-flow-step { align-items: flex-start; text-align: left; }
   .sc-tl-dot { position: static; }
@@ -184,3 +184,35 @@ html[data-song] .sc { --amber: var(--accent); --cxc: var(--accent); --cxb: var(-
 }
 
 .sc-legal { margin: 0; padding-top: 1.4rem; border-top: 1px solid var(--hair); font: 400 .6rem/1.7 var(--font-mono); letter-spacing: .08em; color: var(--soft); }
+
+/* real detection footage inside the DETECT scene */
+.sc-detect { position: relative; width: 100%; border-radius: 4px; overflow: hidden; background: #000; }
+.sc-detect video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.sc-detect-tag { position: absolute; left: .6rem; bottom: .6rem; font: 500 .5rem/1 var(--font-mono); letter-spacing: .18em; color: #fff; background: rgba(7,11,20,.72); padding: .4rem .55rem; border-radius: 2px; }
+
+/* chapter 3: the AI test (YOLO11m vs RF-DETR Small) */
+.sc-ch--find { padding-top: 3.5rem; border-top: 1px solid var(--hair); }
+.sc-vs-heads { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: .8rem; }
+.sc-vs-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.sc-vs-n { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.3rem, 2.6vw, 2rem); letter-spacing: .04em; text-transform: uppercase; }
+.sc-vs-l { font: 500 .55rem/1 var(--font-mono); letter-spacing: .2em; color: var(--soft); }
+.sc-vs-frame { border: 1px solid rgba(175,198,233,.22); border-radius: 6px; overflow: hidden; background: #0B1730; box-shadow: 0 30px 80px rgba(16,32,61,.35); }
+.sc-vs-frame video { display: block; width: 100%; aspect-ratio: 4 / 1.02; object-fit: cover; }
+.sc-vs { margin: 0 0 2.4rem; }
+.sc-vs-table { margin: 0 0 2.4rem; }
+.sc-vs-row { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem 1rem; align-items: baseline; padding: 1rem 0 1.1rem; border-top: 1px solid var(--hair); }
+.sc-vs-row:last-child { border-bottom: 1px solid var(--hair); }
+.sc-vs-k { grid-column: 1 / -1; font: 500 .56rem/1 var(--font-mono); letter-spacing: .2em; color: var(--soft); }
+.sc-vs-a, .sc-vs-b { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 3vw, 2.2rem); line-height: 1; text-transform: uppercase; }
+.sc-vs-b { color: var(--amber); }
+.sc-verdict { max-width: 34ch; margin: 0 0 .9rem; }
+.sc-gaps, .sc-vet, .sc-road { margin: 3rem 0 0; }
+.sc-vet-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.4rem; margin-bottom: 1rem; }
+.sc-stat { display: flex; flex-direction: column; gap: .5rem; padding-top: .9rem; border-top: 1px solid var(--hair); }
+.sc-stat-n { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.6rem, 6vw, 4.6rem); line-height: .9; font-variant-numeric: tabular-nums; }
+.sc-stat--hot .sc-stat-n { color: var(--amber); }
+.sc-stat-l { font: 500 .54rem/1.4 var(--font-mono); letter-spacing: .18em; color: var(--soft); }
+.sc-road-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.2rem; }
+.sc-road-t { font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; letter-spacing: .08em; text-transform: uppercase; margin-bottom: .9rem; }
+.sc-road-col:last-child .sc-road-t { color: var(--amber); }
+@media (max-width: 820px) { .sc-vet-row { grid-template-columns: repeat(2, 1fr); } .sc-vs-frame video { aspect-ratio: 16 / 5; } }

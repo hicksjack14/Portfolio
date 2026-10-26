@@ -60,7 +60,7 @@
   /* ---------- Lineup: ribbon L + amber "i" (the L and the dot read as "Li"), then N E U P draw in ---------- */
   function lineup(host, opts) {
     opts = opts || {};
-    var id = 'lgl' + (++uid), box = h('div', 'lg lg-lineup' + (opts.idle ? ' lg--idle' : '') + (opts.size ? ' lg--' + opts.size : ''));
+    var id = 'lgl' + (++uid), box = h('div', 'lg lg-lineup' + (opts.idle ? ' lg--idle' : '') + (opts.clean ? ' lg--clean' : '') + (opts.size ? ' lg--' + opts.size : ''));
     box.setAttribute('role', 'img'); box.setAttribute('aria-label', 'Lineup');
     var svg = s('svg', { viewBox: '120 80 360 350', 'class': 'lg-mark' });
     var defs = s('defs', {}, svg);

@@ -182,14 +182,16 @@ const SITE_CONFIG = {
         accentRgb: "94, 147, 245",
         dates: "Mar 2026 to Present",
         location: "Syracuse, NY",
-        description: "Lineup is a recruiting network for rugby, built for players of all ages and especially early development, the years that lead to college and pro play. Players build a real profile and coaches actually find them. Rugby comes first, with other sports to follow. It grew out of Coach X, an AI film-analysis platform I started, using the Syracuse men's rugby team as a test. I co-created it and lead the project, from the pitch to the build, and in September I presented the MVP proposal to my two advisors.",
+        description: "Lineup is a recruiting network for rugby, built for players of all ages and especially early development, the years that lead to college and pro play. Players build a real profile and coaches actually find them. Rugby comes first, with other sports to follow. It began as an AI film-analysis platform I built, using the Syracuse men's rugby team as a test. I co-created it and lead the project, from the pitch to the build, and in September I presented the MVP proposal to my two advisors. In October it grew into a three-sided network of players, coaches and programs.",
         bullets: [
           "Pitched the Lineup MVP in September 2026: a focused first version with links instead of uploads, and a \"who's viewed me\" feature that turns a directory into a network",
-          "Started as Coach X: a computer-vision pipeline that detects every player, tracks body position, and writes coaching reports with AI agents",
-          "Produced the 58-second Coach X pitch film in Remotion and designed the Lineup identity and proposal deck",
+          "Began as an AI film-analysis tool: a computer-vision pipeline that detects every player, tracks body position, and writes coaching reports with AI agents",
+          "Produced the 58-second Lineup pitch film in Remotion and designed the brand identity and proposal deck",
+          "Expanded the plan into a three-sided network: players, coaches and programs, with a coaching openings board so coaches can apply to colleges, high schools and academies",
+          "Tested the leading open-source detectors on real match footage to choose the vision model for automatic highlights",
           "Built on Next.js, Supabase and Vercel"
         ],
-        tags: ["Product Strategy", "Computer Vision", "AI Agents", "Brand Design", "Sports Tech", "Video Production"]
+        tags: ["Product Strategy", "Network Design", "Computer Vision", "AI Agents", "Brand Design", "Sports Tech", "Video Production"]
       }
     },
     {
@@ -327,19 +329,20 @@ SITE_CONFIG.now = {
   items: [
     { title: "UNIVERSITY UNION", tag: "DIRECTOR OF SOCIAL MEDIA", text: "Running social for the 2026-27 board. Month one: +4.8% followers, 500K engagements.", open: "UNIVERSITY UNION" },
     { title: "LOUD AND CLEAR",   tag: "TD / MUSIC JOURNALIST",   text: "Cutting the live show, booking talent, interviewing the artists on camera, and aiming for the EP chair next semester.", open: "LOUD AND CLEAR" },
-    { title: "LINEUP",           tag: "CO-CREATOR & PROJECT LEAD", text: "Building a recruiting network for rugby, from early development to college and pro. It started as Coach X.", open: "LINEUP" },
+    { title: "LINEUP",           tag: "CO-CREATOR & PROJECT LEAD", text: "Building a recruiting network for rugby, from early development to college and pro. It started as an AI film-analysis tool for rugby.", open: "LINEUP" },
     { title: "CRATES",           tag: "LIVE",                     text: "Letterboxd for music, in the hands of real users.", href: "https://crates-chi.vercel.app" },
     { title: "RUN LAB",          tag: "TRAINING",                 text: "Half marathon on October 18, training inside the app I built for it.", href: "https://hicksjack14.github.io/run-lab/" }
   ]
 };
 
-// ── Lineup / Coach X case study (redesign.js, mountShowcase) ─
+// ── Lineup case study (redesign.js, mountShowcase) ─
 SITE_CONFIG.showcases = {
   lineup: {
     timeline: [
-      { when: "MAR 2026", title: "Coach X begins", text: "AI film analysis for rugby, shaped by five problems a coach sees every week." },
+      { when: "MAR 2026", title: "Lineup begins", text: "AI film analysis for rugby, shaped by five problems a coach sees every week." },
       { when: "MAY 2026", title: "The pitch film",  text: "A 58-second trailer, built in Remotion." },
-      { when: "SEP 2026", title: "Lineup",          text: "Narrowed to one sport, one level, one clear user. Proposal presented." }
+      { when: "SEP 2026", title: "The network",     text: "Narrowed to one sport, one level, one clear user. Proposal presented." },
+      { when: "OCT 2026", title: "Three sides",     text: "Programs and coaching openings added, and the vision model tested on real match footage." }
     ],
     lineup: {
       kicker: "CHAPTER 01 · NOW",
@@ -352,23 +355,48 @@ SITE_CONFIG.showcases = {
         { t: "GET DISCOVERED", d: "Coaches search by position, grad year and region" },
         { t: "CONNECT",        d: "The coach messages the player directly, in the app" }
       ],
-      players: ["Build a real profile: position, grad year, stats, team", "Link clips you already have (Hudl, YouTube, Vimeo)", "See exactly which coaches viewed you", "Get messaged directly, no guessing"],
-      coaches: ["Search and filter by position, grad year, region", "Browse real player profiles", "Message players in the app", "See who else is watching the same prospects"],
+      sides: [
+        { k: "PLAYERS",  items: ["Build a real profile: position, grad year, stats, team", "Link clips you already have (Hudl, YouTube, Vimeo)", "See exactly which coaches and programs viewed you", "Message coaches, or get messaged first"] },
+        { k: "COACHES",  items: ["Search and filter players by position, grad year and region", "Shortlist prospects and see who else is watching them", "Build a coach profile: experience, certifications, philosophy", "Apply to programs for coaching roles"] },
+        { k: "PROGRAMS", items: ["An org page for your college, high school or academy", "Post coaching openings and review applicants", "Search and message coaches directly", "A verified badge so everyone knows it is real"] }
+      ],
       watching: "Players know they're not shouting into the void. Coaches see real signal. That one feature is the difference between a listing site and a network.",
       scope: ["RUGBY FIRST", "ALL AGES", "EARLY DEVELOPMENT TO COLLEGE + PRO", "MORE SPORTS NEXT"],
-      app: { src: "assets/work/lineup/media/lineup-app.mp4", poster: "assets/work/lineup/media/lineup-poster.jpg",
-             steps: ["GET SEEN", "POST", "GET DISCOVERED", "SEE WHO'S WATCHING", "CONNECT", "PHASE 2: AI HIGHLIGHTS"], marks: [0, 5, 12, 20, 26, 31, 38] },
+      app: { src: "assets/work/lineup/media/lineup-showcase.mp4", poster: "assets/work/lineup/media/lineup-showcase-poster.jpg",
+             steps: ["THE PROBLEM", "THREE SIDES", "POST", "GET DISCOVERED", "PROGRAMS", "SEE WHO'S WATCHING", "CONNECT", "AI TEST", "WHAT'S NEXT"], marks: [0, 9, 14, 19, 24, 30, 34, 37, 46] },
       legal: "Lineup: name, logo, lettering, concept and designs © 2026 Jack Hicks. All rights reserved. This page is a concept preview; sample names and data are fictional.",
-      phase2: "Phase 2: upload raw match footage and the Coach X vision pipeline cuts the highlights for you.",
+      phase2: "Phase 2: upload raw match footage and computer vision cuts the highlights for you. The detection test is in chapter 03.",
       palette: [ { n: "NAVY", c: "#10203D" }, { n: "ICE BLUE", c: "#AFC6E9" }, { n: "AMBER", c: "#F2A93B" } ]
     },
-    coachx: {
+    findings: {
+      kicker: "CHAPTER 03 · THE AI TEST",
+      tagline: ["WE TESTED THE BEST", "OPEN-SOURCE MODELS."],
+      intro: "To cut highlights automatically, Lineup has to find every player in raw match footage. I ran the leading open-source detectors on a real Syracuse match clip, with the same tracker on the same Mac.",
+      compare: { src: "assets/work/lineup/media/detect-compare.mp4", a: { n: "YOLO11m", l: "AGPL-3.0" }, b: { n: "RF-DETR SMALL", l: "APACHE 2.0" }, caption: "Same clip, same tracker. Amber is the coach, labeled by hand." },
+      rows: [["PLAYERS PER FRAME", "19.2", "18.8"], ["SPEED ON A LAPTOP", "4.8 FPS", "8.2 FPS"], ["LICENSE", "AGPL-3.0 OR PAID", "APACHE 2.0"]],
+      verdict: "Both find the same players. RF-DETR runs 1.7 times faster and has the cleaner license, so it is the pick.",
+      caveat: "A by-eye comparison on one 5-second clip. There is no accuracy score yet; that needs a hand-labeled test set.",
+      gapsLabel: "WHAT IT CANNOT DO YET",
+      gaps: ["Boxes the coach and referee as players", "Track IDs switch in crowded moments", "The ball is not detected"],
+      vetLabel: "CHECKED BEFORE IT RAN",
+      vet: [{ n: 84, l: "PACKAGES SCANNED" }, { n: 4, l: "PATCHED" }, { n: 0, l: "KNOWN VULNS LEFT" }, { n: 2, l: "MODEL FILES CLEAN" }],
+      vetNote: "A hash-pinned install in an isolated environment, with telemetry off.",
+      roadLabel: "WHAT'S NEXT",
+      road: [
+        { t: "MVP", items: ["Player and coach profiles", "Search and filters", "Inbox and who viewed me"] },
+        { t: "PROGRAMS", items: ["Org pages and rosters", "Coaching openings board", "Verified badges"] },
+        { t: "AI HIGHLIGHTS", items: ["Auto-cut key moments", "Tell players, coaches and refs apart", "Fine-tune on rugby data"] }
+      ],
+      roadNote: "Concept stage. Nothing above is shipped yet."
+    },
+    vision: {
       kicker: "CHAPTER 02 · WHERE IT STARTED",
-      name: "COACH X",
-      tagline: ["BEFORE LINEUP,", "THERE WAS COACH X."],
-      intro: "Lineup grew out of Coach X, an AI film-analysis platform I started for rugby, using the Syracuse men's rugby team as a test. It taught me the sport's real problems, and its computer vision is what will power Lineup's Phase 2 highlights.",
-      trailer: { src: "assets/work/lineup/media/coach-x-trailer.mp4", poster: "assets/work/lineup/media/trailer-poster.jpg", caption: "The pitch film, 58 seconds, built in Remotion" },
-      compare: { them: "HUDL", themPrice: "€10,000 / yr", themText: "Stores your footage.", us: "COACH X", usText: "Watches it, then tells you what happened." },
+      name: "LINEUP VISION",
+      tagline: ["IT STARTED WITH", "FILM ANALYSIS."],
+      detectVideo: "assets/work/lineup/media/detect-rfdetr.mp4",
+      intro: "Lineup began as an AI film-analysis platform for rugby, built with the Syracuse men's rugby team as a test. It taught me the sport's real problems, and its computer vision is what will power Lineup's Phase 2 highlights.",
+      trailer: { src: "assets/work/lineup/media/lineup-pitch-film.mp4", poster: "assets/work/lineup/media/lineup-pitch-poster.jpg", caption: "The pitch film, 58 seconds, built in Remotion" },
+      compare: { them: "HUDL", themPrice: "€10,000 / yr", themText: "Stores your footage.", us: "LINEUP", usText: "Watches it, then tells you what happened." },
       problems: [
         { t: "Decision-making under pressure", d: "Players struggle to read a closing defence and pick pass, kick or carry." },
         { t: "Skill execution",                d: "Passing, tackling and handling hold up in training and crack in matches." },
