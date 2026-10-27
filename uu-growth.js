@@ -85,7 +85,7 @@
     var by = function (v) { return pT + (1 - v / axisMax) * (H - pT - pB); };
     var cy = function (v) { return pT + (1 - v / total) * (H - pT - pB); };
     var svg = svgEl('svg', { 'class': 'ug-chart', viewBox: '0 0 ' + W + ' ' + H, role: 'img',
-      'aria-label': 'Monthly engagements: ' + k(total) + ' in month one.' }, host);
+      'aria-label': 'Monthly engagements: ' + k(total) + ' across ' + ms.length + (ms.length > 1 ? ' months.' : ' month.') }, host);
 
     for (var v = 0; v <= axisMax; v += axisMax / 4) {
       svgEl('line', { 'class': 'ug-grid', x1: pL, x2: W - pR + 24, y1: by(v), y2: by(v) }, svg);
@@ -125,7 +125,7 @@
         '</div>' +
         '<div class="ug-counters">' +
           '<div><div class="ug-clabel">FOLLOWERS</div><div class="ug-big" data-f>' + num(f0) + '</div><div class="ug-sub">+' + num(f1 - f0) + ' &nbsp;/&nbsp; +' + pct + '%</div></div>' +
-          '<div><div class="ug-clabel">ENGAGEMENTS</div><div class="ug-big ug-big--e" data-e>0</div><div class="ug-sub">in the first month</div></div>' +
+          '<div><div class="ug-clabel">ENGAGEMENTS</div><div class="ug-big ug-big--e" data-e>0</div><div class="ug-sub">' + (g.engagements.months.length > 1 ? 'in the first ' + g.engagements.months.length + ' months' : 'in the first month') + '</div></div>' +
         '</div>' +
         '<div class="ug-charts">' +
           '<div><div class="ug-clabel">FOLLOWERS OVER TIME</div><div data-fc></div></div>' +

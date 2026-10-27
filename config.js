@@ -103,17 +103,17 @@ const SITE_CONFIG = {
       logo: "assets/work/university-union/thuumbnail.jpeg",
       photo: "assets/work/university-union/photo2.jpeg",
       photoCaption: "Myself with the socials board after a successful night at Block Party",
-      // Month-one growth piece (uu-growth.js). Month one = late Aug to late Sep 2026.
+      // Growth piece (uu-growth.js). Month one = late Aug to late Sep 2026, month two = late Sep to late Oct.
       // To update: add a month to engagements.months each month, and add points to
       // followers.points (or later, feed them live). Values are Jack's real numbers.
       growth: {
-        eyebrow: "Month one as Director of Social Media",
+        eyebrow: "First two months as Director of Social Media",
         followers: {
-          points: [ { label: "LATE AUG", value: 12600 }, { label: "LATE SEP", value: 13200 } ],
+          points: [ { label: "LATE AUG", value: 12600 }, { label: "SEP 25", value: 13100 }, { label: "LATE OCT", value: 13300 } ],
           axisMin: 12000, axisMax: 13500
         },
         engagements: {
-          months: [ { label: "AUG 25 - SEP 25", value: 500000 } ]
+          months: [ { label: "AUG 25 - SEP 25", value: 500000 }, { label: "SEP 25 - OCT 25", value: 450000 } ]
         },
         note: "Followers axis starts at 12K so the change is readable."
       },
@@ -316,8 +316,8 @@ const SITE_CONFIG = {
 
 // ── Numbers strip + Now section (redesign.js) ───────────────
 SITE_CONFIG.numbers = [
-  { value: 500,  suffix: "K+", label: "ENGAGEMENTS",       detail: "University Union, month one as director" },
-  { value: 4.8,  prefix: "+", suffix: "%", decimals: 1, label: "FOLLOWER GROWTH", detail: "12.6K to 13.2K in the same month" },
+  { value: 950,  suffix: "K+", label: "ENGAGEMENTS",       detail: "University Union, first two months as director" },
+  { value: 5.6,  prefix: "+", suffix: "%", decimals: 1, label: "FOLLOWER GROWTH", detail: "12.6K to 13.3K in the same two months" },
   { value: 1500, prefix: "+", label: "MONTHLY LISTENERS",  detail: "Isabella Allon, signed through M&H Inc." },
   { text: "TD",     label: "LOUD AND CLEAR",   detail: "Technical Director and music journalist, Orange Television Network" },
   { text: "ON AIR", label: "UNCROWNED",        detail: "Ariel Helwani Show, Summer 2026" }
@@ -327,7 +327,7 @@ SITE_CONFIG.numbers = [
 SITE_CONFIG.now = {
   label: "NOW, FALL 2026",
   items: [
-    { title: "UNIVERSITY UNION", tag: "DIRECTOR OF SOCIAL MEDIA", text: "Running social for the 2026-27 board. Month one: +4.8% followers, 500K engagements.", open: "UNIVERSITY UNION" },
+    { title: "UNIVERSITY UNION", tag: "DIRECTOR OF SOCIAL MEDIA", text: "Running social for the 2026-27 board. First two months: +5.6% followers, 950K engagements.", open: "UNIVERSITY UNION" },
     { title: "LOUD AND CLEAR",   tag: "TD / MUSIC JOURNALIST",   text: "Cutting the live show, booking talent, interviewing the artists on camera, and aiming for the EP chair next semester.", open: "LOUD AND CLEAR" },
     { title: "LINEUP",           tag: "CO-CREATOR & PROJECT LEAD", text: "Building a recruiting network for rugby, from early development to college and pro. It started as an AI film-analysis tool for rugby.", open: "LINEUP" },
     { title: "CRATES",           tag: "LIVE",                     text: "Letterboxd for music, in the hands of real users.", href: "https://crates-chi.vercel.app" },
